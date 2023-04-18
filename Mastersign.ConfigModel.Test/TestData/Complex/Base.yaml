@@ -1,0 +1,34 @@
+$includes:
+- Nested.yaml
+
+$sources:
+  propC: Strings/root_propc.txt
+
+propb: Base B
+
+SimpleChild:
+  Caption: simple child from base
+  Victim: I will be eliminated
+  Timestamp: 2000-01-01T00:00:00Z
+
+MergableByAttribute:
+  x: Base X
+  y: Base Y
+
+MergableByInterface:
+  x: Base X
+  y: Base Y
+  z: Base Z
+
+WithSources:
+  Caption: Base Caption
+  Victim: I will be discarded
+
+WithSourcesMergableByAttribute:
+  x: Base X
+  y: Base Y
+
+WithSourcesMergableByInterface:
+  x: Base X
+  y: Base Y
+  z: Base Z

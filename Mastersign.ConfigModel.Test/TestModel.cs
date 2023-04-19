@@ -10,8 +10,26 @@ namespace Mastersign.ConfigModel.Test
         public string? PropB { get; set; }
         public string? PropC { get; set; }
 
-        [YamlMember(Alias = "prop_dee")]
+        [YamlMember(Alias = "prop_dee", ApplyNamingConventions = false)]
         public string? PropD { get; set; }
+
+        public List<int>? List { get; set; }
+
+        [MergeList(ListMergeMode.Prepend)]
+        public List<int>? ListPrepend { get; set; }
+
+        [MergeList(ListMergeMode.Append)]
+        public List<int>? ListAppend { get; set; }
+
+        [MergeList(ListMergeMode.ReplaceItem)]
+        public List<int>? ListReplace { get; set; }
+
+        [MergeList(ListMergeMode.MergeItem)]
+        public List<ChildMergableByAttribute>? ListMerge { get; set; }
+
+        public Dictionary<string, string>? Dictionary { get; set; }
+
+        public Dictionary<string, string>? DictionaryNoMerge { get; set; }
 
         public ChildBaseByPropertyValue? ChildByPropertyValue { get; set; }
 
@@ -32,17 +50,17 @@ namespace Mastersign.ConfigModel.Test
 
     internal abstract class ChildBaseByPropertyValue
     {
-        [TypeDescriminator]
+        [TypeDiscriminator]
         public string? Class { get; set; }
     }
 
-    [TypeDescriminationValue("Class A")]
+    [TypeDiscriminationValue("Class A")]
     internal class ChildClass1A : ChildBaseByPropertyValue
     {
 
     }
 
-    [TypeDescriminationValue("Class B")]
+    [TypeDiscriminationValue("Class B")]
     internal class ChildClass1B : ChildBaseByPropertyValue
     {
 
@@ -58,7 +76,7 @@ namespace Mastersign.ConfigModel.Test
 
     }
 
-    internal class ChildClass2A : ChildBaseByPropertyExistenceIntermediate
+    internal class ChildClass2A : ChildBaseByPropertyExistence
     {
         [TypeIndicator]
         public int A { get; set; }
@@ -104,8 +122,8 @@ namespace Mastersign.ConfigModel.Test
 
     internal class ChildWithSources : ConfigModelBase
     {
-        public string? Caption { get; set; }
-        public string? Victim { get; set; }
+        public string? X { get; set; }
+        public string? Y { get; set; }
     }
 
     [MergableConfigModel]

@@ -1,0 +1,5 @@
+X: Precedence X
+
+$sources:
+  X: Strings/precedence_x.txt
+  Y: Strings/precedence_y.txt

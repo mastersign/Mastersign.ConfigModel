@@ -6,10 +6,14 @@ namespace Mastersign.ConfigModel
 {
     public abstract class ConfigModelBase
     {
-        [YamlMember(Alias = "$includes", DefaultValuesHandling = DefaultValuesHandling.OmitNull)]
+        [YamlMember(Alias = "$includes",
+            DefaultValuesHandling = DefaultValuesHandling.OmitNull,
+            ApplyNamingConventions = false)]
         public List<string> Includes { get; set; }
 
-        [YamlMember(Alias = "$sources", DefaultValuesHandling = DefaultValuesHandling.OmitNull)]
+        [YamlMember(Alias = "$sources",
+            DefaultValuesHandling = DefaultValuesHandling.OmitNull,
+            ApplyNamingConventions = false)]
         public Dictionary<string, string> StringSources { get; set; }
 
         private readonly List<string> _layers = new List<string>();

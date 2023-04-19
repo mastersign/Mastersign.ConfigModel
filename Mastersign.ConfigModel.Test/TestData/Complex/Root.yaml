@@ -1,40 +1,64 @@
-name: Test Model
+Name: Test Model
 
 $includes:
 - Base.yaml
 - Layer*.yaml
 
 $sources:
-  propC: Strings/root_propc.txt
+  PropC: Strings/root_propc.txt
 
-propC: Root C
+PropC: Root C
 prop_dee: Root D
 
+List:
+- 30
+- 40
+
+ListPrepend:
+- 30
+- 40
+
+ListAppend:
+- 30
+- 40
+
+ListReplace:
+- 30
+
+ListMerge:
+- Y: Root 1 Y
+
+Dictionary:
+  B: Root B
+
+DictionaryNoMerge:
+  B: Root B
+
 ChildByPropertyValue:
-  class: Class A
+  Class: Class A
 
 ChildByPropertyExistence:
-  a: 1234
+  A: 1234
 
 SimpleChild:
   Caption: simple child
   Timestamp: 2023-04-08T10:26:53Z
 
 MergableByAttribute:
-  x: Root X
+  X: Root X
 
 MergableByInterface:
-  x: Root X
+  X: Root X
 
 WithSources:
   $sources:
-    caption: Strings/root_ws_caption.txt
+    X: Strings/root_ws_x.txt
 
 WithSourcesMergableByAttribute:
   $sources:
-    caption: Strings/root_wsma_caption.txt
+    X: Strings/root_wsma_x.txt
 
 WithSourcesMergableByInterface:
   $sources:
-    caption: Strings/root_wsmi_caption.txt
-  z: I will not prevail
+    X: Strings/root_wsmi_x.txt
+  Z: I will not prevail

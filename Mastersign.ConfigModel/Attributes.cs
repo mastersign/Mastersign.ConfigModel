@@ -7,17 +7,57 @@ namespace Mastersign.ConfigModel
     {
     }
 
+    public enum ListMergeMode
+    {
+        Clear,
+        ReplaceItem,
+        MergeItem,
+        Append,
+        Prepend,
+        AppendDistinct,
+        PrependDistinct,
+    }
+
+    public enum DictionaryMergeMode
+    {
+        Clear,
+        ReplaceValue,
+        MergeValue,
+    }
+
     [AttributeUsage(AttributeTargets.Property)]
-    public class TypeDescriminatorAttribute : Attribute
+    public class MergeListAttribute : Attribute
+    {
+        public ListMergeMode MergeMode { get; }
+
+        public MergeListAttribute(ListMergeMode mergeMode)
+        {
+            MergeMode = mergeMode;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class MergeDictionaryAttribute : Attribute
+    {
+        public DictionaryMergeMode MergeMode { get; }
+
+        public MergeDictionaryAttribute(DictionaryMergeMode mergeMode)
+        {
+            MergeMode = mergeMode;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class TypeDiscriminatorAttribute : Attribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class TypeDescriminationValueAttribute : Attribute
+    public class TypeDiscriminationValueAttribute : Attribute
     {
         public string Value { get; }
 
-        public TypeDescriminationValueAttribute(string value)
+        public TypeDiscriminationValueAttribute(string value)
         {
             Value = value;
         }

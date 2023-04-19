@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastersign.ConfigModel", "Mastersign.ConfigModel\Mastersign.ConfigModel.csproj", "{9FA9B512-BF6D-49DD-AD5D-F2B65F915227}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastersign.ConfigModel.Test", "Mastersign.ConfigModel.Test\Mastersign.ConfigModel.Test.csproj", "{10C8C047-1754-4110-B2F2-5EABFC714190}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastersign.ConfigModel.Test", "Mastersign.ConfigModel.Test\Mastersign.ConfigModel.Test.csproj", "{10C8C047-1754-4110-B2F2-5EABFC714190}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,9 +2,39 @@ $includes:
 - Nested.yaml
 
 $sources:
-  propC: Strings/root_propc.txt
+  PropC: Strings/root_propc.txt
 
-propb: Base B
+PropB: Base B
+
+List:
+- 1
+- 2
+
+ListPrepend:
+- 1
+- 2
+
+ListAppend:
+- 1
+- 2
+
+ListReplace:
+- 1
+- 2
+
+ListMerge:
+- X: Base 1 X
+  Y: Base 1 Y
+- X: Base 2 X
+  Y: Base 2 Y
+
+Dictionary:
+  A: Base A
+  B: Base B
+
+DictionaryNoMerge:
+  A: Base A
+  B: Base B
 
 SimpleChild:
   Caption: simple child from base
@@ -12,23 +42,23 @@ SimpleChild:
   Timestamp: 2000-01-01T00:00:00Z
 
 MergableByAttribute:
-  x: Base X
-  y: Base Y
+  X: Base X
+  Y: Base Y
 
 MergableByInterface:
-  x: Base X
-  y: Base Y
-  z: Base Z
+  X: Base X
+  Y: Base Y
+  Z: Base Z
 
 WithSources:
   Caption: Base Caption
   Victim: I will be discarded
 
 WithSourcesMergableByAttribute:
-  x: Base X
-  y: Base Y
+  X: Base X
+  Y: Base Y
 
 WithSourcesMergableByInterface:
-  x: Base X
-  y: Base Y
-  z: Base Z
+  X: Base X
+  Y: Base Y
+  Z: Base Z

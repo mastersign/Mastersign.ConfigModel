@@ -1,0 +1,13 @@
+DictReplace:
+  a:
+    X: X a.1
+    Y: Y a.1
+    NestedModel:
+      A: A a.1
+      B: B a.1
+  b:
+    X: X b.1
+    Y: Y b.1
+    NestedModel:
+      A: A b.1
+      B: B b.1

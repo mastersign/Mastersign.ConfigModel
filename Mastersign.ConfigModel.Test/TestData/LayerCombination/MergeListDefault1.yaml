@@ -1,0 +1,11 @@
+ListDefault:
+  - X: X 1.1
+    Y: Y 1.1
+    NestedModel:
+      A: A 1.1
+      B: B 1.1
+  - X: X 2.1
+    Y: Y 2.1
+    NestedModel:
+      A: A 2.1
+      B: B 2.1

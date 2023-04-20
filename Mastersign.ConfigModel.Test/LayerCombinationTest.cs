@@ -25,7 +25,8 @@ namespace Mastersign.ConfigModel.Test
         public void LayerMergeByInterfaceTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            mgr.AddLayers("MergeByInterface*.yaml", GetTestDataFilePath(SCENARIO));
+            var layers = mgr.AddLayers("MergeByInterface*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.MergableByInterface);
@@ -37,7 +38,8 @@ namespace Mastersign.ConfigModel.Test
         public void LayerMergeByReplacementTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            mgr.AddLayers("NonMergable*.yaml", GetTestDataFilePath(SCENARIO));
+            var layers = mgr.AddLayers("NonMergable*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Child);
@@ -85,7 +87,297 @@ namespace Mastersign.ConfigModel.Test
                 mgr.AddLayers("MergeBy*.yaml", testDataBasePath));
         }
 
+        [TestMethod]
+        public void MergeListDefaultTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeListDefault*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
 
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ListDefault);
+            Assert.AreEqual(2, result.ListDefault.Count);
+
+            Assert.AreEqual("X 3.2", result.ListDefault[0].X);
+            Assert.IsNull(result.ListDefault[0].Y);
+            Assert.IsNotNull(result.ListDefault[0].NestedModel);
+            Assert.AreEqual("A 3.2", result.ListDefault[0].NestedModel?.A);
+            Assert.IsNull(result.ListDefault[0].NestedModel?.B);
+
+            Assert.AreEqual("X 4.2", result.ListDefault[1].X);
+            Assert.IsNull(result.ListDefault[1].Y);
+            Assert.IsNotNull(result.ListDefault[1].NestedModel);
+            Assert.AreEqual("A 4.2", result.ListDefault[1].NestedModel?.A);
+            Assert.IsNull(result.ListDefault[1].NestedModel?.B);
+        }
+
+        [TestMethod]
+        public void MergeListClearTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeListClear*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ListClear);
+            Assert.AreEqual(2, result.ListClear.Count);
+
+            Assert.AreEqual("X 4.2", result.ListClear[0].X);
+            Assert.IsNull(result.ListClear[0].Y);
+
+            Assert.AreEqual("X 5.2", result.ListClear[1].X);
+            Assert.IsNull(result.ListClear[1].Y);
+        }
+
+        [TestMethod]
+        public void MergeListAppendTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeListAppendIndistinct*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ListAppend);
+            Assert.AreEqual(5, result.ListAppend.Count);
+
+            Assert.AreEqual("X 1.1", result.ListAppend[0].X);
+            Assert.AreEqual("X 2.1", result.ListAppend[1].X);
+            Assert.AreEqual("X 3.1", result.ListAppend[2].X);
+            Assert.AreEqual("X 4.2", result.ListAppend[3].X);
+            Assert.AreEqual("X 5.2", result.ListAppend[4].X);
+        }
+
+        [TestMethod]
+        public void MergeListPrependTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeListPrependIndistinct*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ListPrepend);
+            Assert.AreEqual(5, result.ListPrepend.Count);
+
+            Assert.AreEqual("X 4.2", result.ListPrepend[0].X);
+            Assert.AreEqual("X 5.2", result.ListPrepend[1].X);
+            Assert.AreEqual("X 1.1", result.ListPrepend[2].X);
+            Assert.AreEqual("X 2.1", result.ListPrepend[3].X);
+            Assert.AreEqual("X 3.1", result.ListPrepend[4].X);
+        }
+
+        [TestMethod]
+        public void MergeListAppendDistinctTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeListAppendDistinct*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ListAppendDistinct);
+            Assert.AreEqual(4, result.ListAppendDistinct.Count);
+
+            Assert.AreEqual("A", result.ListAppendDistinct[0].X);
+            Assert.AreEqual("B", result.ListAppendDistinct[1].X);
+            Assert.AreEqual("C", result.ListAppendDistinct[2].X);
+            Assert.AreEqual("D", result.ListAppendDistinct[3].X);
+        }
+
+        [TestMethod]
+        public void MergeListPrependDistinctTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeListPrependDistinct*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ListPrependDistinct);
+            Assert.AreEqual(4, result.ListPrependDistinct.Count);
+
+            Assert.AreEqual("D", result.ListPrependDistinct[0].X);
+            Assert.AreEqual("A", result.ListPrependDistinct[1].X);
+            Assert.AreEqual("B", result.ListPrependDistinct[2].X);
+            Assert.AreEqual("C", result.ListPrependDistinct[3].X);
+        }
+
+        [TestMethod]
+        public void MergeListReplaceTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeListReplace*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ListReplace);
+            Assert.AreEqual(3, result.ListReplace.Count);
+
+            Assert.AreEqual("X 1.2", result.ListReplace[0].X);
+            Assert.IsNull(result.ListReplace[0].Y);
+
+            Assert.AreEqual("X 2.2", result.ListReplace[1].X);
+            Assert.IsNull(result.ListReplace[1].Y);
+
+            Assert.AreEqual("X 3.1", result.ListReplace[2].X);
+            Assert.AreEqual("Y 3.1", result.ListReplace[2].Y);
+        }
+
+        [TestMethod]
+        public void MergeListMergeTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeListMerge*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.ListMerge);
+            Assert.AreEqual(3, result.ListMerge.Count);
+
+            Assert.AreEqual("X 1.2", result.ListMerge[0].X);
+            Assert.AreEqual("Y 1.1", result.ListMerge[0].Y);
+            Assert.IsNotNull(result.ListMerge[0].NestedModel);
+            Assert.AreEqual("A 1.2", result.ListMerge[0].NestedModel?.A);
+            Assert.AreEqual("B 1.2", result.ListMerge[0].NestedModel?.B);
+
+            Assert.AreEqual("X 2.2", result.ListMerge[1].X);
+            Assert.AreEqual("Y 2.1", result.ListMerge[1].Y);
+            Assert.IsNotNull(result.ListMerge[1].NestedModel);
+            Assert.AreEqual("A 2.2", result.ListMerge[1].NestedModel?.A);
+            Assert.AreEqual("B 2.1", result.ListMerge[1].NestedModel?.B);
+
+            Assert.AreEqual("X 3.2", result.ListMerge[2].X);
+            Assert.IsNull(result.ListMerge[2].Y);
+            Assert.IsNotNull(result.ListMerge[2].NestedModel);
+            Assert.AreEqual("A 3.2", result.ListMerge[2].NestedModel?.A);
+            Assert.AreEqual("B 3.2", result.ListMerge[2].NestedModel?.B);
+        }
+
+        [TestMethod]
+        public void MergeDictDefaultTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeDictDefault*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.DictDefault);
+            Assert.AreEqual(3, result.DictDefault.Count);
+
+            Assert.AreEqual("X a.2", result.DictDefault["a"].X);
+            Assert.IsNull(result.DictDefault["a"].Y);
+            Assert.IsNotNull(result.DictDefault["a"].NestedModel);
+            Assert.AreEqual("A a.2", result.DictDefault["a"].NestedModel?.A);
+            Assert.IsNull(result.DictDefault["a"].NestedModel?.B);
+
+            Assert.AreEqual("X b.1", result.DictDefault["b"].X);
+            Assert.AreEqual("Y b.1", result.DictDefault["b"].Y);
+            Assert.IsNotNull(result.DictDefault["b"].NestedModel);
+            Assert.AreEqual("A b.1", result.DictDefault["b"].NestedModel?.A);
+            Assert.AreEqual("B b.1", result.DictDefault["b"].NestedModel?.B);
+
+            Assert.AreEqual("X c.2", result.DictDefault["c"].X);
+            Assert.IsNull(result.DictDefault["c"].Y);
+            Assert.IsNotNull(result.DictDefault["c"].NestedModel);
+            Assert.AreEqual("A c.2", result.DictDefault["c"].NestedModel?.A);
+            Assert.IsNull(result.DictDefault["c"].NestedModel?.B);
+        }
+
+        [TestMethod]
+        public void MergeDictClearTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeDictClear*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.DictClear);
+            Assert.AreEqual(2, result.DictClear.Count);
+
+            Assert.AreEqual("X a.2", result.DictClear["a"].X);
+            Assert.IsNull(result.DictClear["a"].Y);
+            Assert.IsNotNull(result.DictClear["a"].NestedModel);
+            Assert.AreEqual("A a.2", result.DictClear["a"].NestedModel?.A);
+            Assert.IsNull(result.DictClear["a"].NestedModel?.B);
+
+            Assert.IsFalse(result.DictClear.ContainsKey("b"));
+
+            Assert.AreEqual("X c.2", result.DictClear["c"].X);
+            Assert.IsNull(result.DictClear["c"].Y);
+            Assert.IsNotNull(result.DictClear["c"].NestedModel);
+            Assert.AreEqual("A c.2", result.DictClear["c"].NestedModel?.A);
+            Assert.IsNull(result.DictClear["c"].NestedModel?.B);
+        }
+
+        [TestMethod]
+        public void MergeDictReplaceTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeDictReplace*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.DictReplace);
+            Assert.AreEqual(3, result.DictReplace.Count);
+
+            Assert.AreEqual("X a.2", result.DictReplace["a"].X);
+            Assert.IsNull(result.DictReplace["a"].Y);
+            Assert.IsNotNull(result.DictReplace["a"].NestedModel);
+            Assert.AreEqual("A a.2", result.DictReplace["a"].NestedModel?.A);
+            Assert.IsNull(result.DictReplace["a"].NestedModel?.B);
+
+            Assert.AreEqual("X b.1", result.DictReplace["b"].X);
+            Assert.AreEqual("Y b.1", result.DictReplace["b"].Y);
+            Assert.IsNotNull(result.DictReplace["b"].NestedModel);
+            Assert.AreEqual("A b.1", result.DictReplace["b"].NestedModel?.A);
+            Assert.AreEqual("B b.1", result.DictReplace["b"].NestedModel?.B);
+
+            Assert.AreEqual("X c.2", result.DictReplace["c"].X);
+            Assert.IsNull(result.DictReplace["c"].Y);
+            Assert.IsNotNull(result.DictReplace["c"].NestedModel);
+            Assert.AreEqual("A c.2", result.DictReplace["c"].NestedModel?.A);
+            Assert.IsNull(result.DictReplace["c"].NestedModel?.B);
+        }
+
+
+        [TestMethod]
+        public void MergeDictMergeTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeDictMerge*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.DictMerge);
+            Assert.AreEqual(3, result.DictMerge.Count);
+
+            Assert.AreEqual("X a.2", result.DictMerge["a"].X);
+            Assert.AreEqual("Y a.1", result.DictMerge["a"].Y);
+            Assert.IsNotNull(result.DictMerge["a"].NestedModel);
+            Assert.AreEqual("A a.2", result.DictMerge["a"].NestedModel?.A);
+            Assert.AreEqual("B a.1", result.DictMerge["a"].NestedModel?.B);
+
+            Assert.AreEqual("X b.1", result.DictMerge["b"].X);
+            Assert.AreEqual("Y b.1", result.DictMerge["b"].Y);
+            Assert.IsNotNull(result.DictMerge["b"].NestedModel);
+            Assert.AreEqual("A b.1", result.DictMerge["b"].NestedModel?.A);
+            Assert.AreEqual("B b.1", result.DictMerge["b"].NestedModel?.B);
+
+            Assert.AreEqual("X c.2", result.DictMerge["c"].X);
+            Assert.IsNull(result.DictMerge["c"].Y);
+            Assert.IsNotNull(result.DictMerge["c"].NestedModel);
+            Assert.AreEqual("A c.2", result.DictMerge["c"].NestedModel?.A);
+            Assert.IsNull(result.DictMerge["c"].NestedModel?.B);
+        }
 
         [MergableConfigModel]
         class Model
@@ -122,7 +414,6 @@ namespace Mastersign.ConfigModel.Test
             [MergeList(ListMergeMode.MergeItem)]
             public List<Child>? ListMerge { get; set; }
 
-
             public IDictionary<string, Child> DictDefault { get; set; } = new Dictionary<string, Child>();
 
             [MergeDictionary(DictionaryMergeMode.Clear)]
@@ -141,6 +432,9 @@ namespace Mastersign.ConfigModel.Test
             public string? Y { get; set; }
 
             public Model? NestedModel { get; set; }
+
+            public override bool Equals(object? obj) => obj is Child child && X == child.X;
+            public override int GetHashCode() => HashCode.Combine(X);
         }
 
         [MergableConfigModel]

@@ -1,0 +1,7 @@
+ListDefault:
+  - X: X 3.2
+    NestedModel:
+      A: A 3.2
+  - X: X 4.2
+    NestedModel:
+      A: A 4.2

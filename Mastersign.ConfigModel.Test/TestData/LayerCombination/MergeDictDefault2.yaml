@@ -1,0 +1,9 @@
+DictDefault:
+  a:
+    X: X a.2
+    NestedModel:
+      A: A a.2
+  c:
+    X: X c.2
+    NestedModel:
+      A: A c.2

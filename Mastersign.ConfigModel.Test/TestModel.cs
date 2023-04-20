@@ -112,7 +112,7 @@ namespace Mastersign.ConfigModel.Test
     {
         public string? Z { get; set; }
 
-        public void UpdateWith(object layer)
+        public void UpdateWith(object layer, bool forceDeepMerge)
         {
             X = (layer as ChildMergableByInterface)?.X;
             Y = (layer as ChildMergableByInterface)?.Y;
@@ -139,7 +139,7 @@ namespace Mastersign.ConfigModel.Test
         public string? Y { get; set; }
         public string? Z { get; set; }
 
-        public override void UpdateWith(object layer)
+        public void UpdateWith(object layer, bool forceDeepMerge)
         {
             X = (layer as ChildWithSourcesMergableByInterface)?.X;
             Y = (layer as ChildWithSourcesMergableByInterface)?.Y;

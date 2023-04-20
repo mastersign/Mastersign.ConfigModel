@@ -2,6 +2,6 @@
 {
     public interface IMergableConfigModel
     {
-        void UpdateWith(object layer);
+        void UpdateWith(object source, bool forceDeepMerge);
     }
 }

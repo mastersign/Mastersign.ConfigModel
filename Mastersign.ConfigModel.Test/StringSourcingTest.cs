@@ -36,12 +36,12 @@ namespace Mastersign.ConfigModel.Test
         public void SourcingInChildren()
         {
             var mgr = new ConfigModelManager<RootModel>();
-            var modelFile = GetFilePath(SCENARIO, "Children.yaml");
+            var modelFile = GetFilePath(SCENARIO, "Child.yaml");
             mgr.AddLayer(modelFile);
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.WithSources);
-            Assert.AreEqual("Children WithSources X from File", result.WithSources.X);
+            Assert.AreEqual("Child WithSources X from File", result.WithSources.X);
         }
     }
 }

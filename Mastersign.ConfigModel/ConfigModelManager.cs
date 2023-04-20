@@ -8,7 +8,6 @@ using Microsoft.Extensions.FileSystemGlobbing;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators;
 using YamlDotNet.Serialization.NamingConventions;
-using static Mastersign.ConfigModel.ReflectionHelper;
 
 namespace Mastersign.ConfigModel
 {
@@ -90,215 +89,10 @@ namespace Mastersign.ConfigModel
             return newLayers.ToArray();
         }
 
-        private Dictionary<Type, Dictionary<string, Type>> GetTypeDiscriminationsByPropertyExistence()
-        {
-            var result = new Dictionary<Type, Dictionary<string, Type>>();
-            foreach (var mt in TraverseModelTypes(typeof(TRootModel)))
-            {
-                foreach (var st in FindAllDerivedTypesInTheSameAssembly(mt))
-                {
-                    foreach (var p in st.GetModelProperties())
-                    {
-                        if (p.HasCustomAttribute<TypeIndicatorAttribute>())
-                        {
-                            if (!result.TryGetValue(mt, out var uniqueKeys))
-                            {
-                                uniqueKeys = new Dictionary<string, Type>();
-                                result.Add(mt, uniqueKeys);
-                            }
-                            uniqueKeys.Add(p.Name, st);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        private Dictionary<Type, Tuple<string, Dictionary<string, Type>>> GetTypeDiscriminationsByPropertyValue()
-        {
-            var result = new Dictionary<Type, Tuple<string, Dictionary<string, Type>>>();
-            foreach (var mt in TraverseModelTypes(typeof(TRootModel)))
-            {
-                foreach (var p in mt.GetModelProperties())
-                {
-                    if (p.HasCustomAttribute<TypeDiscriminatorAttribute>())
-                    {
-                        if (!result.TryGetValue(mt, out var valueIndicator))
-                        {
-                            valueIndicator = Tuple.Create(p.Name, new Dictionary<string, Type>());
-                            result.Add(mt, valueIndicator);
-                        }
-                        foreach (var st in FindAllDerivedTypesInTheSameAssembly(mt))
-                        {
-                            var discriminationValue = st.GetCustomAttribute<TypeDiscriminationValueAttribute>()?.Value;
-                            if (!string.IsNullOrWhiteSpace(discriminationValue))
-                            {
-                                valueIndicator.Item2.Add(discriminationValue, st);
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-            return result;
-        }
-
-        private static void MergeListGeneric<T>(IList<T> target, IList<T> source, ListMergeMode mode)
-        {
-            switch (mode)
-            {
-                case ListMergeMode.Clear:
-                    target.Clear();
-                    foreach (var x in source) target.Add(x);
-                    break;
-                case ListMergeMode.Append:
-                    foreach (var x in source) target.Add(x);
-                    break;
-                case ListMergeMode.Prepend:
-                    // inefficient, performance can definitely be improved
-                    foreach (var x in source.Reverse()) target.Insert(0, x);
-                    break;
-                case ListMergeMode.AppendDistinct:
-                    foreach (var x in source)
-                    {
-                        if (!target.Contains(x)) target.Add(x);
-                    }
-                    break;
-                case ListMergeMode.PrependDistinct:
-                    // inefficient, performance can definitely be improved
-                    foreach (var x in source.Reverse())
-                    {
-                        if (!target.Contains(x)) target.Insert(0, x);
-                    }
-                    break;
-                case ListMergeMode.ReplaceItem:
-                    for (var i = 0; i < Math.Min(source.Count, target.Count); i++)
-                    {
-                        target[i] = source[i];
-                    }
-                    if (source.Count > target.Count)
-                    {
-                        for (var i = target.Count; i < source.Count; i++)
-                        {
-                            target.Add(source[i]);
-                        }
-                    }
-                    break;
-                case ListMergeMode.MergeItem:
-                    for (var i = 0; i < Math.Min(source.Count, target.Count); i++)
-                    {
-                        Merge(target[i], source[i]);
-                    }
-                    if (source.Count > target.Count)
-                    {
-                        for (var i = target.Count; i < source.Count; i++)
-                        {
-                            target.Add(source[i]);
-                        }
-                    }
-                    break;
-                default:
-                    throw new NotSupportedException();
-            }
-        }
-
-        private static void MergeList(object target, object source, Type itemType, ListMergeMode mode)
-        {
-            var mergeMethodInfo = typeof(ConfigModelManager<TRootModel>).GetMethod(nameof(MergeListGeneric), BindingFlags.NonPublic | BindingFlags.Static);
-            var genericMergeMethodInfo = mergeMethodInfo.MakeGenericMethod(itemType);
-            genericMergeMethodInfo.Invoke(null, new object[] { target, source, mode });
-        }
-
-        private static void MergeDictionaryGeneric<T>(IDictionary<string, T> target, IDictionary<string, T> source, DictionaryMergeMode mode)
-        {
-            switch (mode)
-            {
-                case DictionaryMergeMode.Clear:
-                    target.Clear(); 
-                    foreach (var kvp in source) target.Add(kvp.Key, kvp.Value);
-                    break;
-                case DictionaryMergeMode.ReplaceValue:
-                    target.Clear();
-                    foreach (var kvp in source) target[kvp.Key] = kvp.Value;
-                    break;
-                case DictionaryMergeMode.MergeValue:
-                    foreach (var kvp in source)
-                    {
-                        if (target.TryGetValue(kvp.Key, out var v))
-                            Merge(v, kvp.Value);
-                        else
-                            target[kvp.Key] = kvp.Value;
-                    }
-                    break;
-                default:
-                    throw new NotSupportedException();
-            }
-        }
-
-        private static void MergeDictionary(object target, object source, Type valueType, DictionaryMergeMode mode)
-        {
-            var mergeMethodInfo = typeof(ConfigModelManager<TRootModel>).GetMethod(nameof(MergeDictionaryGeneric), BindingFlags.NonPublic | BindingFlags.Static);
-            var genericMergeMethodInfo = mergeMethodInfo.MakeGenericMethod(typeof(string), valueType);
-            genericMergeMethodInfo.Invoke(null, new object[] { target, source, mode });
-        }
-
-        private static void Merge(object target, object source)
-        {
-            if (target == null) throw new ArgumentNullException(nameof(target));
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            var t = target.GetType();
-            if (source.GetType() != t) throw new ArgumentException("Different types in source and target");
-            if (t.IsMergableByInterface())
-            {
-                ((IMergableConfigModel)target).UpdateWith(source);
-            }
-            else
-            {
-                foreach (var p in t.GetModelProperties())
-                {
-                    if (!p.CanRead || !p.CanWrite) continue;
-                    var sv = p.GetValue(source, null);
-                    if (sv == null) continue;
-                    var tv = p.GetValue(target, null);
-                    if (tv == null)
-                    {
-                        p.SetValue(target, sv);
-                        continue;
-                    }
-                    if (p.PropertyType.IsMergable())
-                    {
-                        Merge(tv, sv);
-                        continue;
-                    }
-                    var listElementType = GetListElementType(p.PropertyType);
-                    if (listElementType != null)
-                    {
-                        var listMergeMode = p.GetCustomAttribute<MergeListAttribute>()?.MergeMode ?? ListMergeMode.Clear;
-                        MergeList(tv, sv, listElementType, listMergeMode);
-                        continue;
-                    }
-                    var mapValueType = GetMapValueType(p.PropertyType);
-                    if (mapValueType != null)
-                    {
-                        var mapMergeMode = p.GetCustomAttribute<MergeDictionaryAttribute>()?.MergeMode
-                            ?? (mapValueType.IsMergable()
-                                ? DictionaryMergeMode.MergeValue
-                                : DictionaryMergeMode.ReplaceValue);
-                        MergeDictionary(tv, sv, mapValueType, mapMergeMode);
-                        continue;
-                    }
-
-                    p.SetValue(target, sv);
-                }
-            }
-        }
-
-        private void LoadStringSources(ConfigModelBase model, string filename)
+        private void LoadStringSourcesInternal(ConfigModelBase model, string referenceFilename)
         {
             if (model?.StringSources == null) return;
-            var rootPath = Path.GetDirectoryName(filename);
+            var rootPath = Path.GetDirectoryName(referenceFilename);
             foreach (var p in model.GetType().GetModelProperties()
                 .Where(p => p.PropertyType == typeof(string)))
             {
@@ -317,28 +111,66 @@ namespace Mastersign.ConfigModel
             model.StringSources = null;
         }
 
-        private void LoadStringSources(object o, string filename)
+        private void LoadStringSourcesInList<T>(IList<T> list, string referenceFilename)
+        {
+            if (ReflectionHelper.IsAtomic(typeof(T))) return;
+            for (var i = 0; i < list.Count; i++)
+            {
+                var x = list[i];
+                LoadStringSources(x, referenceFilename);
+                if (typeof(T).IsValueType) list[i] = x;
+            }
+        }
+
+        private void LoadStringSourcesInDictionary<T>(IDictionary<string, T> dictionary, string referenceFilename)
+        {
+            if (ReflectionHelper.IsAtomic(typeof(T))) return;
+            foreach (var kvp in dictionary)
+            {
+                var x = kvp.Value;
+                LoadStringSources(x, referenceFilename);
+                if (typeof(T).IsValueType) dictionary[kvp.Key] = x;
+            }
+        }
+
+        private void LoadStringSources(object o, string referenceFilename)
         {
             if (o == null) return;
             var t = o.GetType();
             if (typeof(ConfigModelBase).IsAssignableFrom(t))
             {
-                LoadStringSources((ConfigModelBase)o, filename);
+                LoadStringSourcesInternal((ConfigModelBase)o, referenceFilename);
             }
-            var listElementType = GetListElementType(t);
-            if (listElementType != null)
-            {
-                throw new NotImplementedException();
-            }
-            var mapValueType = GetMapValueType(t);
+
+            var mapValueType = ReflectionHelper.GetMapValueType(t);
             if (mapValueType != null)
             {
-                throw new NotImplementedException();
+                var loadStringSourcesInDictionaryMethodGenericInfo = typeof(ConfigModelManager<TRootModel>).GetMethod(
+                    nameof(LoadStringSourcesInDictionary), BindingFlags.Instance | BindingFlags.NonPublic);
+                var loadStringSourcesInDictionaryMethod = loadStringSourcesInDictionaryMethodGenericInfo.MakeGenericMethod(typeof(string), mapValueType);
+                loadStringSourcesInDictionaryMethod.Invoke(this, new[] { o, referenceFilename });
+                return;
+            }
+
+            var listElementType = ReflectionHelper.GetListElementType(t);
+            if (listElementType != null)
+            {
+                var loadStringSourcesInListMethodGenericInfo = typeof(ConfigModelManager<TRootModel>).GetMethod(
+                    nameof(LoadStringSourcesInList), BindingFlags.Instance | BindingFlags.NonPublic);
+                var loadStringSourcesInListMethod = loadStringSourcesInListMethodGenericInfo.MakeGenericMethod(listElementType);
+                loadStringSourcesInListMethod.Invoke(this, new[] { o, referenceFilename });
+                return;
             }
 
             foreach (var p in t.GetModelProperties())
             {
-                throw new NotImplementedException();
+                if (ReflectionHelper.IsAtomic(p.PropertyType)) continue;
+                var pv = p.GetValue(o);
+                if (pv != null)
+                {
+                    LoadStringSources(pv, referenceFilename);
+                    if (p.PropertyType.IsValueType) p.SetValue(o, pv);
+                }
             }
         }
 
@@ -350,8 +182,8 @@ namespace Mastersign.ConfigModel
             builder = builder.IgnoreUnmatchedProperties();
             builder = builder.WithNamingConvention(_propertyNamingConvention);
 
-            var discriminationsByPropertyExistence = GetTypeDiscriminationsByPropertyExistence();
-            var discriminationsByPropertyValue = GetTypeDiscriminationsByPropertyValue();
+            var discriminationsByPropertyExistence = ReflectionHelper.GetTypeDiscriminationsByPropertyExistence(typeof(TRootModel));
+            var discriminationsByPropertyValue = ReflectionHelper.GetTypeDiscriminationsByPropertyValue(typeof(TRootModel));
             if (discriminationsByPropertyExistence.Count > 0 ||
                 discriminationsByPropertyValue.Count > 0)
             {
@@ -382,7 +214,7 @@ namespace Mastersign.ConfigModel
                 root = new TRootModel();
                 if (defaultModel != null)
                 {
-                    Merge(root, defaultModel);
+                    Merging.MergeObject(root, defaultModel);
                 }
             }
             else if (defaultModel != null)
@@ -403,7 +235,7 @@ namespace Mastersign.ConfigModel
                     LoadStringSources(layer as ConfigModelBase, layerSource);
                 }
                 if (rootIsMergable)
-                    Merge(root, layer);
+                    Merging.MergeObject(root, layer);
                 else
                     root = layer;
             }

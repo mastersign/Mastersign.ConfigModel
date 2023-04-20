@@ -6,7 +6,7 @@
 - [ ] String Sourcing with `$sources`
     + [X] Simple string sourcing
     + [X] Explicit properties have precedence over file sources
-    + [ ] Sourcing in children
+    + [X] Sourcing in children
     + [ ] Sourcing in includes
 - [ ] Type Discriminator
     + [ ] Property Existence

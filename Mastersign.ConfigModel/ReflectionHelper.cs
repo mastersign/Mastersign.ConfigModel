@@ -11,6 +11,9 @@ namespace Mastersign.ConfigModel
             where T : Attribute
             => type.GetCustomAttribute<T>(inherit) != null;
 
+        public static bool IsAtomic(Type t)
+            => t.IsPrimitive || t.IsEnum || t == typeof(string);
+
         public static IEnumerable<PropertyInfo> GetModelProperties(this Type type)
             => type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Where(p => p.CanRead && p.CanWrite && p.GetIndexParameters().Length == 0);
@@ -83,5 +86,60 @@ namespace Mastersign.ConfigModel
 
         public static bool IsMergable(this Type type) 
             => type.IsMergableByInterface() || type.IsMergableByAttribute();
+
+        public static Dictionary<Type, Dictionary<string, Type>> GetTypeDiscriminationsByPropertyExistence(Type modelType)
+        {
+            var result = new Dictionary<Type, Dictionary<string, Type>>();
+            foreach (var mt in TraverseModelTypes(modelType))
+            {
+                foreach (var st in FindAllDerivedTypesInTheSameAssembly(mt))
+                {
+                    foreach (var p in st.GetModelProperties())
+                    {
+                        if (p.HasCustomAttribute<TypeIndicatorAttribute>())
+                        {
+                            if (!result.TryGetValue(mt, out var uniqueKeys))
+                            {
+                                uniqueKeys = new Dictionary<string, Type>();
+                                result.Add(mt, uniqueKeys);
+                            }
+                            uniqueKeys.Add(p.Name, st);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static Dictionary<Type, Tuple<string, Dictionary<string, Type>>> GetTypeDiscriminationsByPropertyValue(Type modelType)
+        {
+            var result = new Dictionary<Type, Tuple<string, Dictionary<string, Type>>>();
+            foreach (var mt in TraverseModelTypes(modelType))
+            {
+                foreach (var p in mt.GetModelProperties())
+                {
+                    if (p.HasCustomAttribute<TypeDiscriminatorAttribute>())
+                    {
+                        if (!result.TryGetValue(mt, out var valueIndicator))
+                        {
+                            valueIndicator = Tuple.Create(p.Name, new Dictionary<string, Type>());
+                            result.Add(mt, valueIndicator);
+                        }
+                        foreach (var st in FindAllDerivedTypesInTheSameAssembly(mt))
+                        {
+                            var discriminationValue = st.GetCustomAttribute<TypeDiscriminationValueAttribute>()?.Value;
+                            if (!string.IsNullOrWhiteSpace(discriminationValue))
+                            {
+                                valueIndicator.Item2.Add(discriminationValue, st);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

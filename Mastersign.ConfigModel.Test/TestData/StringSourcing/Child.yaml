@@ -1,3 +1,23 @@
-WithSources:
+Child:
   $sources:
-    X: Strings/child_withsources_x.txt
+    X: Strings/x.txt
+    Y: Strings/y.txt
+
+List:
+  - $sources:
+      X: Strings/x.txt
+  - $sources:
+      Y: Strings/y.txt
+
+Nested:
+  Child:
+    $sources:
+      X: Strings/x.txt
+
+  Dictionary:
+    A:
+      $sources:
+        X: Strings/x.txt
+    B:
+      $sources:
+        Y: Strings/y.txt

@@ -20,33 +20,38 @@ namespace Mastersign.ConfigModel
 
         public static Type GetListElementType(Type t)
         {
-            var listInterface = t.FindInterfaces(
-                (i, c) => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(List<>),
-                null)
-                .FirstOrDefault();
-            return listInterface?.GetGenericArguments()[0];
+            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>))
+                return t.GetGenericArguments()[0];
+            return t
+                .FindInterfaces((i, c) => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>), null)
+                .FirstOrDefault()
+                ?.GetGenericArguments()[0];
         }
 
-        public static Type GetMapValueType(Type t)
+        public static Type GetDictionaryValueType(Type t)
         {
-            var dictionaryInterfaces = t.FindInterfaces(
-                (i, c) => i.IsGenericType && 
-                    i.GetGenericTypeDefinition() == typeof(IDictionary<,>) &&
-                    i.GetGenericArguments()[0] == typeof(string),
-                null)
-                .FirstOrDefault();
-            return dictionaryInterfaces?.GetGenericArguments()[1];
+            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IDictionary<,>))
+                return t.GetGenericArguments()[1];
+            return t
+                .FindInterfaces(
+                    (i, c) => i.IsGenericType && 
+                        i.GetGenericTypeDefinition() == typeof(IDictionary<,>) &&
+                        i.GetGenericArguments()[0] == typeof(string),
+                    null)
+                .FirstOrDefault()
+                ?.GetGenericArguments()[1];
         }
 
-        public static List<Type> FindAllDerivedTypes(Type baseType, Assembly assembly)
+        public static List<Type> FindAllDerivedTypes(Type baseType, Assembly assembly, bool returnAbstractClasses = false)
         {
             return assembly.GetTypes()
-                .Where(t => t != baseType && t.IsAssignableFrom(baseType))
+                .Where(t => t != baseType && baseType.IsAssignableFrom(t)
+                    && (returnAbstractClasses || !t.IsAbstract))
                 .ToList();
         }
 
-        public static List<Type> FindAllDerivedTypesInTheSameAssembly(Type baseType)
-            => FindAllDerivedTypes(baseType, Assembly.GetAssembly(baseType));
+        public static List<Type> FindAllDerivedTypesInTheSameAssembly(Type baseType, bool returnAbstractClasses = false)
+            => FindAllDerivedTypes(baseType, Assembly.GetAssembly(baseType), returnAbstractClasses);
 
         public static IEnumerable<Type> GetAssociatedModelTypes(Type t)
         {
@@ -54,7 +59,7 @@ namespace Mastersign.ConfigModel
             {
                 var at = propInfo.PropertyType;
                 var listElementType = GetListElementType(at);
-                var mapValueType = GetMapValueType(at);
+                var mapValueType = GetDictionaryValueType(at);
                 if (listElementType != null) yield return listElementType;
                 else if (mapValueType != null) yield return mapValueType;
                 else yield return at;
@@ -70,7 +75,6 @@ namespace Mastersign.ConfigModel
             foreach (var at in GetAssociatedModelTypes(t))
             {
                 if (visited.Contains(at)) continue;
-                visited.Add(at);
                 foreach (var at2 in TraverseModelTypes(at, visited))
                 {
                     yield return at2;

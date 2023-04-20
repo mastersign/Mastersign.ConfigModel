@@ -1,3 +1,4 @@
+using YamlDotNet.Serialization;
 using static Mastersign.ConfigModel.Test.TestData;
 
 namespace Mastersign.ConfigModel.Test
@@ -10,12 +11,11 @@ namespace Mastersign.ConfigModel.Test
         [TestMethod]
         public void PascalCaseTest()
         {
-            var mgr = new ConfigModelManager<RootModel>(propertyNameHandling: PropertyNameHandling.PascalCase);
-            var modelFile = GetFilePath(SCENARIO, "PascalCase.yaml");
+            var mgr = new ConfigModelManager<Model>(propertyNameHandling: PropertyNameHandling.PascalCase);
+            var modelFile = GetTestDataFilePath(SCENARIO, "PascalCase.yaml");
             mgr.AddLayer(modelFile);
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
-            Assert.AreEqual("Name", result.Name);
             Assert.AreEqual("Prop A", result.PropA);
             Assert.IsNull(result.PropB);
             Assert.AreEqual("Prop D", result.PropD);
@@ -24,12 +24,11 @@ namespace Mastersign.ConfigModel.Test
         [TestMethod]
         public void CamelCaseTest()
         {
-            var mgr = new ConfigModelManager<RootModel>(propertyNameHandling: PropertyNameHandling.CamelCase);
-            var modelFile = GetFilePath(SCENARIO, "CamelCase.yaml");
+            var mgr = new ConfigModelManager<Model>(propertyNameHandling: PropertyNameHandling.CamelCase);
+            var modelFile = GetTestDataFilePath(SCENARIO, "CamelCase.yaml");
             mgr.AddLayer(modelFile);
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
-            Assert.AreEqual("Name", result.Name);
             Assert.AreEqual("Prop A", result.PropA);
             Assert.IsNull(result.PropB);
             Assert.AreEqual("Prop D", result.PropD);
@@ -38,12 +37,11 @@ namespace Mastersign.ConfigModel.Test
         [TestMethod]
         public void UnderscoredTest()
         {
-            var mgr = new ConfigModelManager<RootModel>(propertyNameHandling: PropertyNameHandling.Underscored);
-            var modelFile = GetFilePath(SCENARIO, "Underscored.yaml");
+            var mgr = new ConfigModelManager<Model>(propertyNameHandling: PropertyNameHandling.Underscored);
+            var modelFile = GetTestDataFilePath(SCENARIO, "Underscored.yaml");
             mgr.AddLayer(modelFile);
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
-            Assert.AreEqual("Name", result.Name);
             Assert.AreEqual("Prop A", result.PropA);
             Assert.IsNull(result.PropB);
             Assert.AreEqual("Prop D", result.PropD);
@@ -52,15 +50,24 @@ namespace Mastersign.ConfigModel.Test
         [TestMethod]
         public void HyphenatedTest()
         {
-            var mgr = new ConfigModelManager<RootModel>(propertyNameHandling: PropertyNameHandling.Hyphenated);
-            var modelFile = GetFilePath(SCENARIO, "Hyphenated.yaml");
+            var mgr = new ConfigModelManager<Model>(propertyNameHandling: PropertyNameHandling.Hyphenated);
+            var modelFile = GetTestDataFilePath(SCENARIO, "Hyphenated.yaml");
             mgr.AddLayer(modelFile);
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
-            Assert.AreEqual("Name", result.Name);
             Assert.AreEqual("Prop A", result.PropA);
             Assert.IsNull(result.PropB);
             Assert.AreEqual("Prop D", result.PropD);
+        }
+
+        class Model
+        {
+            public string? PropA { get; set; }
+            public string? PropB { get; set; }
+            public string? PropC { get; set; }
+
+            [YamlMember(Alias = "prop_dee", ApplyNamingConventions = false)]
+            public string? PropD { get; set; }
         }
     }
 }

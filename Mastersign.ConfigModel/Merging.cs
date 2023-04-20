@@ -129,7 +129,7 @@ namespace Mastersign.ConfigModel
                     p.SetValue(target, sv);
                     continue;
                 }
-                var propertyMapValueType = GetMapValueType(p.PropertyType);
+                var propertyMapValueType = GetDictionaryValueType(p.PropertyType);
                 if (propertyMapValueType != null)
                 {
                     var mapMergeMode = p.GetCustomAttribute<MergeDictionaryAttribute>()?.MergeMode
@@ -170,7 +170,7 @@ namespace Mastersign.ConfigModel
                 return;
             }
 
-            var mapValueType = GetMapValueType(t);
+            var mapValueType = GetDictionaryValueType(t);
             if (mapValueType != null)
             {
                 MergeDictionary(target, source, mapValueType, DictionaryMergeMode.ReplaceValue, forceDeepMerge);

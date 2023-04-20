@@ -1,0 +1,3 @@
+B: b # first indicator property wins
+A: a
+X: x

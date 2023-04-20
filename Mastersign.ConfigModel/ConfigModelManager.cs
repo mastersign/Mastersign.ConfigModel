@@ -52,7 +52,7 @@ namespace Mastersign.ConfigModel
         }
 
         public ConfigModelManager(
-            StringComparison filenameComparison = StringComparison.InvariantCulture,
+            StringComparison filenameComparison = StringComparison.Ordinal,
             PropertyNameHandling propertyNameHandling = PropertyNameHandling.PascalCase)
         {
             _filenameComparison = filenameComparison;
@@ -142,12 +142,12 @@ namespace Mastersign.ConfigModel
                 LoadStringSourcesInternal((ConfigModelBase)o, referenceFilename);
             }
 
-            var mapValueType = ReflectionHelper.GetMapValueType(t);
+            var mapValueType = ReflectionHelper.GetDictionaryValueType(t);
             if (mapValueType != null)
             {
                 var loadStringSourcesInDictionaryMethodGenericInfo = typeof(ConfigModelManager<TRootModel>).GetMethod(
                     nameof(LoadStringSourcesInDictionary), BindingFlags.Instance | BindingFlags.NonPublic);
-                var loadStringSourcesInDictionaryMethod = loadStringSourcesInDictionaryMethodGenericInfo.MakeGenericMethod(typeof(string), mapValueType);
+                var loadStringSourcesInDictionaryMethod = loadStringSourcesInDictionaryMethodGenericInfo.MakeGenericMethod(mapValueType);
                 loadStringSourcesInDictionaryMethod.Invoke(this, new[] { o, referenceFilename });
                 return;
             }
@@ -166,11 +166,9 @@ namespace Mastersign.ConfigModel
             {
                 if (ReflectionHelper.IsAtomic(p.PropertyType)) continue;
                 var pv = p.GetValue(o);
-                if (pv != null)
-                {
-                    LoadStringSources(pv, referenceFilename);
-                    if (p.PropertyType.IsValueType) p.SetValue(o, pv);
-                }
+                if (pv == null) continue;
+                LoadStringSources(pv, referenceFilename);
+                if (p.PropertyType.IsValueType) p.SetValue(o, pv);
             }
         }
 
@@ -229,11 +227,10 @@ namespace Mastersign.ConfigModel
                 {
                     layer = deserializer.Deserialize<TRootModel>(r);
                 }
-                if (layer is ConfigModelBase)
-                {
-                    // TODO load includes
-                    LoadStringSources(layer as ConfigModelBase, layerSource);
-                }
+
+                // TODO load includes
+                LoadStringSources(layer, layerSource);
+
                 if (rootIsMergable)
                     Merging.MergeObject(root, layer);
                 else

@@ -8,31 +8,28 @@
     + [X] Explicit properties have precedence over file sources
     + [X] Sourcing in children
     + [ ] Sourcing in includes
-- [ ] Type Discriminator
-    + [ ] Property Existence
-    + [ ] Property Value
+- [X] Type Discriminator
+    + [X] Property Existence
+    + [X] Property Value
+- [X] Collection Merge
+    + [X] List Merge Clear
+    + [X] List Merge Append
+    + [X] List Merge Prepend
+    + [X] List Merge Item Replace
+    + [X] List Merge Item Merge
+    + [X] Dictionary Merge Clear
+    + [X] Dictionary Merge Item Replace
+    + [X] Dictionary Merge Item Merge
 - [ ] Root Layer Combination
-    + [ ] List Merge Append
-    + [ ] List Merge Prepend
-    + [ ] List Merge Item Replace
-    + [ ] List Merge Item Merge
-    + [ ] Dictionary Item Replace
-    + [ ] Dictionary Item Merge
-    + [ ] Layer Source Filenames
+    + [X] Attribute
+    + [X] Interface
+    + [X] POCO Replacement
+    + [X] Layer Source Filenames
 - [ ] Layer Combination from `$includes`
     + [ ] Without Globbing
     + [ ] With Globbing
     + [ ] Layer Source Filenames
     + [ ] Cycle Detection
-- [ ] Non-Mergablility
-    + [ ] POCO
-    + [ ] `ConfigModelBase`
-- [ ] Mergability with Attribute
-    + [ ] POCO
-    + [ ] `ConfigModelBase`
-- [ ] Mergability with Interface
-    + [ ] POCO
-    + [ ] `ConfigModelBase`
 - [ ] Exceptions
     + [ ] If include does not exist
     + [ ] If include can not be read

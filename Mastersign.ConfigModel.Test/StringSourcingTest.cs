@@ -1,6 +1,5 @@
 ﻿using static Mastersign.ConfigModel.Test.TestData;
 
-
 namespace Mastersign.ConfigModel.Test
 {
     [TestClass]

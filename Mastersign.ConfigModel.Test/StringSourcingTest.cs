@@ -68,6 +68,23 @@ namespace Mastersign.ConfigModel.Test
             Assert.IsNull(result.Nested.List);
         }
 
+        [TestMethod]
+        public void GetStringSourcePathsTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var basePath = GetTestDataFilePath(SCENARIO);
+            mgr.AddLayer(Path.Combine(basePath, "Child.yaml"));
+            Assert.AreEqual(0, mgr.GetStringSourcePaths().Length);
+            mgr.LoadModel();
+            CollectionAssert.AreEquivalent(
+                new[]
+                {
+                    Path.Combine(basePath, "Strings", "x.txt"),
+                    Path.Combine(basePath, "Strings", "y.txt"),
+                },
+                mgr.GetStringSourcePaths());
+        }
+
         class Model
         {
             public ChildWithSources? Child { get; set; }

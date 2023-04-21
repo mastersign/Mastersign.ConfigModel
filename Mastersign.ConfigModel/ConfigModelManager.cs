@@ -95,6 +95,10 @@ namespace Mastersign.ConfigModel
 
         public string[] GetLayerPaths() => _layers.ToArray();
 
+        public string[] GetIncludePaths() => _includeSources.ToArray();
+
+        public string[] GetStringSourcePaths() => _stringSources.ToArray();
+
         private void LoadStringSource(ConfigModelBase model, string referencePath, PropertyInfo p)
         {
             if (p.GetValue(model) != null) return;

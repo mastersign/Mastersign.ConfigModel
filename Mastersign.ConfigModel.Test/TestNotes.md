@@ -7,7 +7,7 @@
     + [X] Simple string sourcing
     + [X] Explicit properties have precedence over file sources
     + [X] Sourcing in children
-    + [ ] Sourcing in includes
+    + [X] Sourcing in includes
 - [X] Type Discriminator
     + [X] Property Existence
     + [X] Property Value
@@ -28,7 +28,7 @@
 - [ ] Layer Combination from `$includes`
     + [X] Without Globbing
     + [X] With Globbing
-    + [ ] Layer Source Filenames
+    + [X] Layer Source Filenames
     + [X] Cycle Detection
 - [ ] Exceptions
     + [ ] If include does not exist

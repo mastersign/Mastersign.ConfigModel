@@ -58,6 +58,27 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
+        public void GetIncludePathsTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var basePath = GetTestDataFilePath(SCENARIO);
+            mgr.AddLayer(Path.Combine(basePath, "ComplexMain.yaml"));
+
+            Assert.AreEqual(0, mgr.GetIncludePaths().Length);
+
+            mgr.LoadModel();
+
+            CollectionAssert.AreEquivalent(
+                new[]
+                {
+                    Path.Combine(basePath, "ComplexBase.yaml"),
+                    Path.Combine(basePath, "ComplexFatBoyA.yaml"),
+                    Path.Combine(basePath, "ComplexMainFatChild.yaml"),
+                },
+                mgr.GetIncludePaths());
+        }
+
+        [TestMethod]
         public void CycleDetectionTest()
         {
             var mgr = new ConfigModelManager<Model>();

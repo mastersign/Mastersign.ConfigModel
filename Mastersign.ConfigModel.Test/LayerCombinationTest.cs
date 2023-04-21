@@ -8,6 +8,35 @@ namespace Mastersign.ConfigModel.Test
         private static readonly string SCENARIO = "LayerCombination";
 
         [TestMethod]
+        public void GetLayerPathsTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var canonicalBasePath = GetTestDataFilePath(SCENARIO);
+            var basePath = Path.Combine(canonicalBasePath, "..", SCENARIO, ".");
+
+            Assert.AreEqual(
+                Path.Combine(canonicalBasePath, "MergeByInterface1.yaml"),
+                mgr.AddLayer(Path.Combine(basePath, "MergeByInterface1.yaml")));
+
+            CollectionAssert.AreEqual(
+                new[]
+                {
+                    Path.Combine(canonicalBasePath, "MergeByAttribute1.yaml"),
+                    Path.Combine(canonicalBasePath, "MergeByAttribute2.yaml"),
+                },
+                mgr.AddLayers("MergeByAttribute*.yaml", basePath));
+
+            CollectionAssert.AreEqual(
+                new[]
+                {
+                    Path.Combine(canonicalBasePath, "MergeByInterface1.yaml"),
+                    Path.Combine(canonicalBasePath, "MergeByAttribute1.yaml"),
+                    Path.Combine(canonicalBasePath, "MergeByAttribute2.yaml"),
+                },
+                mgr.GetLayerPaths());
+        }
+
+        [TestMethod]
         public void LayerMergeByAttributeTest()
         {
             var mgr = new ConfigModelManager<Model>();

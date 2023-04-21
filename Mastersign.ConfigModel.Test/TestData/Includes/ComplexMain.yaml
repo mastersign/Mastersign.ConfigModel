@@ -22,7 +22,7 @@ FatChild:
 FatBoys:
   a:
     $includes:
-      - ComplexMainFatBoyA.yaml
+      - ComplexFatBoyA.yaml
     X: Main a.X
     Array:
       - D

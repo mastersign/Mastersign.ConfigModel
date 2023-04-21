@@ -46,15 +46,39 @@ namespace Mastersign.ConfigModel.Test
             Assert.IsNotNull(result.FatChild);
             Assert.AreEqual("Include X", result.FatChild.X);
             Assert.AreEqual("Main Y", result.FatChild.Y);
-            CollectionAssert.AreEqual(new [] { "a", "b", "c", "d" }, result.FatChild.Array);
+            CollectionAssert.AreEqual(new[] { "a", "b", "c", "d" }, result.FatChild.Array);
             Assert.IsNull(result.FatChild.Includes);
 
             Assert.IsNotNull(result.FatBoys);
             Assert.IsTrue(result.FatBoys.ContainsKey("a"));
             Assert.AreEqual("Main a.X", result.FatBoys["a"].X);
             Assert.AreEqual("Y from File", result.FatBoys["a"].Y);
-            CollectionAssert.AreEqual(new[] {"A", "B", "C", "D" }, result.FatBoys["a"].Array);
+            CollectionAssert.AreEqual(new[] { "A", "B", "C", "D" }, result.FatBoys["a"].Array);
             Assert.IsNull(result.FatBoys["a"].Includes);
+        }
+
+        [TestMethod]
+        public void CycleDetectionTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var basePath = GetTestDataFilePath(SCENARIO);
+            mgr.AddLayer(Path.Combine(basePath, "CycleDetectionMain.yaml"));
+            try
+            {
+                mgr.LoadModel();
+                Assert.Fail();
+            }
+            catch (IncludeCycleException ex)
+            {
+                CollectionAssert.AreEqual(
+                    new[] {
+                        Path.Combine(basePath, "CycleDetectionInclude1.yaml"),
+                        Path.Combine(basePath, "CycleDetectionInclude2.yaml"),
+                        Path.Combine(basePath, "CycleDetectionInclude3.yaml"),
+                        Path.Combine(basePath, "CycleDetectionInclude1.yaml"),
+                    },
+                    ex.PathCycle);
+            }
         }
 
         [MergableConfigModel]

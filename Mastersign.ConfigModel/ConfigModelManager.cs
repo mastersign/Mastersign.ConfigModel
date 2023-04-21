@@ -124,10 +124,25 @@ namespace Mastersign.ConfigModel
             return model;
         }
 
-        private T LoadInclude<T>(string referencePath, string includePath, IDeserializer deserializer, bool forceDeepMerge)
+        private static readonly StringComparison FILENAME_COMPARISON
+            = Environment.OSVersion.Platform == PlatformID.Win32NT
+                    ? StringComparison.OrdinalIgnoreCase
+                    : StringComparison.Ordinal;
+
+        private T LoadInclude<T>(string referencePath, string includePath, IDeserializer deserializer, List<string> includeStack, bool forceDeepMerge)
         {
             includePath = PathHelper.GetCanonicalPath(includePath, referencePath);
             _includeSources.Add(includePath);
+
+            if (includeStack.Any(p => string.Equals(p, includePath, FILENAME_COMPARISON)))
+            {
+                throw new IncludeCycleException(includeStack
+                    .SkipWhile(p => !string.Equals(p, includePath))
+                    .Concat(new[] { includePath })
+                    .ToArray());
+            }
+
+            includeStack.Add(includePath);
 
             T model;
             using (var s = File.Open(includePath, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -139,7 +154,9 @@ namespace Mastersign.ConfigModel
             var includeReferencePath = Path.GetDirectoryName(includePath);
 
             model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
-                m => LoadIncludes(m, includeReferencePath, deserializer, forceDeepMerge));
+                m => LoadIncludes(m, includeReferencePath, deserializer, includeStack, forceDeepMerge));
+
+            includeStack.RemoveAt(includeStack.Count - 1);
 
             model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
                 m => LoadStringSources(m, includeReferencePath));
@@ -147,7 +164,7 @@ namespace Mastersign.ConfigModel
             return model;
         }
 
-        private ConfigModelBase LoadIncludes(ConfigModelBase model, string referencePath, IDeserializer deserializer, bool forceDeepMerge = false)
+        private ConfigModelBase LoadIncludes(ConfigModelBase model, string referencePath, IDeserializer deserializer, List<string> includeStack, bool forceDeepMerge = false)
         {
             if (model?.Includes == null) return model;
             var t = model.GetType();
@@ -159,7 +176,15 @@ namespace Mastersign.ConfigModel
 
             foreach (var includePath in model.Includes)
             {
-                var layer = loader.Invoke(this, new object[] { referencePath, includePath, deserializer, forceDeepMerge });
+                object layer;
+                try
+                {
+                    layer = loader.Invoke(this, new object[] { referencePath, includePath, deserializer, includeStack, forceDeepMerge });
+                } 
+                catch (TargetInvocationException ex)
+                {
+                    throw ex.InnerException;
+                }
                 Merging.MergeObject(result, layer, forceRootMerge: true, forceDeepMerge);
             }
 
@@ -226,9 +251,10 @@ namespace Mastersign.ConfigModel
                 }
 
                 var referencePath = Path.GetDirectoryName(layerSource);
-                
+                var includeStack = new List<string> { layerSource };
+
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
-                    m => LoadIncludes(m, referencePath, deserializer, forceDeepMerge: false));
+                    m => LoadIncludes(m, referencePath, deserializer, includeStack, forceDeepMerge: false));
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
                     m => LoadStringSources(m, referencePath));

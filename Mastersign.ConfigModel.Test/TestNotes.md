@@ -29,12 +29,13 @@
     + [X] Without Globbing
     + [X] With Globbing
     + [ ] Layer Source Filenames
-    + [ ] Cycle Detection
+    + [X] Cycle Detection
 - [ ] Exceptions
     + [ ] If include does not exist
     + [ ] If include can not be read
     + [ ] If include can not be parsed
     + [ ] If include can not be deserialized
+    + [X] If includes build a cycle
     + [ ] If string source does not exist
     + [ ] If string source can not be read
 - [ ] Change Trigger

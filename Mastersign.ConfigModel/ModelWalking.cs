@@ -46,7 +46,14 @@ namespace Mastersign.ConfigModel
                 var dictWalkerMethodInfo = typeof(ModelWalking).GetMethod(
                     nameof(WalkModelDictionary), BindingFlags.Static | BindingFlags.NonPublic);
                 var dictWalker = dictWalkerMethodInfo.MakeGenericMethod(typeof(TTarget), mapValueType);
-                dictWalker.Invoke(null, new[] { model, visitor });
+                try
+                {
+                    dictWalker.Invoke(null, new[] { model, visitor });
+                }
+                catch (TargetInvocationException ex)
+                {
+                    throw ex.InnerException;
+                }
                 return model;
             }
 
@@ -56,7 +63,14 @@ namespace Mastersign.ConfigModel
                 var listWalkerMethodInfo = typeof(ModelWalking).GetMethod(
                     nameof(WalkModelList), BindingFlags.Static | BindingFlags.NonPublic);
                 var listWalker = listWalkerMethodInfo.MakeGenericMethod(typeof(TTarget), listElementType);
-                listWalker.Invoke(null, new[] { model, visitor });
+                try
+                {
+                    listWalker.Invoke(null, new[] { model, visitor });
+                }
+                catch (TargetInvocationException ex)
+                {
+                    throw ex.InnerException;
+                }
                 return model;
             }
 

@@ -20,14 +20,14 @@
     + [X] Dictionary Merge Clear
     + [X] Dictionary Merge Item Replace
     + [X] Dictionary Merge Item Merge
-- [ ] Root Layer Combination
+- [X] Root Layer Combination
     + [X] Attribute
     + [X] Interface
     + [X] POCO Replacement
     + [X] Layer Source Filenames
 - [ ] Layer Combination from `$includes`
-    + [ ] Without Globbing
-    + [ ] With Globbing
+    + [X] Without Globbing
+    + [X] With Globbing
     + [ ] Layer Source Filenames
     + [ ] Cycle Detection
 - [ ] Exceptions

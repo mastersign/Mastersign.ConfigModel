@@ -12,7 +12,8 @@ namespace Mastersign.ConfigModel
             => type.GetCustomAttribute<T>(inherit) != null;
 
         public static bool IsAtomic(Type t)
-            => t.IsPrimitive || t.IsEnum || t == typeof(string);
+            => t.IsPrimitive || t.IsEnum || t == typeof(string) 
+                || t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>);
 
         public static IEnumerable<PropertyInfo> GetModelProperties(this Type type)
             => type.GetProperties(BindingFlags.Instance | BindingFlags.Public)

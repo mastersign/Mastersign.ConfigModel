@@ -1,0 +1,29 @@
+$includes:
+  - ComplexBase.yaml
+
+A: Main A
+
+Primitives:
+  - 3
+  - 4
+
+SlimJims:
+  a: { X: 211, Y: 212 }
+  c: { X: 231, Y: null }
+
+FatChild:
+  $includes:
+    - ComplexMainFatChild.yaml
+  Y: Main Y
+  Array:
+    - c
+    - d
+
+FatBoys:
+  a:
+    $includes:
+      - ComplexMainFatBoyA.yaml
+    X: Main a.X
+    Array:
+      - D
+      - C

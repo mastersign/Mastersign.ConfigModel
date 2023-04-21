@@ -1,0 +1,24 @@
+A: Base A
+B: Base B
+
+Primitives:
+  - 1
+  - 2
+
+SlimJims:
+  a: { X: 111, Y: 112 }
+  b: { X: null, Y: 122 }
+
+FatChild:
+  Array:
+    - a
+    - b
+
+FatBoys:
+  a:
+    $includes:
+      - ComplexMainFatBoyA.yaml
+    X: Main a.X
+    Array:
+      - B
+      - C

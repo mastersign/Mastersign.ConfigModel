@@ -7,6 +7,11 @@ namespace Mastersign.ConfigModel
     {
     }
 
+    [AttributeUsage(AttributeTargets.Property)]
+    public class NoMergeAttribute : Attribute 
+    {
+    }
+
     public enum ListMergeMode
     {
         Clear,

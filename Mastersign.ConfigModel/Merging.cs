@@ -120,7 +120,7 @@ namespace Mastersign.ConfigModel
 
             foreach (var p in t.GetModelProperties())
             {
-                if (!p.CanRead || !p.CanWrite) continue;
+                if (p.GetCustomAttribute<NoMergeAttribute>() != null) continue;
                 var sv = p.GetValue(source);
                 if (sv == null) continue;
                 var tv = p.GetValue(target);

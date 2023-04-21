@@ -6,11 +6,13 @@ namespace Mastersign.ConfigModel
 {
     public abstract class ConfigModelBase
     {
+        [NoMerge]
         [YamlMember(Alias = "$includes",
             DefaultValuesHandling = DefaultValuesHandling.OmitNull,
             ApplyNamingConventions = false)]
         public List<string> Includes { get; set; }
 
+        [NoMerge]
         [YamlMember(Alias = "$sources",
             DefaultValuesHandling = DefaultValuesHandling.OmitNull,
             ApplyNamingConventions = false)]

@@ -41,6 +41,8 @@ namespace Mastersign.ConfigModel
         }
 
         private readonly List<string> _layers = new List<string>();
+        private readonly HashSet<string> _stringSources = new HashSet<string>();
+        private readonly HashSet<string> _includeSources = new HashSet<string>();
 
         private readonly StringComparison _filenameComparison;
         private readonly INamingConvention _propertyNamingConvention;
@@ -65,7 +67,7 @@ namespace Mastersign.ConfigModel
             {
                 throw new NotSupportedException("The root model type is not mergable. Therefore, only one layer is supported.");
             }
-            var filepath = Path.GetFullPath(filename);
+            var filepath = PathHelper.GetCanonicalPath(filename);
             if (File.Exists(filepath))
             {
                 _layers.Add(filepath);
@@ -83,98 +85,93 @@ namespace Mastersign.ConfigModel
             var matcher = new Matcher(_filenameComparison);
             matcher.AddInclude(filepattern);
             rootPath = rootPath ?? Environment.CurrentDirectory;
-            var newLayers = new List<string>(matcher.GetResultsInFullPath(rootPath));
+            var newLayers = new List<string>(matcher
+                .GetResultsInFullPath(rootPath)
+                .Select(p => PathHelper.GetCanonicalPath(p)));
             newLayers.Sort(StringComparerLookup.From(_filenameComparison));
             _layers.AddRange(newLayers);
             return newLayers.ToArray();
         }
 
-        private void LoadStringSourcesInternal(ConfigModelBase model, string referenceFilename)
+        public string[] GetLayerPaths() => _layers.ToArray();
+
+        private void LoadStringSource(ConfigModelBase model, string referencePath, PropertyInfo p)
         {
-            if (model?.StringSources == null) return;
-            var rootPath = Path.GetDirectoryName(referenceFilename);
+            if (p.GetValue(model) != null) return;
+            var propName = p.Name;
+            var yamlMemberAttr = p.GetCustomAttribute<YamlMemberAttribute>();
+            if (yamlMemberAttr?.Alias != null) propName = yamlMemberAttr.Alias;
+            if (yamlMemberAttr?.ApplyNamingConventions != false) propName = _propertyNamingConvention.Apply(propName);
+            if (model.StringSources.TryGetValue(propName, out var sourceFile))
+            {
+                if (!Path.IsPathRooted(sourceFile)) sourceFile = Path.Combine(referencePath, sourceFile);
+                sourceFile = PathHelper.GetCanonicalPath(sourceFile);
+                _stringSources.Add(sourceFile);
+                var s = File.ReadAllText(sourceFile, Encoding.UTF8);
+                p.SetValue(model, s);
+            }
+        }
+
+        private ConfigModelBase LoadStringSources(ConfigModelBase model, string referencePath)
+        {
+            if (model?.StringSources == null) return model;
             foreach (var p in model.GetType().GetModelProperties()
                 .Where(p => p.PropertyType == typeof(string)))
             {
-                if (p.GetValue(model) != null) continue;
-                var propName = p.Name;
-                var yamlMemberAttr = p.GetCustomAttribute<YamlMemberAttribute>();
-                if (yamlMemberAttr?.Alias != null) propName = yamlMemberAttr.Alias;
-                if (yamlMemberAttr?.ApplyNamingConventions != false) propName = _propertyNamingConvention.Apply(propName);
-                if (model.StringSources.TryGetValue(propName, out var sourceFile))
-                {
-                    if (!Path.IsPathRooted(sourceFile)) sourceFile = Path.Combine(rootPath, sourceFile);
-                    var s = File.ReadAllText(sourceFile, Encoding.UTF8);
-                    p.SetValue(model, s);
-                }
+                LoadStringSource(model, referencePath, p);
             }
             model.StringSources = null;
+            return model;
         }
 
-        private void LoadStringSourcesInList<T>(IList<T> list, string referenceFilename)
+        private T LoadInclude<T>(string referencePath, string includePath, IDeserializer deserializer, bool forceDeepMerge)
         {
-            if (ReflectionHelper.IsAtomic(typeof(T))) return;
-            for (var i = 0; i < list.Count; i++)
+            includePath = PathHelper.GetCanonicalPath(includePath, referencePath);
+            _includeSources.Add(includePath);
+
+            T model;
+            using (var s = File.Open(includePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var r = new StreamReader(s))
             {
-                var x = list[i];
-                LoadStringSources(x, referenceFilename);
-                if (typeof(T).IsValueType) list[i] = x;
+                model = deserializer.Deserialize<T>(r);
             }
+
+            var includeReferencePath = Path.GetDirectoryName(includePath);
+
+            model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
+                m => LoadIncludes(m, includeReferencePath, deserializer, forceDeepMerge));
+
+            model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
+                m => LoadStringSources(m, includeReferencePath));
+
+            return model;
         }
 
-        private void LoadStringSourcesInDictionary<T>(IDictionary<string, T> dictionary, string referenceFilename)
+        private ConfigModelBase LoadIncludes(ConfigModelBase model, string referencePath, IDeserializer deserializer, bool forceDeepMerge = false)
         {
-            if (ReflectionHelper.IsAtomic(typeof(T))) return;
-            foreach (var kvp in dictionary)
-            {
-                var x = kvp.Value;
-                LoadStringSources(x, referenceFilename);
-                if (typeof(T).IsValueType) dictionary[kvp.Key] = x;
-            }
-        }
+            if (model?.Includes == null) return model;
+            var t = model.GetType();
+            var result = (ConfigModelBase)Activator.CreateInstance(t);
 
-        private void LoadStringSources(object o, string referenceFilename)
-        {
-            if (o == null) return;
-            var t = o.GetType();
-            if (typeof(ConfigModelBase).IsAssignableFrom(t))
+            var loadMethodInfo = typeof(ConfigModelManager<TRootModel>).GetMethod(
+                nameof(LoadInclude), BindingFlags.Instance | BindingFlags.NonPublic);
+            var loader = loadMethodInfo.MakeGenericMethod(t);
+
+            foreach (var includePath in model.Includes)
             {
-                LoadStringSourcesInternal((ConfigModelBase)o, referenceFilename);
+                var layer = loader.Invoke(this, new object[] { referencePath, includePath, deserializer, forceDeepMerge });
+                Merging.MergeObject(result, layer, forceRootMerge: true, forceDeepMerge);
             }
 
-            var mapValueType = ReflectionHelper.GetDictionaryValueType(t);
-            if (mapValueType != null)
-            {
-                var loadStringSourcesInDictionaryMethodGenericInfo = typeof(ConfigModelManager<TRootModel>).GetMethod(
-                    nameof(LoadStringSourcesInDictionary), BindingFlags.Instance | BindingFlags.NonPublic);
-                var loadStringSourcesInDictionaryMethod = loadStringSourcesInDictionaryMethodGenericInfo.MakeGenericMethod(mapValueType);
-                loadStringSourcesInDictionaryMethod.Invoke(this, new[] { o, referenceFilename });
-                return;
-            }
+            model.Includes = null;
 
-            var listElementType = ReflectionHelper.GetListElementType(t);
-            if (listElementType != null)
-            {
-                var loadStringSourcesInListMethodGenericInfo = typeof(ConfigModelManager<TRootModel>).GetMethod(
-                    nameof(LoadStringSourcesInList), BindingFlags.Instance | BindingFlags.NonPublic);
-                var loadStringSourcesInListMethod = loadStringSourcesInListMethodGenericInfo.MakeGenericMethod(listElementType);
-                loadStringSourcesInListMethod.Invoke(this, new[] { o, referenceFilename });
-                return;
-            }
-
-            foreach (var p in t.GetModelProperties())
-            {
-                if (ReflectionHelper.IsAtomic(p.PropertyType)) continue;
-                var pv = p.GetValue(o);
-                if (pv == null) continue;
-                LoadStringSources(pv, referenceFilename);
-                if (p.PropertyType.IsValueType) p.SetValue(o, pv);
-            }
+            Merging.MergeObject(result, model, forceRootMerge: true, forceDeepMerge);
+            return result;
         }
 
         public TRootModel LoadModel(
-            TRootModel defaultModel = null,
-            YamlDeserializerBuildCustomizer customizer = null)
+        TRootModel defaultModel = null,
+        YamlDeserializerBuildCustomizer customizer = null)
         {
             var builder = new DeserializerBuilder();
             builder = builder.IgnoreUnmatchedProperties();
@@ -228,8 +225,13 @@ namespace Mastersign.ConfigModel
                     layer = deserializer.Deserialize<TRootModel>(r);
                 }
 
-                // TODO load includes
-                LoadStringSources(layer, layerSource);
+                var referencePath = Path.GetDirectoryName(layerSource);
+                
+                layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
+                    m => LoadIncludes(m, referencePath, deserializer, forceDeepMerge: false));
+
+                layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
+                    m => LoadStringSources(m, referencePath));
 
                 if (rootIsMergable)
                     Merging.MergeObject(root, layer);

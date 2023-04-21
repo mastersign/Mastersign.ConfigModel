@@ -11,7 +11,8 @@ namespace Mastersign.ConfigModel.Test
         public void LayerMergeByAttributeTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            mgr.AddLayers("MergeByAttribute*.yaml", GetTestDataFilePath(SCENARIO));
+            var layers = mgr.AddLayers("MergeByAttribute*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
             Assert.AreEqual("A1", result.A);
@@ -19,6 +20,18 @@ namespace Mastersign.ConfigModel.Test
             Assert.IsNotNull(result.MergableByAttribute);
             Assert.AreEqual("X1", result.MergableByAttribute.X);
             Assert.AreEqual("Y2", result.MergableByAttribute.Y);
+        }
+
+        [TestMethod]
+        public void LayerMergeByAttributeWithSkipTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var layers = mgr.AddLayers("MergeWithSkip*.yaml", GetTestDataFilePath(SCENARIO));
+            Assert.AreEqual(2, layers.Length);
+            var result = mgr.LoadModel();
+            Assert.IsNotNull(result);
+            Assert.AreEqual("A2", result.A);
+            Assert.IsNull(result.C);
         }
 
         [TestMethod]
@@ -384,6 +397,9 @@ namespace Mastersign.ConfigModel.Test
         {
             public string? A { get; set; }
             public string? B { get; set; }
+
+            [NoMerge]
+            public string? C { get; set; }
 
             public Child? Child { get; set; }
 

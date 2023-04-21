@@ -1,0 +1,8 @@
+$sources:
+  Y: Strings/y.txt
+
+X: Include X
+
+Array:
+  - A
+  - B

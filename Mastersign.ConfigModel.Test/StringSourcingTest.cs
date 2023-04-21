@@ -85,6 +85,25 @@ namespace Mastersign.ConfigModel.Test
                 mgr.GetStringSourcePaths());
         }
 
+        [TestMethod]
+        public void ThrowsStringSourceNotFoundExceptionTest()
+        {
+            var mgr = new ConfigModelManager<ChildWithSources>();
+            var basePath = GetTestDataFilePath(SCENARIO);
+            var modelFile = Path.Combine(basePath, "NotFound.yaml");
+            mgr.AddLayer(modelFile);
+            try
+            {
+                mgr.LoadModel();
+                Assert.Fail();
+            }
+            catch (StringSourceNotFoundException ex)
+            {
+                Assert.AreEqual(modelFile, ex.ModelFile);
+                Assert.AreEqual(Path.Combine(basePath, "Strings", "DoesNotExist.txt"), ex.FileName);
+            }
+        }
+
         class Model
         {
             public ChildWithSources? Child { get; set; }

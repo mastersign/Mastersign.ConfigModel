@@ -99,7 +99,7 @@ namespace Mastersign.ConfigModel
 
         public string[] GetStringSourcePaths() => _stringSources.ToArray();
 
-        private void LoadStringSource(ConfigModelBase model, string referencePath, PropertyInfo p)
+        private void LoadStringSource(ConfigModelBase model, string modelFile, string referencePath, PropertyInfo p)
         {
             if (p.GetValue(model) != null) return;
             var propName = p.Name;
@@ -111,18 +111,29 @@ namespace Mastersign.ConfigModel
                 if (!Path.IsPathRooted(sourceFile)) sourceFile = Path.Combine(referencePath, sourceFile);
                 sourceFile = PathHelper.GetCanonicalPath(sourceFile);
                 _stringSources.Add(sourceFile);
-                var s = File.ReadAllText(sourceFile, Encoding.UTF8);
-                p.SetValue(model, s);
+                try
+                {
+                    var s = File.ReadAllText(sourceFile, Encoding.UTF8);
+                    p.SetValue(model, s);
+                } 
+                catch (FileNotFoundException)
+                {
+                    throw new StringSourceNotFoundException(modelFile, sourceFile);
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    throw new StringSourceNotFoundException(modelFile, sourceFile);
+                }
             }
         }
 
-        private ConfigModelBase LoadStringSources(ConfigModelBase model, string referencePath)
+        private ConfigModelBase LoadStringSources(ConfigModelBase model, string modelFile, string referencePath)
         {
             if (model?.StringSources == null) return model;
             foreach (var p in model.GetType().GetModelProperties()
                 .Where(p => p.PropertyType == typeof(string)))
             {
-                LoadStringSource(model, referencePath, p);
+                LoadStringSource(model, modelFile, referencePath, p);
             }
             model.StringSources = null;
             return model;
@@ -163,7 +174,7 @@ namespace Mastersign.ConfigModel
             includeStack.RemoveAt(includeStack.Count - 1);
 
             model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
-                m => LoadStringSources(m, includeReferencePath));
+                m => LoadStringSources(m, includePath, includeReferencePath));
 
             return model;
         }
@@ -180,16 +191,16 @@ namespace Mastersign.ConfigModel
 
             foreach (var includePath in model.Includes)
             {
-                object layer;
+                object include;
                 try
                 {
-                    layer = loader.Invoke(this, new object[] { referencePath, includePath, deserializer, includeStack, forceDeepMerge });
+                    include = loader.Invoke(this, new object[] { referencePath, includePath, deserializer, includeStack, forceDeepMerge });
                 } 
                 catch (TargetInvocationException ex)
                 {
                     throw ex.InnerException;
                 }
-                Merging.MergeObject(result, layer, forceRootMerge: true, forceDeepMerge);
+                Merging.MergeObject(result, include, forceRootMerge: true, forceDeepMerge);
             }
 
             model.Includes = null;
@@ -245,23 +256,23 @@ namespace Mastersign.ConfigModel
             {
                 throw new NotSupportedException("Root model is not mergable. Therefore, a default model is not supported.");
             }
-            foreach (var layerSource in _layers)
+            foreach (var layerPath in _layers)
             {
                 TRootModel layer;
-                using (var s = File.Open(layerSource, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (var s = File.Open(layerPath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 using (var r = new StreamReader(s))
                 {
                     layer = deserializer.Deserialize<TRootModel>(r);
                 }
 
-                var referencePath = Path.GetDirectoryName(layerSource);
-                var includeStack = new List<string> { layerSource };
+                var referencePath = Path.GetDirectoryName(layerPath);
+                var includeStack = new List<string> { layerPath };
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
                     m => LoadIncludes(m, referencePath, deserializer, includeStack, forceDeepMerge: false));
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
-                    m => LoadStringSources(m, referencePath));
+                    m => LoadStringSources(m, layerPath, referencePath));
 
                 if (rootIsMergable)
                     Merging.MergeObject(root, layer);

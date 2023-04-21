@@ -36,7 +36,7 @@
     + [ ] If include can not be parsed
     + [ ] If include can not be deserialized
     + [X] If includes build a cycle
-    + [ ] If string source does not exist
+    + [X] If string source does not exist
     + [ ] If string source can not be read
 - [ ] Change Trigger
     + [ ] Without delay

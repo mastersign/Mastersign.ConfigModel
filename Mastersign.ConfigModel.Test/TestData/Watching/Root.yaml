@@ -1,0 +1,4 @@
+$includes:
+  - Include.yaml
+$sources:
+  X: Strings/x.txt

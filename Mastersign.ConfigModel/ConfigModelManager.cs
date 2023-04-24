@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using Microsoft.Extensions.FileSystemGlobbing;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
@@ -12,7 +13,29 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Mastersign.ConfigModel
 {
-    public delegate void ModelChangeHandler<T>(T newModel);
+    public class ModelChangedEventArgs<T> : EventArgs
+    {
+        public T NewModel { get; }
+
+        public ModelChangedEventArgs(T newModel)
+        {
+            NewModel = newModel;
+        }
+    }
+
+    public delegate void ModelChangeHandler<T>(object sender, ModelChangedEventArgs<T> eventArgs);
+
+    public class ModelReloadErrorEventArgs : EventArgs
+    {
+        public ConfigModelException Exception { get; }
+
+        public ModelReloadErrorEventArgs(ConfigModelException exception)
+        {
+            Exception = exception;
+        }
+    }
+
+    public delegate void ModelReloadErrorHandler(object sender, ModelReloadErrorEventArgs eventArgs);
 
     public enum PropertyNameHandling
     {
@@ -25,7 +48,7 @@ namespace Mastersign.ConfigModel
 
     public delegate DeserializerBuilder YamlDeserializerBuildCustomizer(DeserializerBuilder builder);
 
-    public class ConfigModelManager<TRootModel>
+    public class ConfigModelManager<TRootModel> : IDisposable
         where TRootModel : class, new()
     {
         private static INamingConvention NamingConventionFor(PropertyNameHandling nameHandling)
@@ -48,39 +71,63 @@ namespace Mastersign.ConfigModel
         private readonly StringComparison _filenameComparison;
         private readonly INamingConvention _propertyNamingConvention;
 
-        public ConfigModelManager(StringComparison filenameComparison, INamingConvention propertyNamingConvention)
+        private readonly Dictionary<Type, Dictionary<string, Type>> _discriminationsByPropertyExistence;
+        private readonly Dictionary<Type, Tuple<string, Dictionary<string, Type>>> _discriminationsByPropertyValue;
+
+        private readonly TRootModel _defaultModel;
+        private readonly YamlDeserializerBuildCustomizer _deserializationCustomizer;
+
+        private ConfigModelManager()
+        {
+            _discriminationsByPropertyExistence = ReflectionHelper.GetTypeDiscriminationsByPropertyExistence(typeof(TRootModel));
+            _discriminationsByPropertyValue = ReflectionHelper.GetTypeDiscriminationsByPropertyValue(typeof(TRootModel));
+        }
+
+        public ConfigModelManager(
+            StringComparison filenameComparison,
+            INamingConvention propertyNamingConvention,
+            TRootModel defaultModel,
+            YamlDeserializerBuildCustomizer deserializationCustomizer)
+            : this()
         {
             _filenameComparison = filenameComparison;
-            _propertyNamingConvention = propertyNamingConvention;
+            _propertyNamingConvention = propertyNamingConvention ?? PascalCaseNamingConvention.Instance;
+            _defaultModel = defaultModel;
+            _deserializationCustomizer = deserializationCustomizer;
         }
 
         public ConfigModelManager(
             StringComparison filenameComparison = StringComparison.Ordinal,
-            PropertyNameHandling propertyNameHandling = PropertyNameHandling.PascalCase)
+            PropertyNameHandling propertyNameHandling = PropertyNameHandling.PascalCase,
+            TRootModel defaultModel = null,
+            YamlDeserializerBuildCustomizer deserializationCustomizer = null)
+            : this(
+                  filenameComparison,
+                  NamingConventionFor(propertyNameHandling),
+                  defaultModel,
+                  deserializationCustomizer)
         {
-            _filenameComparison = filenameComparison;
-            _propertyNamingConvention = NamingConventionFor(propertyNameHandling);
         }
 
-        public string AddLayer(string filename)
+        public string AddLayer(string fileName)
         {
             if (!typeof(TRootModel).IsMergable() && _layers.Count > 0)
             {
                 throw new NotSupportedException("The root model type is not mergable. Therefore, only one layer is supported.");
             }
-            var filepath = PathHelper.GetCanonicalPath(filename);
+            var filepath = PathHelper.GetCanonicalPath(fileName);
             _layers.Add(filepath);
             return filepath;
         }
 
-        public string[] AddLayers(string filepattern, string rootPath = null)
+        public string[] AddLayers(string filePattern, string rootPath = null)
         {
             if (!typeof(TRootModel).IsMergable())
             {
                 throw new NotSupportedException("The root model type is not mergable. Therefore, only one layer is supported.");
             }
             var matcher = new Matcher(_filenameComparison);
-            matcher.AddInclude(filepattern);
+            matcher.AddInclude(filePattern);
             rootPath = rootPath ?? Environment.CurrentDirectory;
             var newLayers = new List<string>(matcher
                 .GetResultsInFullPath(rootPath)
@@ -112,7 +159,7 @@ namespace Mastersign.ConfigModel
                 {
                     var s = File.ReadAllText(sourceFile, Encoding.UTF8);
                     p.SetValue(model, s);
-                } 
+                }
                 catch (FileNotFoundException ex)
                 {
                     throw new ConfigModelStringSourceNotFoundException(
@@ -258,7 +305,7 @@ namespace Mastersign.ConfigModel
                         modelFile, referencePath, includePath,
                         deserializer, includeStack, forceDeepMerge,
                     });
-                } 
+                }
                 catch (TargetInvocationException ex)
                 {
                     throw ex.InnerException;
@@ -272,53 +319,58 @@ namespace Mastersign.ConfigModel
             return result;
         }
 
-        public TRootModel LoadModel(
-        TRootModel defaultModel = null,
-        YamlDeserializerBuildCustomizer customizer = null)
+        private IDeserializer BuildDeserializer()
         {
             var builder = new DeserializerBuilder();
             builder = builder.IgnoreUnmatchedProperties();
             builder = builder.WithNamingConvention(_propertyNamingConvention);
             builder = builder.WithNodeTypeResolver(new ClrTypeFromTagNodeTypeResolver());
 
-            var discriminationsByPropertyExistence = ReflectionHelper.GetTypeDiscriminationsByPropertyExistence(typeof(TRootModel));
-            var discriminationsByPropertyValue = ReflectionHelper.GetTypeDiscriminationsByPropertyValue(typeof(TRootModel));
-            if (discriminationsByPropertyExistence.Count > 0 ||
-                discriminationsByPropertyValue.Count > 0)
+            if (_discriminationsByPropertyExistence.Count > 0 ||
+                _discriminationsByPropertyValue.Count > 0)
             {
                 builder = builder.WithTypeDiscriminatingNodeDeserializer(o =>
                 {
-                    foreach (var discrimination in discriminationsByPropertyExistence)
+                    foreach (var discrimination in _discriminationsByPropertyExistence)
                     {
                         o.AddTypeDiscriminator(new UniqueKeyTypeDiscriminator(
                             discrimination.Key, discrimination.Value));
                     }
-                    foreach (var discrimination in discriminationsByPropertyValue)
+                    foreach (var discrimination in _discriminationsByPropertyValue)
                     {
                         o.AddTypeDiscriminator(new KeyValueTypeDiscriminator(
                             discrimination.Key, discrimination.Value.Item1, discrimination.Value.Item2));
                     }
                 });
             }
-            if (customizer != null)
+            if (_deserializationCustomizer != null)
             {
-                builder = customizer(builder);
+                builder = _deserializationCustomizer(builder);
             }
             var deserializer = builder.Build();
+            return deserializer;
+        }
+
+        public TRootModel LoadModel()
+        {
+            _stringSources.Clear();
+            _includeSources.Clear();
+
+            IDeserializer deserializer = BuildDeserializer();
 
             TRootModel root = null;
             var rootIsMergable = typeof(TRootModel).IsMergable();
             if (rootIsMergable)
             {
                 root = new TRootModel();
-                if (defaultModel != null)
+                if (_defaultModel != null)
                 {
-                    Merging.MergeObject(root, defaultModel);
+                    Merging.MergeObject(root, _defaultModel);
                 }
             }
-            else if (defaultModel != null)
+            else if (_defaultModel != null)
             {
-                throw new NotSupportedException("Root model is not mergable. Therefore, a default model is not supported.");
+                throw new NotSupportedException("The root model is not mergable. Therefore, a default model is not supported.");
             }
             foreach (var layerPath in _layers)
             {
@@ -400,9 +452,109 @@ namespace Mastersign.ConfigModel
 
         public event ModelChangeHandler<TRootModel> ModelChanged;
 
-        public void WatchForChanges()
-        {
+        private void OnModelChanged(TRootModel model)
+            => ModelChanged?.Invoke(this, new ModelChangedEventArgs<TRootModel>(model));
 
+        public event ModelReloadErrorHandler ModelReloadFailed;
+
+        private void OnModelReloadFailed(ConfigModelException exception)
+            => ModelReloadFailed?.Invoke(this, new ModelReloadErrorEventArgs(exception));
+
+        public TimeSpan ReloadDelay { get; set; } = TimeSpan.FromMilliseconds(250);
+
+        private readonly List<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
+
+        private Timer _delayTimer = null;
+
+        private void OnReloadTimer(object _)
+        {
+            TRootModel model;
+            try
+            {
+                model = LoadModel();
+            }
+            catch (ConfigModelException ex)
+            {
+                OnModelReloadFailed(ex);
+                return;
+            }
+            OnModelChanged(model);
+        }
+
+        private void TriggerReloadTimer() => _delayTimer.Change(ReloadDelay, Timeout.InfiniteTimeSpan);
+
+        private static readonly NotifyFilters WATCH_NOTIFY_FILTER =
+            NotifyFilters.CreationTime
+            | NotifyFilters.DirectoryName
+            | NotifyFilters.FileName
+            | NotifyFilters.LastWrite
+            | NotifyFilters.Size;
+
+        public void WatchAndReload()
+        {
+            StopWatching();
+
+            var files = _layers.Concat(_includeSources).Concat(_stringSources).Distinct().ToList();
+            var directories = files
+                .GroupBy(Path.GetDirectoryName)
+                .ToDictionary(
+                    g => g.Key,
+                    g => new HashSet<string>(g.Select(Path.GetFileName)));
+
+            _delayTimer = new Timer(OnReloadTimer);
+            _delayTimer.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+
+            foreach (var group in directories)
+            {
+                var dir = group.Key;
+                var groupFiles = group.Value;
+                var watcher = new FileSystemWatcher(group.Key);
+                watcher.NotifyFilter = WATCH_NOTIFY_FILTER;
+                if (groupFiles.Count == 1)
+                {
+                    watcher.Filter = Path.GetFileName(groupFiles.First());
+                }
+                else
+                {
+                    var extensions = groupFiles.Select(Path.GetExtension).Distinct().ToList();
+                    if (extensions.Count == 1)
+                    {
+                        watcher.Filter = "*" + extensions[0];
+                    }
+                }
+
+                void Handler(object s, FileSystemEventArgs ea)
+                {
+                    if (groupFiles.Count > 1 && !groupFiles.Contains(ea.Name)) return;
+                    TriggerReloadTimer();
+                }
+                void RenamedHandler(object s, RenamedEventArgs ea)
+                {
+                    if (groupFiles.Count > 1 && !groupFiles.Contains(ea.Name) && !groupFiles.Contains(ea.OldName)) return;
+                    TriggerReloadTimer();
+                }
+
+                watcher.Changed += Handler;
+                watcher.Created += Handler;
+                watcher.Deleted += Handler;
+                watcher.Renamed += RenamedHandler;
+                _watchers.Add(watcher);
+                watcher.EnableRaisingEvents = true;
+            }
+        }
+
+        public void StopWatching()
+        {
+            foreach (var watcher in _watchers)
+            {
+                watcher.Dispose();
+            }
+            _watchers.Clear();
+        }
+
+        public void Dispose()
+        {
+            StopWatching();
         }
     }
 }

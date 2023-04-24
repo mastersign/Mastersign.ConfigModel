@@ -39,10 +39,8 @@
     + [X] If string source does not exist
     + [X] If string source can not be read
 - [ ] Change Trigger
-    + [ ] Without delay
-    + [ ] With delay
-    + [ ] With locked file
-    + [ ] On root
+    + [X] On root
     + [ ] On string source
     + [ ] On include
     + [ ] On nested include
+    + [ ] With read error (locked file)

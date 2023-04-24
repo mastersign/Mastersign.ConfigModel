@@ -4,8 +4,8 @@
 
 ## Features
 
-- Layers
-- Optional merge or replace for child maps
+- Multiple layers
+- Optional merge or replace for child maps / arrays
 - Includes
 - String sourcing from text files
-- Reload on change
+- Auto reload on file change

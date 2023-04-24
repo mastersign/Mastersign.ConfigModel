@@ -1,7 +1,7 @@
 ﻿namespace Mastersign.ConfigModel.Test
 {
     [TestClass]
-    public class ReflectionTests
+    public class ReflectionHelperTest
     {
         [TestMethod]
         public void GetListElementTypeTest()

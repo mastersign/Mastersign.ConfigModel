@@ -3,7 +3,7 @@
 ## Dimensions
 
 - [X] Property Naming Convention
-- [ ] String Sourcing with `$sources`
+- [X] String Sourcing with `$sources`
     + [X] Simple string sourcing
     + [X] Explicit properties have precedence over file sources
     + [X] Sourcing in children
@@ -25,19 +25,19 @@
     + [X] Interface
     + [X] POCO Replacement
     + [X] Layer Source Filenames
-- [ ] Layer Combination from `$includes`
+- [X] Layer Combination from `$includes`
     + [X] Without Globbing
     + [X] With Globbing
     + [X] Layer Source Filenames
     + [X] Cycle Detection
-- [ ] Exceptions
-    + [ ] If include does not exist
-    + [ ] If include can not be read
-    + [ ] If include can not be parsed
-    + [ ] If include can not be deserialized
+- [X] Exceptions
+    + [X] Layer does not exist
+    + [X] If include does not exist
+    + [X] File can not be read
+    + [X] File can not be parsed
     + [X] If includes build a cycle
     + [X] If string source does not exist
-    + [ ] If string source can not be read
+    + [X] If string source can not be read
 - [ ] Change Trigger
     + [ ] Without delay
     + [ ] With delay

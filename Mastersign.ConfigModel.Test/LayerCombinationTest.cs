@@ -100,8 +100,9 @@ namespace Mastersign.ConfigModel.Test
                 Path.Combine(testDataBasePath, "MergeByAttribute1.yaml"),
                 mgr.AddLayer(Path.Combine(testDataBasePath, "MergeByAttribute1.yaml")));
 
-            Assert.ThrowsException<FileNotFoundException>(() =>
-                mgr.AddLayer(Path.Combine(testDataBasePath, "_invalid_.yaml")));
+            Assert.AreEqual(
+                Path.Combine(testDataBasePath, "DoesNotExist.yaml"),
+                mgr.AddLayer(Path.Combine(testDataBasePath, "DoesNotExist.yaml")));
         }
 
         [TestMethod]
@@ -419,6 +420,52 @@ namespace Mastersign.ConfigModel.Test
             Assert.IsNotNull(result.DictMerge["c"].NestedModel);
             Assert.AreEqual("A c.2", result.DictMerge["c"].NestedModel?.A);
             Assert.IsNull(result.DictMerge["c"].NestedModel?.B);
+        }
+
+        [TestMethod]
+        public void ThrowsModelNotFoundExceptionFileNotFoundTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var modelFile = GetTestDataFilePath(SCENARIO, "DoesNotExist.yaml");
+            mgr.AddLayer(modelFile);
+            try
+            {
+                mgr.LoadModel();
+                Assert.Fail("Should throw " + nameof(ConfigModelLayerNotFoundException));
+            }
+            catch (ConfigModelLayerNotFoundException ex)
+            {
+                Assert.AreEqual(modelFile, ex.FileName);
+                Console.WriteLine(ex.GetType().Name + ": " + ex.Message);
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine(ex.InnerException.GetType().Name + ": " + ex.InnerException.Message);
+                }
+                Assert.IsInstanceOfType(ex.InnerException, typeof(FileNotFoundException));
+            }
+        }
+
+        [TestMethod]
+        public void ThrowsModelNotFoundExceptionDirectoryNotFoundTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var modelFile = GetTestDataFilePath("Missing", "DoesNotExist.yaml");
+            mgr.AddLayer(modelFile);
+            try
+            {
+                mgr.LoadModel();
+                Assert.Fail("Should throw " + nameof(ConfigModelLayerNotFoundException));
+            }
+            catch (ConfigModelLayerNotFoundException ex)
+            {
+                Assert.AreEqual(modelFile, ex.FileName);
+                Console.WriteLine(ex.GetType().Name + ": " + ex.Message);
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine(ex.InnerException.GetType().Name + ": " + ex.InnerException.Message);
+                }
+                Assert.IsInstanceOfType(ex.InnerException, typeof(DirectoryNotFoundException));
+            }
         }
 
         [MergableConfigModel]

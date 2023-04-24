@@ -95,12 +95,14 @@ namespace Mastersign.ConfigModel.Test
             try
             {
                 mgr.LoadModel();
-                Assert.Fail();
+                Assert.Fail("Should throw " + nameof(ConfigModelStringSourceNotFoundException));
             }
-            catch (StringSourceNotFoundException ex)
+            catch (ConfigModelStringSourceNotFoundException ex)
             {
                 Assert.AreEqual(modelFile, ex.ModelFile);
+                Console.WriteLine(ex.GetType().Name + ": " + ex.Message);
                 Assert.AreEqual(Path.Combine(basePath, "Strings", "DoesNotExist.txt"), ex.FileName);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(FileNotFoundException));
             }
         }
 

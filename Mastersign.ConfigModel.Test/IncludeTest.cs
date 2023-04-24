@@ -79,6 +79,24 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
+        public void ThrowsIncludeNotFoundExceptionTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            var basePath = GetTestDataFilePath(SCENARIO);
+            mgr.AddLayer(Path.Combine(basePath, "NonExistantInclude.yaml"));
+            try
+            {
+                mgr.LoadModel();
+                Assert.Fail("Should throw IncludeNotFoundException");
+            }
+            catch (ConfigModelIncludeNotFoundException ex)
+            {
+                Assert.AreEqual(Path.Combine(basePath, "NonExistantInclude.yaml"), ex.ModelFile);
+                Assert.AreEqual(Path.Combine(basePath, "Missing", "NotExistant.yaml"), ex.FileName);
+            }
+        }
+
+        [TestMethod]
         public void CycleDetectionTest()
         {
             var mgr = new ConfigModelManager<Model>();
@@ -89,7 +107,7 @@ namespace Mastersign.ConfigModel.Test
                 mgr.LoadModel();
                 Assert.Fail();
             }
-            catch (IncludeCycleException ex)
+            catch (ConfigModelIncludeCycleException ex)
             {
                 CollectionAssert.AreEqual(
                     new[] {

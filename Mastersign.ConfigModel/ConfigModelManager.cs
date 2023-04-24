@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.FileSystemGlobbing;
+using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators;
 using YamlDotNet.Serialization.NamingConventions;
@@ -68,12 +69,8 @@ namespace Mastersign.ConfigModel
                 throw new NotSupportedException("The root model type is not mergable. Therefore, only one layer is supported.");
             }
             var filepath = PathHelper.GetCanonicalPath(filename);
-            if (File.Exists(filepath))
-            {
-                _layers.Add(filepath);
-                return filepath;
-            }
-            throw new FileNotFoundException("The given file was not found", filepath);
+            _layers.Add(filepath);
+            return filepath;
         }
 
         public string[] AddLayers(string filepattern, string rootPath = null)
@@ -116,13 +113,23 @@ namespace Mastersign.ConfigModel
                     var s = File.ReadAllText(sourceFile, Encoding.UTF8);
                     p.SetValue(model, s);
                 } 
-                catch (FileNotFoundException)
+                catch (FileNotFoundException ex)
                 {
-                    throw new StringSourceNotFoundException(modelFile, sourceFile);
+                    throw new ConfigModelStringSourceNotFoundException(
+                        $"Could not find string source file '{sourceFile}' for model '{modelFile}'.",
+                        modelFile, sourceFile, ex);
                 }
-                catch (DirectoryNotFoundException)
+                catch (DirectoryNotFoundException ex)
                 {
-                    throw new StringSourceNotFoundException(modelFile, sourceFile);
+                    throw new ConfigModelStringSourceNotFoundException(
+                        $"Could not find a part of the path to string source file '{sourceFile}' for model '{modelFile}'.",
+                        modelFile, sourceFile, ex);
+                }
+                catch (IOException ex)
+                {
+                    throw new ConfigModelStringSourceLoadException(
+                        $"Can not read string source file in model '{modelFile}': {ex.Message}",
+                        modelFile, sourceFile, ex);
                 }
             }
         }
@@ -144,14 +151,15 @@ namespace Mastersign.ConfigModel
                     ? StringComparison.OrdinalIgnoreCase
                     : StringComparison.Ordinal;
 
-        private T LoadInclude<T>(string referencePath, string includePath, IDeserializer deserializer, List<string> includeStack, bool forceDeepMerge)
+        private T LoadInclude<T>(string modelFile, string referencePath, string includePath,
+            IDeserializer deserializer, List<string> includeStack, bool forceDeepMerge)
         {
             includePath = PathHelper.GetCanonicalPath(includePath, referencePath);
             _includeSources.Add(includePath);
 
             if (includeStack.Any(p => string.Equals(p, includePath, FILENAME_COMPARISON)))
             {
-                throw new IncludeCycleException(includeStack
+                throw new ConfigModelIncludeCycleException(includeStack
                     .SkipWhile(p => !string.Equals(p, includePath))
                     .Concat(new[] { includePath })
                     .ToArray());
@@ -160,16 +168,67 @@ namespace Mastersign.ConfigModel
             includeStack.Add(includePath);
 
             T model;
-            using (var s = File.Open(includePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (var r = new StreamReader(s))
+            try
             {
-                model = deserializer.Deserialize<T>(r);
+                using (var s = File.Open(includePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (var r = new StreamReader(s))
+                {
+                    model = deserializer.Deserialize<T>(r);
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new ConfigModelIncludeNotFoundException(
+                    $"Could not find included file '{includePath}' in model '{modelFile}'.",
+                    modelFile, includePath, ex);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                throw new ConfigModelIncludeNotFoundException(
+                    $"Could not find a part of the path to included file '{includePath}' in model '{modelFile}'.",
+                    modelFile, includePath, ex);
+            }
+            catch (IOException ex)
+            {
+                throw new ConfigModelIncludeLoadException(
+                    $"Can not read include file in model file '{modelFile}': {ex.Message}",
+                    modelFile, includePath, ex);
+            }
+            catch (SyntaxErrorException ex)
+            {
+                throw new ConfigModelIncludeLoadException(
+                    $"Syntax error in included model file '{includePath}' at {ex.Start}: {ex.Message}",
+                    modelFile, includePath, ex);
+            }
+            catch (SemanticErrorException ex)
+            {
+                throw new ConfigModelIncludeLoadException(
+                    $"Semantic error in included file '{includePath}' at {ex.Start}: {ex.Message}",
+                    modelFile, includePath, ex);
+            }
+            catch (AnchorNotFoundException ex)
+            {
+                throw new ConfigModelIncludeLoadException(
+                    $"Anchor not found in included file '{includePath}' at {ex.Start}: {ex.Message}",
+                    modelFile, includePath, ex);
+            }
+            catch (ForwardAnchorNotSupportedException ex)
+            {
+                throw new ConfigModelIncludeLoadException(
+                    $"Forward anchor not supported in included file '{includePath}' at {ex.Start}: {ex.Message}",
+                    modelFile, includePath, ex);
+            }
+            catch (MaximumRecursionLevelReachedException ex)
+            {
+                throw new ConfigModelIncludeLoadException(
+                    $"Maximum recursion level reached in included file '{includePath}' at {ex.Start}: {ex.Message}",
+                    modelFile, includePath, ex);
             }
 
             var includeReferencePath = Path.GetDirectoryName(includePath);
 
             model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
-                m => LoadIncludes(m, includeReferencePath, deserializer, includeStack, forceDeepMerge));
+                m => LoadIncludes(m, modelFile, includeReferencePath, deserializer, includeStack, forceDeepMerge));
 
             includeStack.RemoveAt(includeStack.Count - 1);
 
@@ -179,7 +238,8 @@ namespace Mastersign.ConfigModel
             return model;
         }
 
-        private ConfigModelBase LoadIncludes(ConfigModelBase model, string referencePath, IDeserializer deserializer, List<string> includeStack, bool forceDeepMerge = false)
+        private ConfigModelBase LoadIncludes(ConfigModelBase model, string modelFile, string referencePath,
+            IDeserializer deserializer, List<string> includeStack, bool forceDeepMerge = false)
         {
             if (model?.Includes == null) return model;
             var t = model.GetType();
@@ -194,7 +254,10 @@ namespace Mastersign.ConfigModel
                 object include;
                 try
                 {
-                    include = loader.Invoke(this, new object[] { referencePath, includePath, deserializer, includeStack, forceDeepMerge });
+                    include = loader.Invoke(this, new object[] {
+                        modelFile, referencePath, includePath,
+                        deserializer, includeStack, forceDeepMerge,
+                    });
                 } 
                 catch (TargetInvocationException ex)
                 {
@@ -259,17 +322,68 @@ namespace Mastersign.ConfigModel
             foreach (var layerPath in _layers)
             {
                 TRootModel layer;
-                using (var s = File.Open(layerPath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                using (var r = new StreamReader(s))
+                try
                 {
-                    layer = deserializer.Deserialize<TRootModel>(r);
+                    using (var s = File.Open(layerPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    using (var r = new StreamReader(s))
+                    {
+                        layer = deserializer.Deserialize<TRootModel>(r);
+                    }
+                }
+                catch (FileNotFoundException ex)
+                {
+                    throw new ConfigModelLayerNotFoundException(
+                        $"Could not find model file '{layerPath}'.",
+                        layerPath, ex);
+                }
+                catch (DirectoryNotFoundException ex)
+                {
+                    throw new ConfigModelLayerNotFoundException(
+                        $"Could not find a part of the path to model file '{layerPath}'."
+                        , layerPath, ex);
+                }
+                catch (IOException ex)
+                {
+                    throw new ConfigModelLayerLoadException(
+                        $"Failed to open model file: {ex.Message}",
+                        layerPath, ex);
+                }
+                catch (SyntaxErrorException ex)
+                {
+                    throw new ConfigModelLayerLoadException(
+                        $"Syntax error in model file '{layerPath}' at {ex.Start}: {ex.Message}",
+                        layerPath, ex);
+                }
+                catch (SemanticErrorException ex)
+                {
+                    throw new ConfigModelLayerLoadException(
+                        $"Semantic error in model file '{layerPath}' at {ex.Start}: {ex.Message}",
+                        layerPath, ex);
+                }
+                catch (AnchorNotFoundException ex)
+                {
+                    throw new ConfigModelLayerLoadException(
+                        $"Anchor not found in model file '{layerPath}' at {ex.Start}: {ex.Message}",
+                        layerPath, ex);
+                }
+                catch (ForwardAnchorNotSupportedException ex)
+                {
+                    throw new ConfigModelLayerLoadException(
+                        $"Forward anchor not supported in model file '{layerPath}' at {ex.Start}: {ex.Message}"
+                        , layerPath, ex);
+                }
+                catch (MaximumRecursionLevelReachedException ex)
+                {
+                    throw new ConfigModelLayerLoadException(
+                        $"Maximum recursion level reached in model file '{layerPath}' at {ex.Start}: {ex.Message}",
+                        layerPath, ex);
                 }
 
                 var referencePath = Path.GetDirectoryName(layerPath);
                 var includeStack = new List<string> { layerPath };
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
-                    m => LoadIncludes(m, referencePath, deserializer, includeStack, forceDeepMerge: false));
+                    m => LoadIncludes(m, layerPath, referencePath, deserializer, includeStack, forceDeepMerge: false));
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
                     m => LoadStringSources(m, layerPath, referencePath));

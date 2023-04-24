@@ -279,6 +279,7 @@ namespace Mastersign.ConfigModel
             var builder = new DeserializerBuilder();
             builder = builder.IgnoreUnmatchedProperties();
             builder = builder.WithNamingConvention(_propertyNamingConvention);
+            builder = builder.WithNodeTypeResolver(new ClrTypeFromTagNodeTypeResolver());
 
             var discriminationsByPropertyExistence = ReflectionHelper.GetTypeDiscriminationsByPropertyExistence(typeof(TRootModel));
             var discriminationsByPropertyValue = ReflectionHelper.GetTypeDiscriminationsByPropertyValue(typeof(TRootModel));

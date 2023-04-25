@@ -8,7 +8,7 @@ namespace Mastersign.ConfigModel.Test
         private static readonly string SCENARIO = "StringSourcing";
 
         [TestMethod]
-        public void SimpleSourcing()
+        public void SimpleSourcingTest()
         {
             var mgr = new ConfigModelManager<ChildWithSources>();
             var modelFile = GetTestDataFilePath(SCENARIO, "Simple.yaml");
@@ -20,7 +20,7 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void Precedence()
+        public void PrecedenceTest()
         {
             var mgr = new ConfigModelManager<ChildWithSources>();
             var modelFile = GetTestDataFilePath(SCENARIO, "Precedence.yaml");
@@ -29,10 +29,11 @@ namespace Mastersign.ConfigModel.Test
             Assert.IsNotNull(result);
             Assert.AreEqual("Precedence X", result.X);
             Assert.AreEqual("Y from File", result.Y);
+            Assert.AreEqual("Z from Include", result.Z);
         }
 
         [TestMethod]
-        public void SourcingInChildren()
+        public void SourcingInChildrenTest()
         {
             var mgr = new ConfigModelManager<Model>();
             var modelFile = GetTestDataFilePath(SCENARIO, "Child.yaml");
@@ -119,6 +120,7 @@ namespace Mastersign.ConfigModel.Test
         {
             public string? X { get; set; }
             public string? Y { get; set; }
+            public string? Z { get; set; }
         }
     }
 }

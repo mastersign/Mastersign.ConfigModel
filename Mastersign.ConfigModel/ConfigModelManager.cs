@@ -276,12 +276,12 @@ namespace Mastersign.ConfigModel
             var includeReferencePath = Path.GetDirectoryName(includePath);
 
             model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
+                m => LoadStringSources(m, includePath, includeReferencePath));
+
+            model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
                 m => LoadIncludes(m, modelFile, includeReferencePath, deserializer, includeStack, forceDeepMerge));
 
             includeStack.RemoveAt(includeStack.Count - 1);
-
-            model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
-                m => LoadStringSources(m, includePath, includeReferencePath));
 
             return model;
         }
@@ -458,10 +458,10 @@ namespace Mastersign.ConfigModel
                 var includeStack = new List<string> { layerPath };
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
-                    m => LoadIncludes(m, layerPath, referencePath, deserializer, includeStack, forceDeepMerge: false));
+                    m => LoadStringSources(m, layerPath, referencePath));
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
-                    m => LoadStringSources(m, layerPath, referencePath));
+                    m => LoadIncludes(m, layerPath, referencePath, deserializer, includeStack, forceDeepMerge: false));
 
                 if (rootIsMergable)
                     Merging.MergeObject(root, layer);

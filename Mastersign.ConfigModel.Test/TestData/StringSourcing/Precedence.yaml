@@ -3,3 +3,6 @@ X: Precedence X
 $sources:
   X: Strings/x.txt
   Y: Strings/y.txt
+
+$includes:
+  - Include.yaml

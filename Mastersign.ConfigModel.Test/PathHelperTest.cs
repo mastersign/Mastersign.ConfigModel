@@ -20,5 +20,22 @@
                 $@"c:{DS}folder A{DS}Folder b{DS}File Name.txt",
                 PathHelper.GetCanonicalPath($@"X{DS}..{DS}Folder b{DS}.{DS}File Name.txt", $@"c:{DS}folder A{DS}Y{DS}..{DS}"));
         }
+
+        [TestMethod]
+        public void PrepareGlobbingPatternNoRootTest()
+        {
+            var result = PathHelper.PrepareGlobbingPattern("a/b/*.txt", @"C:\Users\Me\Documents");
+            Assert.AreEqual(@"C:\Users\Me\Documents\a\b", result.Item1);
+            Assert.AreEqual(@"*.txt", result.Item2);
+        }
+
+        [TestMethod]
+        public void PrepareGlobbingPatternRootedTest()
+        {
+            var result = PathHelper.PrepareGlobbingPattern("D:/a/**/b/*.txt", @"C:\Users\Me\Documents");
+            Assert.AreEqual(@"D:\a", result.Item1);
+            Assert.AreEqual(@"**\b\*.txt", result.Item2);
+        }
+
     }
 }

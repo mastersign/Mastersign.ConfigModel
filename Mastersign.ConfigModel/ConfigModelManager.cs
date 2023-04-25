@@ -127,10 +127,11 @@ namespace Mastersign.ConfigModel
                 throw new NotSupportedException("The root model type is not mergable. Therefore, only one layer is supported.");
             }
             var matcher = new Matcher(_filenameComparison);
-            matcher.AddInclude(filePattern);
             rootPath = rootPath ?? Environment.CurrentDirectory;
+            var glob = PathHelper.PrepareGlobbingPattern(filePattern, rootPath);
+            matcher.AddInclude(glob.Item2);
             var newLayers = new List<string>(matcher
-                .GetResultsInFullPath(rootPath)
+                .GetResultsInFullPath(glob.Item1)
                 .Select(p => PathHelper.GetCanonicalPath(p)));
             newLayers.Sort(StringComparerLookup.From(_filenameComparison));
             _layers.AddRange(newLayers);
@@ -296,7 +297,7 @@ namespace Mastersign.ConfigModel
                 nameof(LoadInclude), BindingFlags.Instance | BindingFlags.NonPublic);
             var loader = loadMethodInfo.MakeGenericMethod(t);
 
-            foreach (var includePath in model.Includes)
+            void Include(string includePath)
             {
                 object include;
                 try
@@ -313,9 +314,30 @@ namespace Mastersign.ConfigModel
                 Merging.MergeObject(result, include, forceRootMerge: true, forceDeepMerge);
             }
 
-            model.Includes = null;
+            foreach (var includePath in model.Includes)
+            {
+                if (includePath.Contains('*'))
+                {
+                    var matcher = new Matcher(_filenameComparison);
+                    var glob = PathHelper.PrepareGlobbingPattern(includePath, referencePath);
+                    matcher.AddInclude(glob.Item2);
+                    var matches = new List<string>(matcher
+                        .GetResultsInFullPath(glob.Item1)
+                        .Select(p => PathHelper.GetCanonicalPath(p)));
+                    matches.Sort(StringComparerLookup.From(_filenameComparison));
+                    foreach (var match in matches)
+                    {
+                        Include(match);
+                    }
+                }
+                else
+                {
+                    Include(includePath);
+                }
+            }
 
             Merging.MergeObject(result, model, forceRootMerge: true, forceDeepMerge);
+
             return result;
         }
 

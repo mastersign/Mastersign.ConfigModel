@@ -58,6 +58,17 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
+        public void GlobbingIncludeTest()
+        {
+            var mgr = new ConfigModelManager<Model>();
+            mgr.AddLayer(GetTestDataFilePath(SCENARIO, "GlobbingMain.yaml"));
+            var result = mgr.LoadModel();
+            Assert.IsNotNull(result);
+
+            CollectionAssert.AreEqual(new[] { 1, 2, 3, 4, 5, 6 }, result.Primitives);
+        }
+
+        [TestMethod]
         public void GetIncludePathsTest()
         {
             var mgr = new ConfigModelManager<Model>();

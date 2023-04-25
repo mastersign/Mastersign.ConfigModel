@@ -1,0 +1,3 @@
+$includes:
+  - DeletionBase.yaml
+  - Deleted*.yaml

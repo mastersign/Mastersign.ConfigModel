@@ -40,7 +40,9 @@
     + [X] If string source can not be read
 - [ ] Change Trigger
     + [X] On root
-    + [ ] On string source
-    + [ ] On include
-    + [ ] On nested include
-    + [ ] With read error (locked file)
+    + [X] On string source
+    + [X] On include
+    + [X] On nested include
+    + [X] With correct delay
+    + [X] Multiple sequential changes
+    + [X] With read error (missing/locked file)

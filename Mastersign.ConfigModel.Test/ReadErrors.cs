@@ -56,7 +56,7 @@ namespace Mastersign.ConfigModel.Test
         public void StringSourceBlockedTest()
         {
             var modelFile = GetTestDataFilePath(SCENARIO, "WithBlockedStringSource.yaml");
-            var stringSourceFile = GetTestDataFilePath(SCENARIO, Path.Combine("Strings", "BlockedFile.txt"));
+            var stringSourceFile = GetTestDataFilePath(SCENARIO, "Strings", "BlockedFile.txt");
             using var block = File.Open(stringSourceFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
 
             var mgr = new ConfigModelManager<Model>();

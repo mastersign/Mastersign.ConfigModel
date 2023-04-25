@@ -72,15 +72,14 @@ namespace Mastersign.ConfigModel.Test
         public void GetStringSourcePathsTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var basePath = GetTestDataFilePath(SCENARIO);
-            mgr.AddLayer(Path.Combine(basePath, "Child.yaml"));
+            mgr.AddLayer(GetTestDataFilePath(SCENARIO, "Child.yaml"));
             Assert.AreEqual(0, mgr.GetStringSourcePaths().Length);
             mgr.LoadModel();
             CollectionAssert.AreEquivalent(
                 new[]
                 {
-                    Path.Combine(basePath, "Strings", "x.txt"),
-                    Path.Combine(basePath, "Strings", "y.txt"),
+                    GetTestDataFilePath(SCENARIO, "Strings", "x.txt"),
+                    GetTestDataFilePath(SCENARIO, "Strings", "y.txt"),
                 },
                 mgr.GetStringSourcePaths());
         }
@@ -89,8 +88,7 @@ namespace Mastersign.ConfigModel.Test
         public void ThrowsStringSourceNotFoundExceptionTest()
         {
             var mgr = new ConfigModelManager<ChildWithSources>();
-            var basePath = GetTestDataFilePath(SCENARIO);
-            var modelFile = Path.Combine(basePath, "NotFound.yaml");
+            var modelFile = GetTestDataFilePath(SCENARIO, "NotFound.yaml");
             mgr.AddLayer(modelFile);
             try
             {
@@ -101,7 +99,7 @@ namespace Mastersign.ConfigModel.Test
             {
                 Assert.AreEqual(modelFile, ex.ModelFile);
                 Console.WriteLine(ex.GetType().Name + ": " + ex.Message);
-                Assert.AreEqual(Path.Combine(basePath, "Strings", "DoesNotExist.txt"), ex.FileName);
+                Assert.AreEqual(GetTestDataFilePath(SCENARIO, "Strings", "DoesNotExist.txt"), ex.FileName);
                 Assert.IsInstanceOfType(ex.InnerException, typeof(FileNotFoundException));
             }
         }

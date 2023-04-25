@@ -61,8 +61,7 @@ namespace Mastersign.ConfigModel.Test
         public void GetIncludePathsTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var basePath = GetTestDataFilePath(SCENARIO);
-            mgr.AddLayer(Path.Combine(basePath, "ComplexMain.yaml"));
+            mgr.AddLayer(GetTestDataFilePath(SCENARIO, "ComplexMain.yaml"));
 
             Assert.AreEqual(0, mgr.GetIncludePaths().Length);
 
@@ -71,9 +70,9 @@ namespace Mastersign.ConfigModel.Test
             CollectionAssert.AreEquivalent(
                 new[]
                 {
-                    Path.Combine(basePath, "ComplexBase.yaml"),
-                    Path.Combine(basePath, "ComplexFatBoyA.yaml"),
-                    Path.Combine(basePath, "ComplexMainFatChild.yaml"),
+                    GetTestDataFilePath(SCENARIO, "ComplexBase.yaml"),
+                    GetTestDataFilePath(SCENARIO, "ComplexFatBoyA.yaml"),
+                    GetTestDataFilePath(SCENARIO, "ComplexMainFatChild.yaml"),
                 },
                 mgr.GetIncludePaths());
         }
@@ -82,8 +81,7 @@ namespace Mastersign.ConfigModel.Test
         public void ThrowsIncludeNotFoundExceptionTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var basePath = GetTestDataFilePath(SCENARIO);
-            mgr.AddLayer(Path.Combine(basePath, "NonExistantInclude.yaml"));
+            mgr.AddLayer(GetTestDataFilePath(SCENARIO, "NonExistantInclude.yaml"));
             try
             {
                 mgr.LoadModel();
@@ -91,8 +89,8 @@ namespace Mastersign.ConfigModel.Test
             }
             catch (ConfigModelIncludeNotFoundException ex)
             {
-                Assert.AreEqual(Path.Combine(basePath, "NonExistantInclude.yaml"), ex.ModelFile);
-                Assert.AreEqual(Path.Combine(basePath, "Missing", "NotExistant.yaml"), ex.FileName);
+                Assert.AreEqual(GetTestDataFilePath(SCENARIO, "NonExistantInclude.yaml"), ex.ModelFile);
+                Assert.AreEqual(GetTestDataFilePath(SCENARIO, "Missing", "NotExistant.yaml"), ex.FileName);
             }
         }
 

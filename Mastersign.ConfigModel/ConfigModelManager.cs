@@ -48,6 +48,10 @@ namespace Mastersign.ConfigModel
 
     public delegate DeserializerBuilder YamlDeserializerBuildCustomizer(DeserializerBuilder builder);
 
+    /// <summary>
+    /// The main class of the Mastersign.ConfigModel library.
+    /// </summary>
+    /// <typeparam name="TRootModel">The type of the root class of the configuration model tree.</typeparam>
     public class ConfigModelManager<TRootModel> : IDisposable
         where TRootModel : class, new()
     {
@@ -375,6 +379,8 @@ namespace Mastersign.ConfigModel
 
         public TRootModel LoadModel()
         {
+            if (_disposed) throw new ObjectDisposedException(typeof(ConfigModelManager<TRootModel>).FullName);
+
             _stringSources.Clear();
             _includeSources.Clear();
 
@@ -514,6 +520,7 @@ namespace Mastersign.ConfigModel
 
         public void WatchAndReload()
         {
+            if (_disposed) throw new ObjectDisposedException(typeof(ConfigModelManager<TRootModel>).FullName);
             StopWatching();
 
             var files = _layers.Concat(_includeSources).Concat(_stringSources).Distinct().ToList();
@@ -574,9 +581,19 @@ namespace Mastersign.ConfigModel
             _watchers.Clear();
         }
 
+        private bool _disposed = false;
+
         public void Dispose()
         {
+            if (_disposed) return;
+            _disposed = true;
             StopWatching();
+            GC.SuppressFinalize(this);
+        }
+
+        ~ConfigModelManager()
+        {
+            Dispose();
         }
     }
 }

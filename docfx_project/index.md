@@ -10,6 +10,8 @@
 - Optional merge or replace for items in dictionaries / lists
 - Auto reload on file change
 
+See [Documentation](articles/intro.md) and [API](api/index.md).
+
 ## Example
 
 ```cs

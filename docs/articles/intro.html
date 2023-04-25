@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Introduction | Mastersign.ConfigModel </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Introduction | Mastersign.ConfigModel ">
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="Mastersign.ConfigModel">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="introduction">Introduction</h1>
+
+<p>Mastersign.ConfigModel is based on the YamlDotNet deserializer
+and adds features for loading the configuration of an app from YAML files.</p>
+<h2 id="features">Features</h2>
+<p>The library currently supports the following features:</p>
+<ul>
+<li>Includes</li>
+<li>String sourcing from text files</li>
+<li>Multiple layers</li>
+<li>Optional merge or replace for items in dictionaries / lists</li>
+<li>Auto reload on file change</li>
+</ul>
+<h2 id="example-model">Example Model</h2>
+<p>The following model is used in most of the examples:</p>
+<pre><code class="lang-cs">using Mastersign.ConfigModel;
+
+[MergableConfigModel]
+class RootModel : ConfigModelBase
+{
+    public string? A { get; set; }
+
+    public string? B { get; set; }
+
+    public ChildModel? Child { get; set; }
+}
+
+[MergableConfigModel]
+class ChildModel : ConfigModelBase
+{
+    public int? X { get; set; }
+
+    public Dictionary&lt;string, int&gt; Ys { get; set; }
+}
+</code></pre>
+<p>The base class <a class="xref" href="../api/Mastersign.ConfigModel.ConfigModelBase.html">ConfigModelBase</a> adds support for includes and string sourcing to the model.
+The class attribute <a class="xref" href="../api/Mastersign.ConfigModel.MergableConfigModelAttribute.html">MergableConfigModelAttribute</a> indicates,
+that the annotated class can be automatically merged by assigning or merging each readable and writable public property.</p>
+<p>Therefore, both classes <code>RootModel</code> and <code>ChildModel</code> do support includes and string sourcing.
+And instances of these classes are automatically merged by merging their public properties.</p>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <center><a href="https://mastersign.de">mastersign</a></center>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

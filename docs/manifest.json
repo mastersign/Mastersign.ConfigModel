@@ -1,0 +1,517 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/repo/projects/OS/Mastersign.ConfigModel/docfx_project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.html",
+          "hash": "RbKg9NyzkWUZp0k//YSUywoW2gryH+cDifr5wMWfumY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelBase.html",
+          "hash": "rqxBkEMm8597OompiWccBO+ZBxahrNzoANeqZVQuD8Q="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelException.html",
+          "hash": "SEFc3/UNRqC38rF5Zlq0Hu+2IyKTsJ2vjS6xqM5XOfo="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.html",
+          "hash": "TmjaRfGvAJF4llhBdmdgnbRbUausaIwKf4SB7jlhI9Y="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.html",
+          "hash": "PX64z7OULRD2mhoQmkJxz3bIFvXxMZvIIPQmsBgI5B0="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.html",
+          "hash": "vyUiYJ3E6XMUqAWO1bhyUY7pCtE6EW98G7N8v9jbXDI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.html",
+          "hash": "ulxlG9dKkWVGJ1ESROrLyc1DTa0/rug0bwjVq8oU1tQ="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerLoadException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerLoadException.html",
+          "hash": "/hT6UWTPdxMoZQ0Mm5lseNWfN5uEOgRly7G18yLQVOU="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerNotFoundException.html",
+          "hash": "zBlygx8NJIFpxK9RtXLEvt38jq7xv7Rl2j+q+CwpchI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelLoadException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLoadException.html",
+          "hash": "Ie5axG4TDyPRXIbldA5Laa+Zvjdg9kBO/9QZ0Tg/Las="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelManager-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelManager-1.html",
+          "hash": "k/962+QbpYbMKVtiuw4r3QlwYWCiiG6Y1ZwhPG5y5WM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.html",
+          "hash": "SK1HAP+4te3A7p97V50gSu4kn3fxDUJVEO/89Q6Sa8s="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.html",
+          "hash": "5a0/SjRt0GOmCvqE2qpXJd4X0cY2lJ+54L8YWI0yiOQ="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.DictionaryMergeMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.DictionaryMergeMode.html",
+          "hash": "Fd33nMRMQ2YyPXHU8W4ZMk+b6e/Wdrpg2XMQA/pRsvY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.IMergableConfigModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.IMergableConfigModel.html",
+          "hash": "sBaI1+PChIkx0c+6uP7RIhUD/2pgJ67wyO7Xb+SLMps="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ListMergeMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ListMergeMode.html",
+          "hash": "Wzzy7RCPe3fm3wMvlq3K7i04vgncy7xyoiFlKXO2Ps8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.MergableConfigModelAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.MergableConfigModelAttribute.html",
+          "hash": "OTh6kIDx0PQgRCvvwgseuJRVHBwmVQ/ameIc7EXxvhE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.MergeDictionaryAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.MergeDictionaryAttribute.html",
+          "hash": "sJ1qYGVbzJlkdutBgs3yMYV+54YUm8Lh6zJ148K3dI8="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.MergeListAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.MergeListAttribute.html",
+          "hash": "fUPfu031+SrMD4cL3N/FfyZlQq0H2+ZtL5CZfaKGSpk="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ModelChangeHandler-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ModelChangeHandler-1.html",
+          "hash": "hHOVTaemylLYyhaBWYcTAqH5yXDUEbfPc5Mz+icswbE="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ModelChangedEventArgs-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ModelChangedEventArgs-1.html",
+          "hash": "ivmJVm1YzrKGDW/Mb9x8iKbvFujmj/GR7BaKDzjKI8M="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.html",
+          "hash": "hOzhy6UguYszhYjBpVRRj9b8V2++hXUxDCdTrNm+fxQ="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorHandler.html",
+          "hash": "Wdrhqe+RwfZWHDANvgok7M14TrmlITotx3FvNm6z4cM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.NoMergeAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.NoMergeAttribute.html",
+          "hash": "8TQ6qlCoKbZ5zrMzHJmxbHdDhu95zmUVBf1zS4sDo6M="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.PropertyNameHandling.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.PropertyNameHandling.html",
+          "hash": "HvoAn9W4+qeXrbhHHi0VO1v0F9wMk27Rkew6k31I+DI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.html",
+          "hash": "GUNn6PzjRCOlSCd685jrhEAWvz5oXZFIIJn/j1iut0E="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.TypeDiscriminatorAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.TypeDiscriminatorAttribute.html",
+          "hash": "u/ALTdf3dPkKyq2UxlvChaTsrfxDxL1bNgkwVJKBz5Q="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.TypeIndicatorAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.TypeIndicatorAttribute.html",
+          "hash": "XLBhnsBvQJtqYeYgW/8TjJc+oBDUUGtj8cX+K9eSNus="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.YamlDeserializerBuildCustomizer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.YamlDeserializerBuildCustomizer.html",
+          "hash": "Hw+1pBU0j9DEyxxmodvTZxjMBiR5XvUkdpX+XhBuEqs="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mastersign.ConfigModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mastersign.ConfigModel.html",
+          "hash": "YyY8ZBc1SFn8m3+ta4B8DNimMVzGTgu3W48smqmu2Os="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "vZgdh/0jRmGMacZG73wwLmx2VtIcbRh/sEFgOFAgVJU="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "k/QBg4A9k+lQK2uW1Qwk0lgUSIzSWJEkZw5+M/pi8ww="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/includes.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/includes.html",
+          "hash": "l6E49VlNpT4Bwawu43Joufq0Reughlfl28wj08ZwfLw="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "nQxhwBVVhW6cS7rEkHPaVewvrI/LttlB9vksI2G0Z8M="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/layers.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/layers.html",
+          "hash": "UWQxOqbQj9wUj/eqdJuRqyhe9ewpqIvWo96KKGxt7to="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/merging.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/merging.html",
+          "hash": "J0aAy/UI0D+SYgrzr7oveNirHNW68JzI+Q0M/PLr+Jc="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/naming.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/naming.html",
+          "hash": "G23MgpsNteQDZwsPJ9BKl67FaLpmuexpgkfWZO5Nr0g="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/sources.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/sources.html",
+          "hash": "y5wW5dOYQfBk+CoHHYgS3emGQHA52y4tImxOtOmxmPI="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/start.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/start.html",
+          "hash": "fzT6vLWOqrG8LZvpdcsxrdNZOCl1VmLcyzKTot/pEsQ="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "yE3Dy9Jf3nO/fK7sNRyMcbB0gOL9x+QXeieg2T062xg="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/types.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/types.html",
+          "hash": "odQlDazYXuYa0fQHM6dcS/GmGqXWFxVQ5XWgtyEbb68="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/watch.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/watch.html",
+          "hash": "v50F5m7NsCv32UARb8UEhpJ7GSIiHcRHFBas/+gR11U="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "NFddTPbEk2NuYTeHIY/QJEvN749QzW58uaA3XCLe5qk="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "YTWhJn3oHS1U+dTfnW5wPJJuYFmN1QrG5XVuJIDl1YM="
+        }
+      },
+      "version": ""
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

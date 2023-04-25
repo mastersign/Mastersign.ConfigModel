@@ -1,0 +1,1048 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Mastersign.ConfigModel
+  name: Mastersign.ConfigModel
+  href: api/Mastersign.ConfigModel.html
+  commentId: N:Mastersign.ConfigModel
+  fullName: Mastersign.ConfigModel
+  nameWithType: Mastersign.ConfigModel
+- uid: Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver
+  name: ClrTypeFromTagNodeTypeResolver
+  href: api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.html
+  commentId: T:Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver
+  fullName: Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver
+  nameWithType: ClrTypeFromTagNodeTypeResolver
+- uid: Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.Resolve(YamlDotNet.Core.Events.NodeEvent,System.Type@)
+  name: Resolve(NodeEvent, ref Type)
+  href: api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.html#Mastersign_ConfigModel_ClrTypeFromTagNodeTypeResolver_Resolve_YamlDotNet_Core_Events_NodeEvent_System_Type__
+  commentId: M:Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.Resolve(YamlDotNet.Core.Events.NodeEvent,System.Type@)
+  name.vb: Resolve(NodeEvent, Type)
+  fullName: Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.Resolve(YamlDotNet.Core.Events.NodeEvent, ref System.Type)
+  fullName.vb: Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.Resolve(YamlDotNet.Core.Events.NodeEvent, System.Type)
+  nameWithType: ClrTypeFromTagNodeTypeResolver.Resolve(NodeEvent, ref Type)
+  nameWithType.vb: ClrTypeFromTagNodeTypeResolver.Resolve(NodeEvent, Type)
+- uid: Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.Resolve*
+  name: Resolve
+  href: api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.html#Mastersign_ConfigModel_ClrTypeFromTagNodeTypeResolver_Resolve_
+  commentId: Overload:Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.Resolve
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.Resolve
+  nameWithType: ClrTypeFromTagNodeTypeResolver.Resolve
+- uid: Mastersign.ConfigModel.ConfigModelBase
+  name: ConfigModelBase
+  href: api/Mastersign.ConfigModel.ConfigModelBase.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelBase
+  fullName: Mastersign.ConfigModel.ConfigModelBase
+  nameWithType: ConfigModelBase
+- uid: Mastersign.ConfigModel.ConfigModelBase.GetLayers
+  name: GetLayers()
+  href: api/Mastersign.ConfigModel.ConfigModelBase.html#Mastersign_ConfigModel_ConfigModelBase_GetLayers
+  commentId: M:Mastersign.ConfigModel.ConfigModelBase.GetLayers
+  fullName: Mastersign.ConfigModel.ConfigModelBase.GetLayers()
+  nameWithType: ConfigModelBase.GetLayers()
+- uid: Mastersign.ConfigModel.ConfigModelBase.GetLayers*
+  name: GetLayers
+  href: api/Mastersign.ConfigModel.ConfigModelBase.html#Mastersign_ConfigModel_ConfigModelBase_GetLayers_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelBase.GetLayers
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelBase.GetLayers
+  nameWithType: ConfigModelBase.GetLayers
+- uid: Mastersign.ConfigModel.ConfigModelBase.Includes
+  name: Includes
+  href: api/Mastersign.ConfigModel.ConfigModelBase.html#Mastersign_ConfigModel_ConfigModelBase_Includes
+  commentId: P:Mastersign.ConfigModel.ConfigModelBase.Includes
+  fullName: Mastersign.ConfigModel.ConfigModelBase.Includes
+  nameWithType: ConfigModelBase.Includes
+- uid: Mastersign.ConfigModel.ConfigModelBase.Includes*
+  name: Includes
+  href: api/Mastersign.ConfigModel.ConfigModelBase.html#Mastersign_ConfigModel_ConfigModelBase_Includes_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelBase.Includes
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelBase.Includes
+  nameWithType: ConfigModelBase.Includes
+- uid: Mastersign.ConfigModel.ConfigModelBase.StringSources
+  name: StringSources
+  href: api/Mastersign.ConfigModel.ConfigModelBase.html#Mastersign_ConfigModel_ConfigModelBase_StringSources
+  commentId: P:Mastersign.ConfigModel.ConfigModelBase.StringSources
+  fullName: Mastersign.ConfigModel.ConfigModelBase.StringSources
+  nameWithType: ConfigModelBase.StringSources
+- uid: Mastersign.ConfigModel.ConfigModelBase.StringSources*
+  name: StringSources
+  href: api/Mastersign.ConfigModel.ConfigModelBase.html#Mastersign_ConfigModel_ConfigModelBase_StringSources_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelBase.StringSources
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelBase.StringSources
+  nameWithType: ConfigModelBase.StringSources
+- uid: Mastersign.ConfigModel.ConfigModelException
+  name: ConfigModelException
+  href: api/Mastersign.ConfigModel.ConfigModelException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelException
+  fullName: Mastersign.ConfigModel.ConfigModelException
+  nameWithType: ConfigModelException
+- uid: Mastersign.ConfigModel.ConfigModelException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: ConfigModelException(SerializationInfo, StreamingContext)
+  href: api/Mastersign.ConfigModel.ConfigModelException.html#Mastersign_ConfigModel_ConfigModelException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:Mastersign.ConfigModel.ConfigModelException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name.vb: New(SerializationInfo, StreamingContext)
+  fullName: Mastersign.ConfigModel.ConfigModelException.ConfigModelException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelException.New(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: ConfigModelException.ConfigModelException(SerializationInfo, StreamingContext)
+  nameWithType.vb: ConfigModelException.New(SerializationInfo, StreamingContext)
+- uid: Mastersign.ConfigModel.ConfigModelException.#ctor(System.String,System.Exception)
+  name: ConfigModelException(string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelException.html#Mastersign_ConfigModel_ConfigModelException__ctor_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelException.#ctor(System.String,System.Exception)
+  name.vb: New(String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelException.ConfigModelException(string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelException.New(String, System.Exception)
+  nameWithType: ConfigModelException.ConfigModelException(string, Exception)
+  nameWithType.vb: ConfigModelException.New(String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelException.#ctor(System.String)
+  name: ConfigModelException(string)
+  href: api/Mastersign.ConfigModel.ConfigModelException.html#Mastersign_ConfigModel_ConfigModelException__ctor_System_String_
+  commentId: M:Mastersign.ConfigModel.ConfigModelException.#ctor(System.String)
+  name.vb: New(String)
+  fullName: Mastersign.ConfigModel.ConfigModelException.ConfigModelException(string)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelException.New(String)
+  nameWithType: ConfigModelException.ConfigModelException(string)
+  nameWithType.vb: ConfigModelException.New(String)
+- uid: Mastersign.ConfigModel.ConfigModelException.#ctor*
+  name: ConfigModelException
+  href: api/Mastersign.ConfigModel.ConfigModelException.html#Mastersign_ConfigModel_ConfigModelException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelException.ConfigModelException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelException.New
+  nameWithType: ConfigModelException.ConfigModelException
+  nameWithType.vb: ConfigModelException.New
+- uid: Mastersign.ConfigModel.ConfigModelFileNotFoundException
+  name: ConfigModelFileNotFoundException
+  href: api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelFileNotFoundException
+  fullName: Mastersign.ConfigModel.ConfigModelFileNotFoundException
+  nameWithType: ConfigModelFileNotFoundException
+- uid: Mastersign.ConfigModel.ConfigModelFileNotFoundException.#ctor(System.String,System.String,System.Exception)
+  name: ConfigModelFileNotFoundException(string, string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.html#Mastersign_ConfigModel_ConfigModelFileNotFoundException__ctor_System_String_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelFileNotFoundException.#ctor(System.String,System.String,System.Exception)
+  name.vb: New(String, String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelFileNotFoundException.ConfigModelFileNotFoundException(string, string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelFileNotFoundException.New(String, String, System.Exception)
+  nameWithType: ConfigModelFileNotFoundException.ConfigModelFileNotFoundException(string, string, Exception)
+  nameWithType.vb: ConfigModelFileNotFoundException.New(String, String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelFileNotFoundException.#ctor*
+  name: ConfigModelFileNotFoundException
+  href: api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.html#Mastersign_ConfigModel_ConfigModelFileNotFoundException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelFileNotFoundException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelFileNotFoundException.ConfigModelFileNotFoundException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelFileNotFoundException.New
+  nameWithType: ConfigModelFileNotFoundException.ConfigModelFileNotFoundException
+  nameWithType.vb: ConfigModelFileNotFoundException.New
+- uid: Mastersign.ConfigModel.ConfigModelFileNotFoundException.FileName
+  name: FileName
+  href: api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.html#Mastersign_ConfigModel_ConfigModelFileNotFoundException_FileName
+  commentId: P:Mastersign.ConfigModel.ConfigModelFileNotFoundException.FileName
+  fullName: Mastersign.ConfigModel.ConfigModelFileNotFoundException.FileName
+  nameWithType: ConfigModelFileNotFoundException.FileName
+- uid: Mastersign.ConfigModel.ConfigModelFileNotFoundException.FileName*
+  name: FileName
+  href: api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.html#Mastersign_ConfigModel_ConfigModelFileNotFoundException_FileName_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelFileNotFoundException.FileName
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelFileNotFoundException.FileName
+  nameWithType: ConfigModelFileNotFoundException.FileName
+- uid: Mastersign.ConfigModel.ConfigModelIncludeCycleException
+  name: ConfigModelIncludeCycleException
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelIncludeCycleException
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeCycleException
+  nameWithType: ConfigModelIncludeCycleException
+- uid: Mastersign.ConfigModel.ConfigModelIncludeCycleException.#ctor(System.String[])
+  name: ConfigModelIncludeCycleException(string[])
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.html#Mastersign_ConfigModel_ConfigModelIncludeCycleException__ctor_System_String___
+  commentId: M:Mastersign.ConfigModel.ConfigModelIncludeCycleException.#ctor(System.String[])
+  name.vb: New(String())
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeCycleException.ConfigModelIncludeCycleException(string[])
+  fullName.vb: Mastersign.ConfigModel.ConfigModelIncludeCycleException.New(String())
+  nameWithType: ConfigModelIncludeCycleException.ConfigModelIncludeCycleException(string[])
+  nameWithType.vb: ConfigModelIncludeCycleException.New(String())
+- uid: Mastersign.ConfigModel.ConfigModelIncludeCycleException.#ctor*
+  name: ConfigModelIncludeCycleException
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.html#Mastersign_ConfigModel_ConfigModelIncludeCycleException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelIncludeCycleException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeCycleException.ConfigModelIncludeCycleException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelIncludeCycleException.New
+  nameWithType: ConfigModelIncludeCycleException.ConfigModelIncludeCycleException
+  nameWithType.vb: ConfigModelIncludeCycleException.New
+- uid: Mastersign.ConfigModel.ConfigModelIncludeCycleException.PathCycle
+  name: PathCycle
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.html#Mastersign_ConfigModel_ConfigModelIncludeCycleException_PathCycle
+  commentId: P:Mastersign.ConfigModel.ConfigModelIncludeCycleException.PathCycle
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeCycleException.PathCycle
+  nameWithType: ConfigModelIncludeCycleException.PathCycle
+- uid: Mastersign.ConfigModel.ConfigModelIncludeCycleException.PathCycle*
+  name: PathCycle
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.html#Mastersign_ConfigModel_ConfigModelIncludeCycleException_PathCycle_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelIncludeCycleException.PathCycle
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeCycleException.PathCycle
+  nameWithType: ConfigModelIncludeCycleException.PathCycle
+- uid: Mastersign.ConfigModel.ConfigModelIncludeLoadException
+  name: ConfigModelIncludeLoadException
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelIncludeLoadException
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeLoadException
+  nameWithType: ConfigModelIncludeLoadException
+- uid: Mastersign.ConfigModel.ConfigModelIncludeLoadException.#ctor(System.String,System.String,System.String,System.Exception)
+  name: ConfigModelIncludeLoadException(string, string, string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.html#Mastersign_ConfigModel_ConfigModelIncludeLoadException__ctor_System_String_System_String_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelIncludeLoadException.#ctor(System.String,System.String,System.String,System.Exception)
+  name.vb: New(String, String, String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeLoadException.ConfigModelIncludeLoadException(string, string, string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelIncludeLoadException.New(String, String, String, System.Exception)
+  nameWithType: ConfigModelIncludeLoadException.ConfigModelIncludeLoadException(string, string, string, Exception)
+  nameWithType.vb: ConfigModelIncludeLoadException.New(String, String, String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelIncludeLoadException.#ctor*
+  name: ConfigModelIncludeLoadException
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.html#Mastersign_ConfigModel_ConfigModelIncludeLoadException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelIncludeLoadException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeLoadException.ConfigModelIncludeLoadException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelIncludeLoadException.New
+  nameWithType: ConfigModelIncludeLoadException.ConfigModelIncludeLoadException
+  nameWithType.vb: ConfigModelIncludeLoadException.New
+- uid: Mastersign.ConfigModel.ConfigModelIncludeLoadException.ModelFile
+  name: ModelFile
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.html#Mastersign_ConfigModel_ConfigModelIncludeLoadException_ModelFile
+  commentId: P:Mastersign.ConfigModel.ConfigModelIncludeLoadException.ModelFile
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeLoadException.ModelFile
+  nameWithType: ConfigModelIncludeLoadException.ModelFile
+- uid: Mastersign.ConfigModel.ConfigModelIncludeLoadException.ModelFile*
+  name: ModelFile
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.html#Mastersign_ConfigModel_ConfigModelIncludeLoadException_ModelFile_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelIncludeLoadException.ModelFile
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeLoadException.ModelFile
+  nameWithType: ConfigModelIncludeLoadException.ModelFile
+- uid: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException
+  name: ConfigModelIncludeNotFoundException
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelIncludeNotFoundException
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException
+  nameWithType: ConfigModelIncludeNotFoundException
+- uid: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.#ctor(System.String,System.String,System.String,System.Exception)
+  name: ConfigModelIncludeNotFoundException(string, string, string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.html#Mastersign_ConfigModel_ConfigModelIncludeNotFoundException__ctor_System_String_System_String_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.#ctor(System.String,System.String,System.String,System.Exception)
+  name.vb: New(String, String, String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.ConfigModelIncludeNotFoundException(string, string, string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.New(String, String, String, System.Exception)
+  nameWithType: ConfigModelIncludeNotFoundException.ConfigModelIncludeNotFoundException(string, string, string, Exception)
+  nameWithType.vb: ConfigModelIncludeNotFoundException.New(String, String, String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.#ctor*
+  name: ConfigModelIncludeNotFoundException
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.html#Mastersign_ConfigModel_ConfigModelIncludeNotFoundException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.ConfigModelIncludeNotFoundException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.New
+  nameWithType: ConfigModelIncludeNotFoundException.ConfigModelIncludeNotFoundException
+  nameWithType.vb: ConfigModelIncludeNotFoundException.New
+- uid: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.ModelFile
+  name: ModelFile
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.html#Mastersign_ConfigModel_ConfigModelIncludeNotFoundException_ModelFile
+  commentId: P:Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.ModelFile
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.ModelFile
+  nameWithType: ConfigModelIncludeNotFoundException.ModelFile
+- uid: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.ModelFile*
+  name: ModelFile
+  href: api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.html#Mastersign_ConfigModel_ConfigModelIncludeNotFoundException_ModelFile_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.ModelFile
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.ModelFile
+  nameWithType: ConfigModelIncludeNotFoundException.ModelFile
+- uid: Mastersign.ConfigModel.ConfigModelLayerLoadException
+  name: ConfigModelLayerLoadException
+  href: api/Mastersign.ConfigModel.ConfigModelLayerLoadException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelLayerLoadException
+  fullName: Mastersign.ConfigModel.ConfigModelLayerLoadException
+  nameWithType: ConfigModelLayerLoadException
+- uid: Mastersign.ConfigModel.ConfigModelLayerLoadException.#ctor(System.String,System.String,System.Exception)
+  name: ConfigModelLayerLoadException(string, string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelLayerLoadException.html#Mastersign_ConfigModel_ConfigModelLayerLoadException__ctor_System_String_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelLayerLoadException.#ctor(System.String,System.String,System.Exception)
+  name.vb: New(String, String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelLayerLoadException.ConfigModelLayerLoadException(string, string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelLayerLoadException.New(String, String, System.Exception)
+  nameWithType: ConfigModelLayerLoadException.ConfigModelLayerLoadException(string, string, Exception)
+  nameWithType.vb: ConfigModelLayerLoadException.New(String, String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelLayerLoadException.#ctor*
+  name: ConfigModelLayerLoadException
+  href: api/Mastersign.ConfigModel.ConfigModelLayerLoadException.html#Mastersign_ConfigModel_ConfigModelLayerLoadException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelLayerLoadException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelLayerLoadException.ConfigModelLayerLoadException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelLayerLoadException.New
+  nameWithType: ConfigModelLayerLoadException.ConfigModelLayerLoadException
+  nameWithType.vb: ConfigModelLayerLoadException.New
+- uid: Mastersign.ConfigModel.ConfigModelLayerNotFoundException
+  name: ConfigModelLayerNotFoundException
+  href: api/Mastersign.ConfigModel.ConfigModelLayerNotFoundException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelLayerNotFoundException
+  fullName: Mastersign.ConfigModel.ConfigModelLayerNotFoundException
+  nameWithType: ConfigModelLayerNotFoundException
+- uid: Mastersign.ConfigModel.ConfigModelLayerNotFoundException.#ctor(System.String,System.String,System.Exception)
+  name: ConfigModelLayerNotFoundException(string, string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelLayerNotFoundException.html#Mastersign_ConfigModel_ConfigModelLayerNotFoundException__ctor_System_String_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelLayerNotFoundException.#ctor(System.String,System.String,System.Exception)
+  name.vb: New(String, String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelLayerNotFoundException.ConfigModelLayerNotFoundException(string, string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelLayerNotFoundException.New(String, String, System.Exception)
+  nameWithType: ConfigModelLayerNotFoundException.ConfigModelLayerNotFoundException(string, string, Exception)
+  nameWithType.vb: ConfigModelLayerNotFoundException.New(String, String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelLayerNotFoundException.#ctor*
+  name: ConfigModelLayerNotFoundException
+  href: api/Mastersign.ConfigModel.ConfigModelLayerNotFoundException.html#Mastersign_ConfigModel_ConfigModelLayerNotFoundException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelLayerNotFoundException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelLayerNotFoundException.ConfigModelLayerNotFoundException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelLayerNotFoundException.New
+  nameWithType: ConfigModelLayerNotFoundException.ConfigModelLayerNotFoundException
+  nameWithType.vb: ConfigModelLayerNotFoundException.New
+- uid: Mastersign.ConfigModel.ConfigModelLoadException
+  name: ConfigModelLoadException
+  href: api/Mastersign.ConfigModel.ConfigModelLoadException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelLoadException
+  fullName: Mastersign.ConfigModel.ConfigModelLoadException
+  nameWithType: ConfigModelLoadException
+- uid: Mastersign.ConfigModel.ConfigModelLoadException.#ctor(System.String,System.String,System.Exception)
+  name: ConfigModelLoadException(string, string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelLoadException.html#Mastersign_ConfigModel_ConfigModelLoadException__ctor_System_String_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelLoadException.#ctor(System.String,System.String,System.Exception)
+  name.vb: New(String, String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelLoadException.ConfigModelLoadException(string, string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelLoadException.New(String, String, System.Exception)
+  nameWithType: ConfigModelLoadException.ConfigModelLoadException(string, string, Exception)
+  nameWithType.vb: ConfigModelLoadException.New(String, String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelLoadException.#ctor*
+  name: ConfigModelLoadException
+  href: api/Mastersign.ConfigModel.ConfigModelLoadException.html#Mastersign_ConfigModel_ConfigModelLoadException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelLoadException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelLoadException.ConfigModelLoadException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelLoadException.New
+  nameWithType: ConfigModelLoadException.ConfigModelLoadException
+  nameWithType.vb: ConfigModelLoadException.New
+- uid: Mastersign.ConfigModel.ConfigModelLoadException.FileName
+  name: FileName
+  href: api/Mastersign.ConfigModel.ConfigModelLoadException.html#Mastersign_ConfigModel_ConfigModelLoadException_FileName
+  commentId: P:Mastersign.ConfigModel.ConfigModelLoadException.FileName
+  fullName: Mastersign.ConfigModel.ConfigModelLoadException.FileName
+  nameWithType: ConfigModelLoadException.FileName
+- uid: Mastersign.ConfigModel.ConfigModelLoadException.FileName*
+  name: FileName
+  href: api/Mastersign.ConfigModel.ConfigModelLoadException.html#Mastersign_ConfigModel_ConfigModelLoadException_FileName_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelLoadException.FileName
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelLoadException.FileName
+  nameWithType: ConfigModelLoadException.FileName
+- uid: Mastersign.ConfigModel.ConfigModelManager`1
+  name: ConfigModelManager<TRootModel>
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelManager`1
+  name.vb: ConfigModelManager(Of TRootModel)
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel)
+  nameWithType: ConfigModelManager<TRootModel>
+  nameWithType.vb: ConfigModelManager(Of TRootModel)
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.#ctor(System.StringComparison,Mastersign.ConfigModel.PropertyNameHandling,`0,Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)
+  name: ConfigModelManager(StringComparison, PropertyNameHandling, TRootModel, YamlDeserializerBuildCustomizer)
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1__ctor_System_StringComparison_Mastersign_ConfigModel_PropertyNameHandling__0_Mastersign_ConfigModel_YamlDeserializerBuildCustomizer_
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.#ctor(System.StringComparison,Mastersign.ConfigModel.PropertyNameHandling,`0,Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)
+  name.vb: New(StringComparison, PropertyNameHandling, TRootModel, YamlDeserializerBuildCustomizer)
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.ConfigModelManager(System.StringComparison, Mastersign.ConfigModel.PropertyNameHandling, TRootModel, Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).New(System.StringComparison, Mastersign.ConfigModel.PropertyNameHandling, TRootModel, Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)
+  nameWithType: ConfigModelManager<TRootModel>.ConfigModelManager(StringComparison, PropertyNameHandling, TRootModel, YamlDeserializerBuildCustomizer)
+  nameWithType.vb: ConfigModelManager(Of TRootModel).New(StringComparison, PropertyNameHandling, TRootModel, YamlDeserializerBuildCustomizer)
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.#ctor(System.StringComparison,YamlDotNet.Serialization.INamingConvention,`0,Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)
+  name: ConfigModelManager(StringComparison, INamingConvention, TRootModel, YamlDeserializerBuildCustomizer)
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1__ctor_System_StringComparison_YamlDotNet_Serialization_INamingConvention__0_Mastersign_ConfigModel_YamlDeserializerBuildCustomizer_
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.#ctor(System.StringComparison,YamlDotNet.Serialization.INamingConvention,`0,Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)
+  name.vb: New(StringComparison, INamingConvention, TRootModel, YamlDeserializerBuildCustomizer)
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.ConfigModelManager(System.StringComparison, YamlDotNet.Serialization.INamingConvention, TRootModel, Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).New(System.StringComparison, YamlDotNet.Serialization.INamingConvention, TRootModel, Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)
+  nameWithType: ConfigModelManager<TRootModel>.ConfigModelManager(StringComparison, INamingConvention, TRootModel, YamlDeserializerBuildCustomizer)
+  nameWithType.vb: ConfigModelManager(Of TRootModel).New(StringComparison, INamingConvention, TRootModel, YamlDeserializerBuildCustomizer)
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.#ctor*
+  name: ConfigModelManager
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.ConfigModelManager
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).New
+  nameWithType: ConfigModelManager<TRootModel>.ConfigModelManager
+  nameWithType.vb: ConfigModelManager(Of TRootModel).New
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.AddLayer(System.String)
+  name: AddLayer(string)
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_AddLayer_System_String_
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.AddLayer(System.String)
+  name.vb: AddLayer(String)
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.AddLayer(string)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).AddLayer(String)
+  nameWithType: ConfigModelManager<TRootModel>.AddLayer(string)
+  nameWithType.vb: ConfigModelManager(Of TRootModel).AddLayer(String)
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.AddLayer*
+  name: AddLayer
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_AddLayer_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.AddLayer
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.AddLayer
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).AddLayer
+  nameWithType: ConfigModelManager<TRootModel>.AddLayer
+  nameWithType.vb: ConfigModelManager(Of TRootModel).AddLayer
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.AddLayers(System.String,System.String)
+  name: AddLayers(string, string)
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_AddLayers_System_String_System_String_
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.AddLayers(System.String,System.String)
+  name.vb: AddLayers(String, String)
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.AddLayers(string, string)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).AddLayers(String, String)
+  nameWithType: ConfigModelManager<TRootModel>.AddLayers(string, string)
+  nameWithType.vb: ConfigModelManager(Of TRootModel).AddLayers(String, String)
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.AddLayers*
+  name: AddLayers
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_AddLayers_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.AddLayers
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.AddLayers
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).AddLayers
+  nameWithType: ConfigModelManager<TRootModel>.AddLayers
+  nameWithType.vb: ConfigModelManager(Of TRootModel).AddLayers
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.Dispose
+  name: Dispose()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_Dispose
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.Dispose
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.Dispose()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).Dispose()
+  nameWithType: ConfigModelManager<TRootModel>.Dispose()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).Dispose()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.Dispose*
+  name: Dispose
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_Dispose_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.Dispose
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.Dispose
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).Dispose
+  nameWithType: ConfigModelManager<TRootModel>.Dispose
+  nameWithType.vb: ConfigModelManager(Of TRootModel).Dispose
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.Finalize
+  name: ~ConfigModelManager()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_Finalize
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.Finalize
+  name.vb: ''
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.~ConfigModelManager()
+  fullName.vb: ''
+  nameWithType: ConfigModelManager<TRootModel>.~ConfigModelManager()
+  nameWithType.vb: ''
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.Finalize*
+  name: ~ConfigModelManager
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_Finalize_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.Finalize
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.~ConfigModelManager
+  nameWithType: ConfigModelManager<TRootModel>.~ConfigModelManager
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths
+  name: GetIncludePaths()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePaths
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetIncludePaths()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetIncludePaths()
+  nameWithType: ConfigModelManager<TRootModel>.GetIncludePaths()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetIncludePaths()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths*
+  name: GetIncludePaths
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePaths_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetIncludePaths
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetIncludePaths
+  nameWithType: ConfigModelManager<TRootModel>.GetIncludePaths
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetIncludePaths
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths
+  name: GetLayerPaths()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPaths
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLayerPaths()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLayerPaths()
+  nameWithType: ConfigModelManager<TRootModel>.GetLayerPaths()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLayerPaths()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths*
+  name: GetLayerPaths
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPaths_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLayerPaths
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLayerPaths
+  nameWithType: ConfigModelManager<TRootModel>.GetLayerPaths
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLayerPaths
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths
+  name: GetStringSourcePaths()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetStringSourcePaths
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetStringSourcePaths()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetStringSourcePaths()
+  nameWithType: ConfigModelManager<TRootModel>.GetStringSourcePaths()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetStringSourcePaths()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths*
+  name: GetStringSourcePaths
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetStringSourcePaths_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetStringSourcePaths
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetStringSourcePaths
+  nameWithType: ConfigModelManager<TRootModel>.GetStringSourcePaths
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetStringSourcePaths
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.LoadModel
+  name: LoadModel()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_LoadModel
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.LoadModel
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.LoadModel()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).LoadModel()
+  nameWithType: ConfigModelManager<TRootModel>.LoadModel()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).LoadModel()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.LoadModel*
+  name: LoadModel
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_LoadModel_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.LoadModel
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.LoadModel
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).LoadModel
+  nameWithType: ConfigModelManager<TRootModel>.LoadModel
+  nameWithType.vb: ConfigModelManager(Of TRootModel).LoadModel
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.ModelChanged
+  name: ModelChanged
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_ModelChanged
+  commentId: E:Mastersign.ConfigModel.ConfigModelManager`1.ModelChanged
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.ModelChanged
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).ModelChanged
+  nameWithType: ConfigModelManager<TRootModel>.ModelChanged
+  nameWithType.vb: ConfigModelManager(Of TRootModel).ModelChanged
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.ModelReloadFailed
+  name: ModelReloadFailed
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_ModelReloadFailed
+  commentId: E:Mastersign.ConfigModel.ConfigModelManager`1.ModelReloadFailed
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.ModelReloadFailed
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).ModelReloadFailed
+  nameWithType: ConfigModelManager<TRootModel>.ModelReloadFailed
+  nameWithType.vb: ConfigModelManager(Of TRootModel).ModelReloadFailed
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.ReloadDelay
+  name: ReloadDelay
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_ReloadDelay
+  commentId: P:Mastersign.ConfigModel.ConfigModelManager`1.ReloadDelay
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.ReloadDelay
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).ReloadDelay
+  nameWithType: ConfigModelManager<TRootModel>.ReloadDelay
+  nameWithType.vb: ConfigModelManager(Of TRootModel).ReloadDelay
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.ReloadDelay*
+  name: ReloadDelay
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_ReloadDelay_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.ReloadDelay
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.ReloadDelay
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).ReloadDelay
+  nameWithType: ConfigModelManager<TRootModel>.ReloadDelay
+  nameWithType.vb: ConfigModelManager(Of TRootModel).ReloadDelay
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.StopWatching
+  name: StopWatching()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_StopWatching
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.StopWatching
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.StopWatching()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).StopWatching()
+  nameWithType: ConfigModelManager<TRootModel>.StopWatching()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).StopWatching()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.StopWatching*
+  name: StopWatching
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_StopWatching_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.StopWatching
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.StopWatching
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).StopWatching
+  nameWithType: ConfigModelManager<TRootModel>.StopWatching
+  nameWithType.vb: ConfigModelManager(Of TRootModel).StopWatching
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.WatchAndReload
+  name: WatchAndReload()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_WatchAndReload
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.WatchAndReload
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.WatchAndReload()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).WatchAndReload()
+  nameWithType: ConfigModelManager<TRootModel>.WatchAndReload()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).WatchAndReload()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.WatchAndReload*
+  name: WatchAndReload
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_WatchAndReload_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.WatchAndReload
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.WatchAndReload
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).WatchAndReload
+  nameWithType: ConfigModelManager<TRootModel>.WatchAndReload
+  nameWithType.vb: ConfigModelManager(Of TRootModel).WatchAndReload
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceLoadException
+  name: ConfigModelStringSourceLoadException
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelStringSourceLoadException
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceLoadException
+  nameWithType: ConfigModelStringSourceLoadException
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.#ctor(System.String,System.String,System.String,System.Exception)
+  name: ConfigModelStringSourceLoadException(string, string, string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.html#Mastersign_ConfigModel_ConfigModelStringSourceLoadException__ctor_System_String_System_String_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelStringSourceLoadException.#ctor(System.String,System.String,System.String,System.Exception)
+  name.vb: New(String, String, String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.ConfigModelStringSourceLoadException(string, string, string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.New(String, String, String, System.Exception)
+  nameWithType: ConfigModelStringSourceLoadException.ConfigModelStringSourceLoadException(string, string, string, Exception)
+  nameWithType.vb: ConfigModelStringSourceLoadException.New(String, String, String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.#ctor*
+  name: ConfigModelStringSourceLoadException
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.html#Mastersign_ConfigModel_ConfigModelStringSourceLoadException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelStringSourceLoadException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.ConfigModelStringSourceLoadException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.New
+  nameWithType: ConfigModelStringSourceLoadException.ConfigModelStringSourceLoadException
+  nameWithType.vb: ConfigModelStringSourceLoadException.New
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.ModelFile
+  name: ModelFile
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.html#Mastersign_ConfigModel_ConfigModelStringSourceLoadException_ModelFile
+  commentId: P:Mastersign.ConfigModel.ConfigModelStringSourceLoadException.ModelFile
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.ModelFile
+  nameWithType: ConfigModelStringSourceLoadException.ModelFile
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.ModelFile*
+  name: ModelFile
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.html#Mastersign_ConfigModel_ConfigModelStringSourceLoadException_ModelFile_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelStringSourceLoadException.ModelFile
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceLoadException.ModelFile
+  nameWithType: ConfigModelStringSourceLoadException.ModelFile
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException
+  name: ConfigModelStringSourceNotFoundException
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.html
+  commentId: T:Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException
+  nameWithType: ConfigModelStringSourceNotFoundException
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.#ctor(System.String,System.String,System.String,System.Exception)
+  name: ConfigModelStringSourceNotFoundException(string, string, string, Exception)
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.html#Mastersign_ConfigModel_ConfigModelStringSourceNotFoundException__ctor_System_String_System_String_System_String_System_Exception_
+  commentId: M:Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.#ctor(System.String,System.String,System.String,System.Exception)
+  name.vb: New(String, String, String, Exception)
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.ConfigModelStringSourceNotFoundException(string, string, string, System.Exception)
+  fullName.vb: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.New(String, String, String, System.Exception)
+  nameWithType: ConfigModelStringSourceNotFoundException.ConfigModelStringSourceNotFoundException(string, string, string, Exception)
+  nameWithType.vb: ConfigModelStringSourceNotFoundException.New(String, String, String, Exception)
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.#ctor*
+  name: ConfigModelStringSourceNotFoundException
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.html#Mastersign_ConfigModel_ConfigModelStringSourceNotFoundException__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.ConfigModelStringSourceNotFoundException
+  fullName.vb: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.New
+  nameWithType: ConfigModelStringSourceNotFoundException.ConfigModelStringSourceNotFoundException
+  nameWithType.vb: ConfigModelStringSourceNotFoundException.New
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.ModelFile
+  name: ModelFile
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.html#Mastersign_ConfigModel_ConfigModelStringSourceNotFoundException_ModelFile
+  commentId: P:Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.ModelFile
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.ModelFile
+  nameWithType: ConfigModelStringSourceNotFoundException.ModelFile
+- uid: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.ModelFile*
+  name: ModelFile
+  href: api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.html#Mastersign_ConfigModel_ConfigModelStringSourceNotFoundException_ModelFile_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.ModelFile
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.ModelFile
+  nameWithType: ConfigModelStringSourceNotFoundException.ModelFile
+- uid: Mastersign.ConfigModel.DictionaryMergeMode
+  name: DictionaryMergeMode
+  href: api/Mastersign.ConfigModel.DictionaryMergeMode.html
+  commentId: T:Mastersign.ConfigModel.DictionaryMergeMode
+  fullName: Mastersign.ConfigModel.DictionaryMergeMode
+  nameWithType: DictionaryMergeMode
+- uid: Mastersign.ConfigModel.DictionaryMergeMode.Clear
+  name: Clear
+  href: api/Mastersign.ConfigModel.DictionaryMergeMode.html#Mastersign_ConfigModel_DictionaryMergeMode_Clear
+  commentId: F:Mastersign.ConfigModel.DictionaryMergeMode.Clear
+  fullName: Mastersign.ConfigModel.DictionaryMergeMode.Clear
+  nameWithType: DictionaryMergeMode.Clear
+- uid: Mastersign.ConfigModel.DictionaryMergeMode.MergeValue
+  name: MergeValue
+  href: api/Mastersign.ConfigModel.DictionaryMergeMode.html#Mastersign_ConfigModel_DictionaryMergeMode_MergeValue
+  commentId: F:Mastersign.ConfigModel.DictionaryMergeMode.MergeValue
+  fullName: Mastersign.ConfigModel.DictionaryMergeMode.MergeValue
+  nameWithType: DictionaryMergeMode.MergeValue
+- uid: Mastersign.ConfigModel.DictionaryMergeMode.ReplaceValue
+  name: ReplaceValue
+  href: api/Mastersign.ConfigModel.DictionaryMergeMode.html#Mastersign_ConfigModel_DictionaryMergeMode_ReplaceValue
+  commentId: F:Mastersign.ConfigModel.DictionaryMergeMode.ReplaceValue
+  fullName: Mastersign.ConfigModel.DictionaryMergeMode.ReplaceValue
+  nameWithType: DictionaryMergeMode.ReplaceValue
+- uid: Mastersign.ConfigModel.IMergableConfigModel
+  name: IMergableConfigModel
+  href: api/Mastersign.ConfigModel.IMergableConfigModel.html
+  commentId: T:Mastersign.ConfigModel.IMergableConfigModel
+  fullName: Mastersign.ConfigModel.IMergableConfigModel
+  nameWithType: IMergableConfigModel
+- uid: Mastersign.ConfigModel.IMergableConfigModel.UpdateWith(System.Object,System.Boolean)
+  name: UpdateWith(object, bool)
+  href: api/Mastersign.ConfigModel.IMergableConfigModel.html#Mastersign_ConfigModel_IMergableConfigModel_UpdateWith_System_Object_System_Boolean_
+  commentId: M:Mastersign.ConfigModel.IMergableConfigModel.UpdateWith(System.Object,System.Boolean)
+  name.vb: UpdateWith(Object, Boolean)
+  fullName: Mastersign.ConfigModel.IMergableConfigModel.UpdateWith(object, bool)
+  fullName.vb: Mastersign.ConfigModel.IMergableConfigModel.UpdateWith(Object, Boolean)
+  nameWithType: IMergableConfigModel.UpdateWith(object, bool)
+  nameWithType.vb: IMergableConfigModel.UpdateWith(Object, Boolean)
+- uid: Mastersign.ConfigModel.IMergableConfigModel.UpdateWith*
+  name: UpdateWith
+  href: api/Mastersign.ConfigModel.IMergableConfigModel.html#Mastersign_ConfigModel_IMergableConfigModel_UpdateWith_
+  commentId: Overload:Mastersign.ConfigModel.IMergableConfigModel.UpdateWith
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.IMergableConfigModel.UpdateWith
+  nameWithType: IMergableConfigModel.UpdateWith
+- uid: Mastersign.ConfigModel.ListMergeMode
+  name: ListMergeMode
+  href: api/Mastersign.ConfigModel.ListMergeMode.html
+  commentId: T:Mastersign.ConfigModel.ListMergeMode
+  fullName: Mastersign.ConfigModel.ListMergeMode
+  nameWithType: ListMergeMode
+- uid: Mastersign.ConfigModel.ListMergeMode.Append
+  name: Append
+  href: api/Mastersign.ConfigModel.ListMergeMode.html#Mastersign_ConfigModel_ListMergeMode_Append
+  commentId: F:Mastersign.ConfigModel.ListMergeMode.Append
+  fullName: Mastersign.ConfigModel.ListMergeMode.Append
+  nameWithType: ListMergeMode.Append
+- uid: Mastersign.ConfigModel.ListMergeMode.AppendDistinct
+  name: AppendDistinct
+  href: api/Mastersign.ConfigModel.ListMergeMode.html#Mastersign_ConfigModel_ListMergeMode_AppendDistinct
+  commentId: F:Mastersign.ConfigModel.ListMergeMode.AppendDistinct
+  fullName: Mastersign.ConfigModel.ListMergeMode.AppendDistinct
+  nameWithType: ListMergeMode.AppendDistinct
+- uid: Mastersign.ConfigModel.ListMergeMode.Clear
+  name: Clear
+  href: api/Mastersign.ConfigModel.ListMergeMode.html#Mastersign_ConfigModel_ListMergeMode_Clear
+  commentId: F:Mastersign.ConfigModel.ListMergeMode.Clear
+  fullName: Mastersign.ConfigModel.ListMergeMode.Clear
+  nameWithType: ListMergeMode.Clear
+- uid: Mastersign.ConfigModel.ListMergeMode.MergeItem
+  name: MergeItem
+  href: api/Mastersign.ConfigModel.ListMergeMode.html#Mastersign_ConfigModel_ListMergeMode_MergeItem
+  commentId: F:Mastersign.ConfigModel.ListMergeMode.MergeItem
+  fullName: Mastersign.ConfigModel.ListMergeMode.MergeItem
+  nameWithType: ListMergeMode.MergeItem
+- uid: Mastersign.ConfigModel.ListMergeMode.Prepend
+  name: Prepend
+  href: api/Mastersign.ConfigModel.ListMergeMode.html#Mastersign_ConfigModel_ListMergeMode_Prepend
+  commentId: F:Mastersign.ConfigModel.ListMergeMode.Prepend
+  fullName: Mastersign.ConfigModel.ListMergeMode.Prepend
+  nameWithType: ListMergeMode.Prepend
+- uid: Mastersign.ConfigModel.ListMergeMode.PrependDistinct
+  name: PrependDistinct
+  href: api/Mastersign.ConfigModel.ListMergeMode.html#Mastersign_ConfigModel_ListMergeMode_PrependDistinct
+  commentId: F:Mastersign.ConfigModel.ListMergeMode.PrependDistinct
+  fullName: Mastersign.ConfigModel.ListMergeMode.PrependDistinct
+  nameWithType: ListMergeMode.PrependDistinct
+- uid: Mastersign.ConfigModel.ListMergeMode.ReplaceItem
+  name: ReplaceItem
+  href: api/Mastersign.ConfigModel.ListMergeMode.html#Mastersign_ConfigModel_ListMergeMode_ReplaceItem
+  commentId: F:Mastersign.ConfigModel.ListMergeMode.ReplaceItem
+  fullName: Mastersign.ConfigModel.ListMergeMode.ReplaceItem
+  nameWithType: ListMergeMode.ReplaceItem
+- uid: Mastersign.ConfigModel.MergableConfigModelAttribute
+  name: MergableConfigModelAttribute
+  href: api/Mastersign.ConfigModel.MergableConfigModelAttribute.html
+  commentId: T:Mastersign.ConfigModel.MergableConfigModelAttribute
+  fullName: Mastersign.ConfigModel.MergableConfigModelAttribute
+  nameWithType: MergableConfigModelAttribute
+- uid: Mastersign.ConfigModel.MergeDictionaryAttribute
+  name: MergeDictionaryAttribute
+  href: api/Mastersign.ConfigModel.MergeDictionaryAttribute.html
+  commentId: T:Mastersign.ConfigModel.MergeDictionaryAttribute
+  fullName: Mastersign.ConfigModel.MergeDictionaryAttribute
+  nameWithType: MergeDictionaryAttribute
+- uid: Mastersign.ConfigModel.MergeDictionaryAttribute.#ctor(Mastersign.ConfigModel.DictionaryMergeMode)
+  name: MergeDictionaryAttribute(DictionaryMergeMode)
+  href: api/Mastersign.ConfigModel.MergeDictionaryAttribute.html#Mastersign_ConfigModel_MergeDictionaryAttribute__ctor_Mastersign_ConfigModel_DictionaryMergeMode_
+  commentId: M:Mastersign.ConfigModel.MergeDictionaryAttribute.#ctor(Mastersign.ConfigModel.DictionaryMergeMode)
+  name.vb: New(DictionaryMergeMode)
+  fullName: Mastersign.ConfigModel.MergeDictionaryAttribute.MergeDictionaryAttribute(Mastersign.ConfigModel.DictionaryMergeMode)
+  fullName.vb: Mastersign.ConfigModel.MergeDictionaryAttribute.New(Mastersign.ConfigModel.DictionaryMergeMode)
+  nameWithType: MergeDictionaryAttribute.MergeDictionaryAttribute(DictionaryMergeMode)
+  nameWithType.vb: MergeDictionaryAttribute.New(DictionaryMergeMode)
+- uid: Mastersign.ConfigModel.MergeDictionaryAttribute.#ctor*
+  name: MergeDictionaryAttribute
+  href: api/Mastersign.ConfigModel.MergeDictionaryAttribute.html#Mastersign_ConfigModel_MergeDictionaryAttribute__ctor_
+  commentId: Overload:Mastersign.ConfigModel.MergeDictionaryAttribute.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.MergeDictionaryAttribute.MergeDictionaryAttribute
+  fullName.vb: Mastersign.ConfigModel.MergeDictionaryAttribute.New
+  nameWithType: MergeDictionaryAttribute.MergeDictionaryAttribute
+  nameWithType.vb: MergeDictionaryAttribute.New
+- uid: Mastersign.ConfigModel.MergeDictionaryAttribute.MergeMode
+  name: MergeMode
+  href: api/Mastersign.ConfigModel.MergeDictionaryAttribute.html#Mastersign_ConfigModel_MergeDictionaryAttribute_MergeMode
+  commentId: P:Mastersign.ConfigModel.MergeDictionaryAttribute.MergeMode
+  fullName: Mastersign.ConfigModel.MergeDictionaryAttribute.MergeMode
+  nameWithType: MergeDictionaryAttribute.MergeMode
+- uid: Mastersign.ConfigModel.MergeDictionaryAttribute.MergeMode*
+  name: MergeMode
+  href: api/Mastersign.ConfigModel.MergeDictionaryAttribute.html#Mastersign_ConfigModel_MergeDictionaryAttribute_MergeMode_
+  commentId: Overload:Mastersign.ConfigModel.MergeDictionaryAttribute.MergeMode
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.MergeDictionaryAttribute.MergeMode
+  nameWithType: MergeDictionaryAttribute.MergeMode
+- uid: Mastersign.ConfigModel.MergeListAttribute
+  name: MergeListAttribute
+  href: api/Mastersign.ConfigModel.MergeListAttribute.html
+  commentId: T:Mastersign.ConfigModel.MergeListAttribute
+  fullName: Mastersign.ConfigModel.MergeListAttribute
+  nameWithType: MergeListAttribute
+- uid: Mastersign.ConfigModel.MergeListAttribute.#ctor(Mastersign.ConfigModel.ListMergeMode)
+  name: MergeListAttribute(ListMergeMode)
+  href: api/Mastersign.ConfigModel.MergeListAttribute.html#Mastersign_ConfigModel_MergeListAttribute__ctor_Mastersign_ConfigModel_ListMergeMode_
+  commentId: M:Mastersign.ConfigModel.MergeListAttribute.#ctor(Mastersign.ConfigModel.ListMergeMode)
+  name.vb: New(ListMergeMode)
+  fullName: Mastersign.ConfigModel.MergeListAttribute.MergeListAttribute(Mastersign.ConfigModel.ListMergeMode)
+  fullName.vb: Mastersign.ConfigModel.MergeListAttribute.New(Mastersign.ConfigModel.ListMergeMode)
+  nameWithType: MergeListAttribute.MergeListAttribute(ListMergeMode)
+  nameWithType.vb: MergeListAttribute.New(ListMergeMode)
+- uid: Mastersign.ConfigModel.MergeListAttribute.#ctor*
+  name: MergeListAttribute
+  href: api/Mastersign.ConfigModel.MergeListAttribute.html#Mastersign_ConfigModel_MergeListAttribute__ctor_
+  commentId: Overload:Mastersign.ConfigModel.MergeListAttribute.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.MergeListAttribute.MergeListAttribute
+  fullName.vb: Mastersign.ConfigModel.MergeListAttribute.New
+  nameWithType: MergeListAttribute.MergeListAttribute
+  nameWithType.vb: MergeListAttribute.New
+- uid: Mastersign.ConfigModel.MergeListAttribute.MergeMode
+  name: MergeMode
+  href: api/Mastersign.ConfigModel.MergeListAttribute.html#Mastersign_ConfigModel_MergeListAttribute_MergeMode
+  commentId: P:Mastersign.ConfigModel.MergeListAttribute.MergeMode
+  fullName: Mastersign.ConfigModel.MergeListAttribute.MergeMode
+  nameWithType: MergeListAttribute.MergeMode
+- uid: Mastersign.ConfigModel.MergeListAttribute.MergeMode*
+  name: MergeMode
+  href: api/Mastersign.ConfigModel.MergeListAttribute.html#Mastersign_ConfigModel_MergeListAttribute_MergeMode_
+  commentId: Overload:Mastersign.ConfigModel.MergeListAttribute.MergeMode
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.MergeListAttribute.MergeMode
+  nameWithType: MergeListAttribute.MergeMode
+- uid: Mastersign.ConfigModel.ModelChangedEventArgs`1
+  name: ModelChangedEventArgs<T>
+  href: api/Mastersign.ConfigModel.ModelChangedEventArgs-1.html
+  commentId: T:Mastersign.ConfigModel.ModelChangedEventArgs`1
+  name.vb: ModelChangedEventArgs(Of T)
+  fullName: Mastersign.ConfigModel.ModelChangedEventArgs<T>
+  fullName.vb: Mastersign.ConfigModel.ModelChangedEventArgs(Of T)
+  nameWithType: ModelChangedEventArgs<T>
+  nameWithType.vb: ModelChangedEventArgs(Of T)
+- uid: Mastersign.ConfigModel.ModelChangedEventArgs`1.#ctor(`0)
+  name: ModelChangedEventArgs(T)
+  href: api/Mastersign.ConfigModel.ModelChangedEventArgs-1.html#Mastersign_ConfigModel_ModelChangedEventArgs_1__ctor__0_
+  commentId: M:Mastersign.ConfigModel.ModelChangedEventArgs`1.#ctor(`0)
+  name.vb: New(T)
+  fullName: Mastersign.ConfigModel.ModelChangedEventArgs<T>.ModelChangedEventArgs(T)
+  fullName.vb: Mastersign.ConfigModel.ModelChangedEventArgs(Of T).New(T)
+  nameWithType: ModelChangedEventArgs<T>.ModelChangedEventArgs(T)
+  nameWithType.vb: ModelChangedEventArgs(Of T).New(T)
+- uid: Mastersign.ConfigModel.ModelChangedEventArgs`1.#ctor*
+  name: ModelChangedEventArgs
+  href: api/Mastersign.ConfigModel.ModelChangedEventArgs-1.html#Mastersign_ConfigModel_ModelChangedEventArgs_1__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ModelChangedEventArgs`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ModelChangedEventArgs<T>.ModelChangedEventArgs
+  fullName.vb: Mastersign.ConfigModel.ModelChangedEventArgs(Of T).New
+  nameWithType: ModelChangedEventArgs<T>.ModelChangedEventArgs
+  nameWithType.vb: ModelChangedEventArgs(Of T).New
+- uid: Mastersign.ConfigModel.ModelChangedEventArgs`1.NewModel
+  name: NewModel
+  href: api/Mastersign.ConfigModel.ModelChangedEventArgs-1.html#Mastersign_ConfigModel_ModelChangedEventArgs_1_NewModel
+  commentId: P:Mastersign.ConfigModel.ModelChangedEventArgs`1.NewModel
+  fullName: Mastersign.ConfigModel.ModelChangedEventArgs<T>.NewModel
+  fullName.vb: Mastersign.ConfigModel.ModelChangedEventArgs(Of T).NewModel
+  nameWithType: ModelChangedEventArgs<T>.NewModel
+  nameWithType.vb: ModelChangedEventArgs(Of T).NewModel
+- uid: Mastersign.ConfigModel.ModelChangedEventArgs`1.NewModel*
+  name: NewModel
+  href: api/Mastersign.ConfigModel.ModelChangedEventArgs-1.html#Mastersign_ConfigModel_ModelChangedEventArgs_1_NewModel_
+  commentId: Overload:Mastersign.ConfigModel.ModelChangedEventArgs`1.NewModel
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ModelChangedEventArgs<T>.NewModel
+  fullName.vb: Mastersign.ConfigModel.ModelChangedEventArgs(Of T).NewModel
+  nameWithType: ModelChangedEventArgs<T>.NewModel
+  nameWithType.vb: ModelChangedEventArgs(Of T).NewModel
+- uid: Mastersign.ConfigModel.ModelChangeHandler`1
+  name: ModelChangeHandler<T>
+  href: api/Mastersign.ConfigModel.ModelChangeHandler-1.html
+  commentId: T:Mastersign.ConfigModel.ModelChangeHandler`1
+  name.vb: ModelChangeHandler(Of T)
+  fullName: Mastersign.ConfigModel.ModelChangeHandler<T>
+  fullName.vb: Mastersign.ConfigModel.ModelChangeHandler(Of T)
+  nameWithType: ModelChangeHandler<T>
+  nameWithType.vb: ModelChangeHandler(Of T)
+- uid: Mastersign.ConfigModel.ModelReloadErrorEventArgs
+  name: ModelReloadErrorEventArgs
+  href: api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.html
+  commentId: T:Mastersign.ConfigModel.ModelReloadErrorEventArgs
+  fullName: Mastersign.ConfigModel.ModelReloadErrorEventArgs
+  nameWithType: ModelReloadErrorEventArgs
+- uid: Mastersign.ConfigModel.ModelReloadErrorEventArgs.#ctor(Mastersign.ConfigModel.ConfigModelException)
+  name: ModelReloadErrorEventArgs(ConfigModelException)
+  href: api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.html#Mastersign_ConfigModel_ModelReloadErrorEventArgs__ctor_Mastersign_ConfigModel_ConfigModelException_
+  commentId: M:Mastersign.ConfigModel.ModelReloadErrorEventArgs.#ctor(Mastersign.ConfigModel.ConfigModelException)
+  name.vb: New(ConfigModelException)
+  fullName: Mastersign.ConfigModel.ModelReloadErrorEventArgs.ModelReloadErrorEventArgs(Mastersign.ConfigModel.ConfigModelException)
+  fullName.vb: Mastersign.ConfigModel.ModelReloadErrorEventArgs.New(Mastersign.ConfigModel.ConfigModelException)
+  nameWithType: ModelReloadErrorEventArgs.ModelReloadErrorEventArgs(ConfigModelException)
+  nameWithType.vb: ModelReloadErrorEventArgs.New(ConfigModelException)
+- uid: Mastersign.ConfigModel.ModelReloadErrorEventArgs.#ctor*
+  name: ModelReloadErrorEventArgs
+  href: api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.html#Mastersign_ConfigModel_ModelReloadErrorEventArgs__ctor_
+  commentId: Overload:Mastersign.ConfigModel.ModelReloadErrorEventArgs.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.ModelReloadErrorEventArgs.ModelReloadErrorEventArgs
+  fullName.vb: Mastersign.ConfigModel.ModelReloadErrorEventArgs.New
+  nameWithType: ModelReloadErrorEventArgs.ModelReloadErrorEventArgs
+  nameWithType.vb: ModelReloadErrorEventArgs.New
+- uid: Mastersign.ConfigModel.ModelReloadErrorEventArgs.Exception
+  name: Exception
+  href: api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.html#Mastersign_ConfigModel_ModelReloadErrorEventArgs_Exception
+  commentId: P:Mastersign.ConfigModel.ModelReloadErrorEventArgs.Exception
+  fullName: Mastersign.ConfigModel.ModelReloadErrorEventArgs.Exception
+  nameWithType: ModelReloadErrorEventArgs.Exception
+- uid: Mastersign.ConfigModel.ModelReloadErrorEventArgs.Exception*
+  name: Exception
+  href: api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.html#Mastersign_ConfigModel_ModelReloadErrorEventArgs_Exception_
+  commentId: Overload:Mastersign.ConfigModel.ModelReloadErrorEventArgs.Exception
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ModelReloadErrorEventArgs.Exception
+  nameWithType: ModelReloadErrorEventArgs.Exception
+- uid: Mastersign.ConfigModel.ModelReloadErrorHandler
+  name: ModelReloadErrorHandler
+  href: api/Mastersign.ConfigModel.ModelReloadErrorHandler.html
+  commentId: T:Mastersign.ConfigModel.ModelReloadErrorHandler
+  fullName: Mastersign.ConfigModel.ModelReloadErrorHandler
+  nameWithType: ModelReloadErrorHandler
+- uid: Mastersign.ConfigModel.NoMergeAttribute
+  name: NoMergeAttribute
+  href: api/Mastersign.ConfigModel.NoMergeAttribute.html
+  commentId: T:Mastersign.ConfigModel.NoMergeAttribute
+  fullName: Mastersign.ConfigModel.NoMergeAttribute
+  nameWithType: NoMergeAttribute
+- uid: Mastersign.ConfigModel.PropertyNameHandling
+  name: PropertyNameHandling
+  href: api/Mastersign.ConfigModel.PropertyNameHandling.html
+  commentId: T:Mastersign.ConfigModel.PropertyNameHandling
+  fullName: Mastersign.ConfigModel.PropertyNameHandling
+  nameWithType: PropertyNameHandling
+- uid: Mastersign.ConfigModel.PropertyNameHandling.CamelCase
+  name: CamelCase
+  href: api/Mastersign.ConfigModel.PropertyNameHandling.html#Mastersign_ConfigModel_PropertyNameHandling_CamelCase
+  commentId: F:Mastersign.ConfigModel.PropertyNameHandling.CamelCase
+  fullName: Mastersign.ConfigModel.PropertyNameHandling.CamelCase
+  nameWithType: PropertyNameHandling.CamelCase
+- uid: Mastersign.ConfigModel.PropertyNameHandling.Hyphenated
+  name: Hyphenated
+  href: api/Mastersign.ConfigModel.PropertyNameHandling.html#Mastersign_ConfigModel_PropertyNameHandling_Hyphenated
+  commentId: F:Mastersign.ConfigModel.PropertyNameHandling.Hyphenated
+  fullName: Mastersign.ConfigModel.PropertyNameHandling.Hyphenated
+  nameWithType: PropertyNameHandling.Hyphenated
+- uid: Mastersign.ConfigModel.PropertyNameHandling.LowerCase
+  name: LowerCase
+  href: api/Mastersign.ConfigModel.PropertyNameHandling.html#Mastersign_ConfigModel_PropertyNameHandling_LowerCase
+  commentId: F:Mastersign.ConfigModel.PropertyNameHandling.LowerCase
+  fullName: Mastersign.ConfigModel.PropertyNameHandling.LowerCase
+  nameWithType: PropertyNameHandling.LowerCase
+- uid: Mastersign.ConfigModel.PropertyNameHandling.PascalCase
+  name: PascalCase
+  href: api/Mastersign.ConfigModel.PropertyNameHandling.html#Mastersign_ConfigModel_PropertyNameHandling_PascalCase
+  commentId: F:Mastersign.ConfigModel.PropertyNameHandling.PascalCase
+  fullName: Mastersign.ConfigModel.PropertyNameHandling.PascalCase
+  nameWithType: PropertyNameHandling.PascalCase
+- uid: Mastersign.ConfigModel.PropertyNameHandling.Underscored
+  name: Underscored
+  href: api/Mastersign.ConfigModel.PropertyNameHandling.html#Mastersign_ConfigModel_PropertyNameHandling_Underscored
+  commentId: F:Mastersign.ConfigModel.PropertyNameHandling.Underscored
+  fullName: Mastersign.ConfigModel.PropertyNameHandling.Underscored
+  nameWithType: PropertyNameHandling.Underscored
+- uid: Mastersign.ConfigModel.TypeDiscriminationValueAttribute
+  name: TypeDiscriminationValueAttribute
+  href: api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.html
+  commentId: T:Mastersign.ConfigModel.TypeDiscriminationValueAttribute
+  fullName: Mastersign.ConfigModel.TypeDiscriminationValueAttribute
+  nameWithType: TypeDiscriminationValueAttribute
+- uid: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.#ctor(System.String)
+  name: TypeDiscriminationValueAttribute(string)
+  href: api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.html#Mastersign_ConfigModel_TypeDiscriminationValueAttribute__ctor_System_String_
+  commentId: M:Mastersign.ConfigModel.TypeDiscriminationValueAttribute.#ctor(System.String)
+  name.vb: New(String)
+  fullName: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.TypeDiscriminationValueAttribute(string)
+  fullName.vb: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.New(String)
+  nameWithType: TypeDiscriminationValueAttribute.TypeDiscriminationValueAttribute(string)
+  nameWithType.vb: TypeDiscriminationValueAttribute.New(String)
+- uid: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.#ctor*
+  name: TypeDiscriminationValueAttribute
+  href: api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.html#Mastersign_ConfigModel_TypeDiscriminationValueAttribute__ctor_
+  commentId: Overload:Mastersign.ConfigModel.TypeDiscriminationValueAttribute.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.TypeDiscriminationValueAttribute
+  fullName.vb: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.New
+  nameWithType: TypeDiscriminationValueAttribute.TypeDiscriminationValueAttribute
+  nameWithType.vb: TypeDiscriminationValueAttribute.New
+- uid: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.Value
+  name: Value
+  href: api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.html#Mastersign_ConfigModel_TypeDiscriminationValueAttribute_Value
+  commentId: P:Mastersign.ConfigModel.TypeDiscriminationValueAttribute.Value
+  fullName: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.Value
+  nameWithType: TypeDiscriminationValueAttribute.Value
+- uid: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.Value*
+  name: Value
+  href: api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.html#Mastersign_ConfigModel_TypeDiscriminationValueAttribute_Value_
+  commentId: Overload:Mastersign.ConfigModel.TypeDiscriminationValueAttribute.Value
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.TypeDiscriminationValueAttribute.Value
+  nameWithType: TypeDiscriminationValueAttribute.Value
+- uid: Mastersign.ConfigModel.TypeDiscriminatorAttribute
+  name: TypeDiscriminatorAttribute
+  href: api/Mastersign.ConfigModel.TypeDiscriminatorAttribute.html
+  commentId: T:Mastersign.ConfigModel.TypeDiscriminatorAttribute
+  fullName: Mastersign.ConfigModel.TypeDiscriminatorAttribute
+  nameWithType: TypeDiscriminatorAttribute
+- uid: Mastersign.ConfigModel.TypeIndicatorAttribute
+  name: TypeIndicatorAttribute
+  href: api/Mastersign.ConfigModel.TypeIndicatorAttribute.html
+  commentId: T:Mastersign.ConfigModel.TypeIndicatorAttribute
+  fullName: Mastersign.ConfigModel.TypeIndicatorAttribute
+  nameWithType: TypeIndicatorAttribute
+- uid: Mastersign.ConfigModel.YamlDeserializerBuildCustomizer
+  name: YamlDeserializerBuildCustomizer
+  href: api/Mastersign.ConfigModel.YamlDeserializerBuildCustomizer.html
+  commentId: T:Mastersign.ConfigModel.YamlDeserializerBuildCustomizer
+  fullName: Mastersign.ConfigModel.YamlDeserializerBuildCustomizer
+  nameWithType: YamlDeserializerBuildCustomizer

@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Mastersign.ConfigModel | Mastersign.ConfigModel </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Mastersign.ConfigModel | Mastersign.ConfigModel ">
+    
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="stylesheet" href="styles/docfx.vendor.css">
+      <link rel="stylesheet" href="styles/docfx.css">
+      <link rel="stylesheet" href="styles/main.css">
+      <meta property="docfx:navrel" content="toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="images/logo.svg" alt="Mastersign.ConfigModel">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="mastersignconfigmodel">Mastersign.ConfigModel</h1>
+
+<blockquote>
+<p>YAML based configuration model for .NET</p>
+</blockquote>
+<h2 id="features">Features</h2>
+<ul>
+<li>Includes</li>
+<li>String sourcing from text files</li>
+<li>Multiple layers</li>
+<li>Optional merge or replace for items in dictionaries / lists</li>
+<li>Auto reload on file change</li>
+</ul>
+<p>See <a href="articles/intro.html">Documentation</a> and <a href="api/index.html">API</a>.</p>
+<h2 id="example">Example</h2>
+<pre><code class="lang-cs">using Mastersign.ConfigModel;
+using System.IO;
+
+[MergableConfigModel]
+class RootModel : ConfigModelBase
+{
+    public string? A { get; set; }
+
+    public string? B { get; set; }
+
+    public ChildModel? Child { get; set; }
+}
+
+[MergableConfigModel]
+class ChildModel : ConfigModelBase
+{
+    public int? X { get; set; }
+
+    public Dictionary&lt;string, int&gt; Ys { get; set; }
+}
+
+static class Program
+{
+    static string ConfigurationFolder =&gt; Path.Combine(Environment.CurrentDirectory, &quot;config&quot;);
+
+    static ConfigModelManager modelManager;
+
+    static RootModel Model { get; set; }
+
+    static void HandleModelReload(object sender, ConfigModelReloadEventArgs ea)
+    {
+        Model = ea.NewModel;
+        Console.WriteLine(&quot;Model reloaded.&quot;);
+    }
+
+    static void Main()
+    {
+        modelManager = new ConfigModelManager&lt;RootModel&gt;();
+
+        manager.AddLayers(&quot;*.yaml&quot;, ConfigurationFolder);
+        Model = manager.LoadModel();
+
+        manager.ModelReload += HandleModelReload;
+        manager.WatchAndReload();
+    }
+}
+</code></pre>
+<p>You could use the following configuration files:</p>
+<ul>
+<li><code>config</code>
+<ul>
+<li><code>includes</code>
+<ul>
+<li><code>child.yaml</code></li>
+<li><code>user.inc.yaml</code></li>
+</ul>
+</li>
+<li><code>strings</code>
+<ul>
+<li><code>a.txt</code></li>
+</ul>
+</li>
+<li><code>1-default.yaml</code></li>
+<li><code>2-main.yaml</code></li>
+</ul>
+</li>
+</ul>
+<p><code>config\1-defaults.yaml</code>:</p>
+<pre><code class="lang-yaml">A: Default A
+B: Default B
+Child:
+  X: 100
+</code></pre>
+<p><code>config\2-main.yaml</code>:</p>
+<pre><code class="lang-yaml">$includes:
+  - includes/*.inc.yaml
+$sources:
+  A: strings/a.txt
+
+Child:
+  $includes:
+    - includes\child.yaml
+</code></pre>
+<p><code>config\includes\user.inc.yaml</code></p>
+<pre><code class="lang-yaml">B: User B
+</code></pre>
+<p><code>config\includes\child.yaml</code></p>
+<pre><code class="lang-yaml">Ys:
+  a: 1
+  b: 2
+</code></pre>
+<p><code>config\strings\a.txt</code>:</p>
+<pre><code class="lang-txt">Value A From File
+</code></pre>
+<p>The loaded model would contain the following data:</p>
+<pre><code class="lang-yaml">A: Value A From File
+B: User B
+Child:
+  X: 100
+  Ys:
+    a: 1
+    b: 2
+</code></pre>
+<h2 id="license">License</h2>
+<p>This project is licensed under the MIT license.<br>
+Copyright by Tobias Kiertscher <a href="mailto:dev@mastersign.de">dev@mastersign.de</a>.</p>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <center><a href="https://mastersign.de">mastersign</a></center>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

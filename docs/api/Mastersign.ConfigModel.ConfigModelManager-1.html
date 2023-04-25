@@ -1,0 +1,533 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ConfigModelManager&lt;TRootModel&gt;
+ | Mastersign.ConfigModel </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ConfigModelManager&lt;TRootModel&gt;
+ | Mastersign.ConfigModel ">
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="Mastersign.ConfigModel">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mastersign.ConfigModel.ConfigModelManager`1">
+
+
+  <h1 id="Mastersign_ConfigModel_ConfigModelManager_1" data-uid="Mastersign.ConfigModel.ConfigModelManager`1" class="text-break">Class ConfigModelManager&lt;TRootModel&gt;
+</h1>
+  <div class="markdown level0 summary"><p>The main class of the Mastersign.ConfigModel library.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">object</span></div>
+    <div class="level1"><span class="xref">ConfigModelManager&lt;TRootModel&gt;</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IDisposable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">object.Equals(object)</span>
+    </div>
+    <div>
+      <span class="xref">object.Equals(object, object)</span>
+    </div>
+    <div>
+      <span class="xref">object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">object.ReferenceEquals(object, object)</span>
+    </div>
+    <div>
+      <span class="xref">object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <span class="xref">Mastersign</span>.<a class="xref" href="Mastersign.ConfigModel.html">ConfigModel</a></h6>
+  <h6><strong>Assembly</strong>: Mastersign.ConfigModel.dll</h6>
+  <h5 id="Mastersign_ConfigModel_ConfigModelManager_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ConfigModelManager&lt;TRootModel&gt; : IDisposable where TRootModel : class, new()</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TRootModel</span></td>
+        <td><p>The type of the root class of the configuration model tree.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+</h3>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1__ctor_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.#ctor*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1__ctor_System_StringComparison_Mastersign_ConfigModel_PropertyNameHandling__0_Mastersign_ConfigModel_YamlDeserializerBuildCustomizer_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.#ctor(System.StringComparison,Mastersign.ConfigModel.PropertyNameHandling,`0,Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)">ConfigModelManager(StringComparison, PropertyNameHandling, TRootModel, YamlDeserializerBuildCustomizer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConfigModelManager(StringComparison filenameComparison = StringComparison.Ordinal, PropertyNameHandling propertyNameHandling = PropertyNameHandling.PascalCase, TRootModel defaultModel = null, YamlDeserializerBuildCustomizer deserializationCustomizer = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.StringComparison</span></td>
+        <td><span class="parametername">filenameComparison</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mastersign.ConfigModel.PropertyNameHandling.html">PropertyNameHandling</a></td>
+        <td><span class="parametername">propertyNameHandling</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TRootModel</span></td>
+        <td><span class="parametername">defaultModel</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mastersign.ConfigModel.YamlDeserializerBuildCustomizer.html">YamlDeserializerBuildCustomizer</a></td>
+        <td><span class="parametername">deserializationCustomizer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1__ctor_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.#ctor*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1__ctor_System_StringComparison_YamlDotNet_Serialization_INamingConvention__0_Mastersign_ConfigModel_YamlDeserializerBuildCustomizer_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.#ctor(System.StringComparison,YamlDotNet.Serialization.INamingConvention,`0,Mastersign.ConfigModel.YamlDeserializerBuildCustomizer)">ConfigModelManager(StringComparison, INamingConvention, TRootModel, YamlDeserializerBuildCustomizer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConfigModelManager(StringComparison filenameComparison, INamingConvention propertyNamingConvention, TRootModel defaultModel, YamlDeserializerBuildCustomizer deserializationCustomizer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.StringComparison</span></td>
+        <td><span class="parametername">filenameComparison</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">YamlDotNet.Serialization.INamingConvention</span></td>
+        <td><span class="parametername">propertyNamingConvention</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TRootModel</span></td>
+        <td><span class="parametername">defaultModel</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mastersign.ConfigModel.YamlDeserializerBuildCustomizer.html">YamlDeserializerBuildCustomizer</a></td>
+        <td><span class="parametername">deserializationCustomizer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_ReloadDelay_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.ReloadDelay*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_ReloadDelay" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.ReloadDelay">ReloadDelay</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan ReloadDelay { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_AddLayer_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.AddLayer*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_AddLayer_System_String_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.AddLayer(System.String)">AddLayer(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AddLayer(string fileName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">fileName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_AddLayers_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.AddLayers*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_AddLayers_System_String_System_String_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.AddLayers(System.String,System.String)">AddLayers(string, string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] AddLayers(string filePattern, string rootPath = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">filePattern</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">rootPath</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_Dispose_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.Dispose*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_Dispose" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_Finalize_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.Finalize*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_Finalize" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.Finalize">~ConfigModelManager()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ~ConfigModelManager()</code></pre>
+  </div>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths">GetIncludePaths()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] GetIncludePaths()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths">GetLayerPaths()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] GetLayerPaths()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetStringSourcePaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetStringSourcePaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths">GetStringSourcePaths()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] GetStringSourcePaths()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_LoadModel_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.LoadModel*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_LoadModel" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.LoadModel">LoadModel()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TRootModel LoadModel()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TRootModel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_StopWatching_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.StopWatching*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_StopWatching" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.StopWatching">StopWatching()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StopWatching()</code></pre>
+  </div>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_WatchAndReload_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.WatchAndReload*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_WatchAndReload" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.WatchAndReload">WatchAndReload()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WatchAndReload()</code></pre>
+  </div>
+  <h3 id="events">Events
+</h3>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_ModelChanged" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.ModelChanged">ModelChanged</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event ModelChangeHandler&lt;TRootModel&gt; ModelChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mastersign.ConfigModel.ModelChangeHandler-1.html">ModelChangeHandler</a>&lt;TRootModel&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_ModelReloadFailed" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.ModelReloadFailed">ModelReloadFailed</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event ModelReloadErrorHandler ModelReloadFailed</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mastersign.ConfigModel.ModelReloadErrorHandler.html">ModelReloadErrorHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <center><a href="https://mastersign.de">mastersign</a></center>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

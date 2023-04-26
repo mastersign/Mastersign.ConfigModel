@@ -1,0 +1,1 @@
+@dotnet pack "%~dp0\Mastersign.COnfigModel\Mastersign.ConfigModel.csproj" -o "%~dp0\publish" -c Release

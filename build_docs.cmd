@@ -1,0 +1,1 @@
+@docfx "%~dp0\docfx_project\docfx.json"

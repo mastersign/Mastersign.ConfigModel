@@ -4,6 +4,8 @@
 
 [![NuGet Package](https://img.shields.io/nuget/v/Mastersign.ConfigModel?logo=nuget&style=flat-square)](https://www.nuget.org/packages/Mastersign.ConfigModel)
 
+Repository: <https://github.com/mastersign/Mastersign.ConfigModel>
+
 This library is designed for the following use case:
 You have an application needing a rather large configuration.
 And you typically write the configuration by hand or modify

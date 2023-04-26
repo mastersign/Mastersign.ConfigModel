@@ -23,9 +23,9 @@ and the layer with lower precedence is the target.
 4. An object is merged by calling the `UpdateWith()` method,
    if its class implements the `IMergableConfigModel` interface.
 5. If none of the rules above apply, the object is merged by
-   replacing the target with the source.
+   replacing the target with the source as a unit.
 
-### List Merging
+## List Merging
 
 The following list merge modes are supported:
 
@@ -47,7 +47,7 @@ The following list merge modes are supported:
 * `ListMergeMode.AppendDistinct`  
   The same as `Append`, but skip items from the source list,
   if an equal item already exists in the target list.
-* `ListMergeMode.PrependDistinct`
+* `ListMergeMode.PrependDistinct`  
   The same as `Prepend`, but skip items from the source list,
   if an equal item already exists in the target list.
 
@@ -103,7 +103,7 @@ Children:
     Y: 52
 ```
 
-### Dictionary Merging
+## Dictionary Merging
 
 The following dictionary merge modes are supported:
 

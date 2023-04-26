@@ -7,11 +7,11 @@ At first we need a YAML file with our application configuration.
 `config.yaml`:
 
 ```yaml
-A: Value A
-B: Value B
-Child:
-  X: 100
-  Ys:
+Project: My Project
+Description: An Example
+Data:
+  Version: 2
+  Values:
     a: 1
     b: 2
 ```

@@ -19,9 +19,9 @@ $includes:
   - defaults.yaml
   - config.d/**/*.yaml
 
-A: Value A
-Child:
-  Ys:
+Project: Project A
+Data:
+  Values:
     b: 20
 ```
 
@@ -32,11 +32,11 @@ Values from the including file supersede the values from included files.
 `defaults.yaml`:
 
 ```yaml
-A: Default A
-B: Default B
-Child:
-  X: 1
-  Ys:
+Project: Unnamed
+Description: No Description
+Data:
+  Version: 1
+  Values:
     a: 1
     b: 2
 ```
@@ -44,19 +44,19 @@ Child:
 `config.d/10-example.yaml`:
 
 ```yaml
-Child:
-  Ys:
-    c: 99
+Data:
+  Values:
+    x: 99
 ```
 
 The loaded model equates to the following:
 
 ```yaml
-A: Value A
-B: Default B
-Child:
-  X: 1
-  Ys:
+Project: Project A
+Description: No Description
+Data:
+  Version: 1
+  Values:
     a: 1
     b: 20
     x: 99

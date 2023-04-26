@@ -14,8 +14,8 @@ using Mastersign.ConfigModel;
 
 var compileTimeDefaults = new Model()
 {
-    A: "Basic A",
-    B: "Basic B",
+    Project: "Project Template",
+    Description: "No Description",
 };
 
 // Use an instance of your root model class

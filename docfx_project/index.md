@@ -1,6 +1,21 @@
 # Mastersign.ConfigModel
 
-> YAML based configuration model for .NET
+> YAML based configuration model for .NET applications
+
+[![NuGet Package](https://img.shields.io/nuget/v/Mastersign.ConfigModel?logo=nuget&style=flat-square)](https://www.nuget.org/packages/Mastersign.ConfigModel)
+
+This library is designed for the following use case:
+You have an application needing a rather large configuration.
+And you typically write the configuration by hand or modify
+only parts of it with scripts, or by the application itself.
+To keep the configuration lucid, you like to spread it over
+multiple easy to manage files in a fitting directory structure.
+You like to automatically reload the configuration,
+when one file of the configuration changes.
+
+What this library **not** supports is a full round-trip for a configuration.
+Where you load it from file(s), modify it during the runtime
+of the application and write it back to disk.
 
 ## Features
 
@@ -10,31 +25,48 @@
 - Optional merge or replace for items in dictionaries / lists
 - Auto reload on file change
 
-See [Documentation](articles/intro.md) and [API](api/index.md).
+See [Documentation](articles/intro.md) and [API](api/index.md) for more details.
 
 ## Example
+
+This example demonstrates a small configuration model
+with two classes: `ProjectModel` and `DataModel`.
+
+The `ProjectModel` has three public readable and writable properties.
+One has the type `DataModel` as example for a nested data structure.
+The `DataModel` class has a property with a dictionary with string keys
+as an example for a generic map structure.
+
+```cs
+[MergableConfigModel]
+class ProjectModel : ConfigModelBase
+{
+    public string? ProjectName { get; set; }
+
+    public string? Description { get; set; }
+
+    public DataModel? Data { get; set; }
+}
+
+[MergableConfigModel]
+class DataModel : ConfigModelBase
+{
+    public int? Version { get; set; }
+
+    public Dictionary<string, int> Values { get; set; }
+}
+```
+
+The following code demonstrates creating a manager
+for the configuration model, loading the model,
+and watching for changes for automatic reload.
+
+The model is loaded by adding the two layers `config\1-defaults.yaml`,
+and `config\2-main.yaml` with a globbing pattern `*.yaml` in the root folder `config`.
 
 ```cs
 using Mastersign.ConfigModel;
 using System.IO;
-
-[MergableConfigModel]
-class RootModel : ConfigModelBase
-{
-    public string? A { get; set; }
-
-    public string? B { get; set; }
-
-    public ChildModel? Child { get; set; }
-}
-
-[MergableConfigModel]
-class ChildModel : ConfigModelBase
-{
-    public int? X { get; set; }
-
-    public Dictionary<string, int> Ys { get; set; }
-}
 
 static class Program
 {
@@ -42,7 +74,7 @@ static class Program
 
     static ConfigModelManager modelManager;
 
-    static RootModel Model { get; set; }
+    static ProjectModel Model { get; set; }
 
     static void HandleModelReload(object sender, ConfigModelReloadEventArgs ea)
     {
@@ -52,80 +84,88 @@ static class Program
 
     static void Main()
     {
-        modelManager = new ConfigModelManager<RootModel>();
+        modelManager = new ConfigModelManager<ProjectModel>();
 
         manager.AddLayers("*.yaml", ConfigurationFolder);
         Model = manager.LoadModel();
 
         manager.ModelReload += HandleModelReload;
         manager.WatchAndReload();
+
+        // your application logic here
     }
 }
 ```
 
-You could use the following configuration files:
+You could use the following configuration files.
+The directory structure is arbitrary, and chosen for this example
+to demonstrate various features of the library.
+Feel free to design your own directory structure for your configuration.
 
 * `config`
     + `includes`
-        - `child.yaml`
+        - `data.yaml`
         - `user.inc.yaml`
     + `strings`
-        - `a.txt`
-    + `1-default.yaml`
+        - `description.txt`
+    + `1-defaults.yaml`
     + `2-main.yaml`
 
-`config\1-defaults.yaml`:
+**config\1-defaults.yaml:**
 
 ```yaml
-A: Default A
-B: Default B
+Project: Unnamed
+Description: No Description
 Child:
-  X: 100
+  Version: 1
 ```
 
-`config\2-main.yaml`:
+**config\2-main.yaml:**
 
 ```yaml
 $includes:
   - includes/*.inc.yaml
-$sources:
-  A: strings/a.txt
 
-Child:
+Data:
   $includes:
-    - includes\child.yaml
+    - includes\data.yaml
 ```
 
-`config\includes\user.inc.yaml`
+**config\includes\user.inc.yaml:**
 
 ```yaml
-B: User B
+Project: My Project
+
+$sources:
+  Description: ../strings/description.txt
 ```
 
-`config\includes\child.yaml`
+**config\includes\data.yaml:**
 
 ```yaml
-Ys:
-  a: 1
-  b: 2
+Values:
+  x: 100
+  y: 200
 ```
 
-`config\strings\a.txt`:
+**config\strings\description.txt:**
 
 ```txt
-Value A From File
+A long project description
+with multiple lines and more text,
+then you would like to have in your YAML files.
 ```
 
 The loaded model would contain the following data:
 
 ```yaml
-A: Value A From File
-B: User B
-Child:
-  X: 100
-  Ys:
-    a: 1
-    b: 2
+Project: My Project
+Description: A long project description...
+Data:
+  Version: 1
+  Values:
+    x: 100
+    y: 200
 ```
 
 ## License

@@ -15,29 +15,29 @@ This example uses the class model from the [Introduction](intro.md).
 
 ```yaml
 $sources:
-  A: resources/a.txt
-  B: resources/b.txt
+  Project: resources/name.txt
+  Description: resources/description.txt
 
-B: Value B
+Project: My Project
 ```
 
-`resources/a.txt`
+`resources/name.txt`
 
 ```txt
-A from File
+Default Project Name
 ```
 
-`resources/b.txt`
+`resources/description.txt`
 
 ```txt
-B from File
+Description from file
 ```
 
 Loading the `config.yaml` yields the following model:
 
 ```yaml
-A: A from File
-B: Value B
+Project: My Project
+Description: Description from file
 ```
 
 String sourcing only works on model classes derived from `ConfigModelBase`.

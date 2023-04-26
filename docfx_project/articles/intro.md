@@ -21,21 +21,21 @@ The following model is used in most of the examples:
 using Mastersign.ConfigModel;
 
 [MergableConfigModel]
-class RootModel : ConfigModelBase
+class ProjectModel : ConfigModelBase
 {
-    public string? A { get; set; }
+    public string? Project { get; set; }
 
-    public string? B { get; set; }
+    public string? Description { get; set; }
 
-    public ChildModel? Child { get; set; }
+    public DataModel? Data { get; set; }
 }
 
 [MergableConfigModel]
-class ChildModel : ConfigModelBase
+class DataModel : ConfigModelBase
 {
-    public int? X { get; set; }
+    public int? Version { get; set; }
 
-    public Dictionary<string, int> Ys { get; set; }
+    public Dictionary<string, int> Values { get; set; }
 }
 ```
 
@@ -43,5 +43,5 @@ The base class @Mastersign.ConfigModel.ConfigModelBase adds support for includes
 The class attribute @Mastersign.ConfigModel.MergableConfigModelAttribute indicates,
 that the annotated class can be automatically merged by assigning or merging each readable and writable public property.
 
-Therefore, both classes `RootModel` and `ChildModel` do support includes and string sourcing.
+Therefore, both classes `ProjectModel` and `DataModel` do support includes and string sourcing.
 And instances of these classes are automatically merged by merging their public properties.

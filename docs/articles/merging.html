@@ -10,7 +10,7 @@
       <meta name="title" content="Merging | Mastersign.ConfigModel ">
     
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
       <link rel="stylesheet" href="../styles/main.css">
       <meta property="docfx:navrel" content="../toc.html">
@@ -91,9 +91,9 @@ and merging the values from the source with the values on the target.</li>
 <li>An object is merged by calling the <code>UpdateWith()</code> method,
 if its class implements the <code>IMergableConfigModel</code> interface.</li>
 <li>If none of the rules above apply, the object is merged by
-replacing the target with the source.</li>
+replacing the target with the source as a unit.</li>
 </ol>
-<h3 id="list-merging">List Merging</h3>
+<h2 id="list-merging">List Merging</h2>
 <p>The following list merge modes are supported:</p>
 <ul>
 <li><code>ListMergeMode.Clear</code> (<em>Default</em>)<br>
@@ -114,7 +114,7 @@ Keep the order from the source list.</li>
 <li><code>ListMergeMode.AppendDistinct</code><br>
 The same as <code>Append</code>, but skip items from the source list,
 if an equal item already exists in the target list.</li>
-<li><code>ListMergeMode.PrependDistinct</code>
+<li><code>ListMergeMode.PrependDistinct</code><br>
 The same as <code>Prepend</code>, but skip items from the source list,
 if an equal item already exists in the target list.</li>
 </ul>
@@ -157,7 +157,7 @@ class ChildModel
   - X: 51
     Y: 52
 </code></pre>
-<h3 id="dictionary-merging">Dictionary Merging</h3>
+<h2 id="dictionary-merging">Dictionary Merging</h2>
 <p>The following dictionary merge modes are supported:</p>
 <ul>
 <li><code>DictionaryMergeMode.Clear</code><br>
@@ -248,7 +248,7 @@ class ChildModel
       </footer>
     </div>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

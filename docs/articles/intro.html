@@ -10,7 +10,7 @@
       <meta name="title" content="Introduction | Mastersign.ConfigModel ">
     
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
       <link rel="stylesheet" href="../styles/main.css">
       <meta property="docfx:navrel" content="../toc.html">
@@ -84,27 +84,27 @@ and adds features for loading the configuration of an app from YAML files.</p>
 <pre><code class="lang-cs">using Mastersign.ConfigModel;
 
 [MergableConfigModel]
-class RootModel : ConfigModelBase
+class ProjectModel : ConfigModelBase
 {
-    public string? A { get; set; }
+    public string? Project { get; set; }
 
-    public string? B { get; set; }
+    public string? Description { get; set; }
 
-    public ChildModel? Child { get; set; }
+    public DataModel? Data { get; set; }
 }
 
 [MergableConfigModel]
-class ChildModel : ConfigModelBase
+class DataModel : ConfigModelBase
 {
-    public int? X { get; set; }
+    public int? Version { get; set; }
 
-    public Dictionary&lt;string, int&gt; Ys { get; set; }
+    public Dictionary&lt;string, int&gt; Values { get; set; }
 }
 </code></pre>
 <p>The base class <a class="xref" href="../api/Mastersign.ConfigModel.ConfigModelBase.html">ConfigModelBase</a> adds support for includes and string sourcing to the model.
 The class attribute <a class="xref" href="../api/Mastersign.ConfigModel.MergableConfigModelAttribute.html">MergableConfigModelAttribute</a> indicates,
 that the annotated class can be automatically merged by assigning or merging each readable and writable public property.</p>
-<p>Therefore, both classes <code>RootModel</code> and <code>ChildModel</code> do support includes and string sourcing.
+<p>Therefore, both classes <code>ProjectModel</code> and <code>DataModel</code> do support includes and string sourcing.
 And instances of these classes are automatically merged by merging their public properties.</p>
 </article>
           </div>
@@ -134,7 +134,7 @@ And instances of these classes are automatically merged by merging their public 
       </footer>
     </div>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

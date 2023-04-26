@@ -10,7 +10,7 @@
       <meta name="title" content="Includes | Mastersign.ConfigModel ">
     
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
       <link rel="stylesheet" href="../styles/main.css">
       <meta property="docfx:navrel" content="../toc.html">
@@ -81,34 +81,34 @@ and <code>**</code> for any characters including path separators.</p>
   - defaults.yaml
   - config.d/**/*.yaml
 
-A: Value A
-Child:
-  Ys:
+Project: Project A
+Data:
+  Values:
     b: 20
 </code></pre>
 <p>The included files are used as base for the including model in the given order.
 Globbed files are sorted alphabetically.
 Values from the including file supersede the values from included files.</p>
 <p><code>defaults.yaml</code>:</p>
-<pre><code class="lang-yaml">A: Default A
-B: Default B
-Child:
-  X: 1
-  Ys:
+<pre><code class="lang-yaml">Project: Unnamed
+Description: No Description
+Data:
+  Version: 1
+  Values:
     a: 1
     b: 2
 </code></pre>
 <p><code>config.d/10-example.yaml</code>:</p>
-<pre><code class="lang-yaml">Child:
-  Ys:
-    c: 99
+<pre><code class="lang-yaml">Data:
+  Values:
+    x: 99
 </code></pre>
 <p>The loaded model equates to the following:</p>
-<pre><code class="lang-yaml">A: Value A
-B: Default B
-Child:
-  X: 1
-  Ys:
+<pre><code class="lang-yaml">Project: Project A
+Description: No Description
+Data:
+  Version: 1
+  Values:
     a: 1
     b: 20
     x: 99
@@ -145,7 +145,7 @@ Meaning, an included YAML files can use includes themselves.</p>
       </footer>
     </div>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

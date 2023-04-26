@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/repo/projects/OS/Mastersign.ConfigModel/docfx_project",
+  "source_base_path": "F:/repo/projects/Mastersign.ConfigModel/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -8,8 +8,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.html",
-          "hash": "RbKg9NyzkWUZp0k//YSUywoW2gryH+cDifr5wMWfumY="
+          "relative_path": "api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.html"
         }
       },
       "version": ""
@@ -19,8 +18,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelBase.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelBase.html",
-          "hash": "rqxBkEMm8597OompiWccBO+ZBxahrNzoANeqZVQuD8Q="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelBase.html"
         }
       },
       "version": ""
@@ -30,8 +28,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelException.html",
-          "hash": "SEFc3/UNRqC38rF5Zlq0Hu+2IyKTsJ2vjS6xqM5XOfo="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelException.html"
         }
       },
       "version": ""
@@ -41,8 +38,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.html",
-          "hash": "TmjaRfGvAJF4llhBdmdgnbRbUausaIwKf4SB7jlhI9Y="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelFileNotFoundException.html"
         }
       },
       "version": ""
@@ -52,8 +48,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.html",
-          "hash": "PX64z7OULRD2mhoQmkJxz3bIFvXxMZvIIPQmsBgI5B0="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeCycleException.html"
         }
       },
       "version": ""
@@ -63,8 +58,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.html",
-          "hash": "vyUiYJ3E6XMUqAWO1bhyUY7pCtE6EW98G7N8v9jbXDI="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeLoadException.html"
         }
       },
       "version": ""
@@ -74,8 +68,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.html",
-          "hash": "ulxlG9dKkWVGJ1ESROrLyc1DTa0/rug0bwjVq8oU1tQ="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelIncludeNotFoundException.html"
         }
       },
       "version": ""
@@ -85,8 +78,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerLoadException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerLoadException.html",
-          "hash": "/hT6UWTPdxMoZQ0Mm5lseNWfN5uEOgRly7G18yLQVOU="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerLoadException.html"
         }
       },
       "version": ""
@@ -96,8 +88,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerNotFoundException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerNotFoundException.html",
-          "hash": "zBlygx8NJIFpxK9RtXLEvt38jq7xv7Rl2j+q+CwpchI="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLayerNotFoundException.html"
         }
       },
       "version": ""
@@ -107,8 +98,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelLoadException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLoadException.html",
-          "hash": "Ie5axG4TDyPRXIbldA5Laa+Zvjdg9kBO/9QZ0Tg/Las="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelLoadException.html"
         }
       },
       "version": ""
@@ -118,8 +108,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelManager-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelManager-1.html",
-          "hash": "k/962+QbpYbMKVtiuw4r3QlwYWCiiG6Y1ZwhPG5y5WM="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelManager-1.html"
         }
       },
       "version": ""
@@ -129,8 +118,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.html",
-          "hash": "SK1HAP+4te3A7p97V50gSu4kn3fxDUJVEO/89Q6Sa8s="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceLoadException.html"
         }
       },
       "version": ""
@@ -140,8 +128,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.html",
-          "hash": "5a0/SjRt0GOmCvqE2qpXJd4X0cY2lJ+54L8YWI0yiOQ="
+          "relative_path": "api/Mastersign.ConfigModel.ConfigModelStringSourceNotFoundException.html"
         }
       },
       "version": ""
@@ -151,8 +138,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.DictionaryMergeMode.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.DictionaryMergeMode.html",
-          "hash": "Fd33nMRMQ2YyPXHU8W4ZMk+b6e/Wdrpg2XMQA/pRsvY="
+          "relative_path": "api/Mastersign.ConfigModel.DictionaryMergeMode.html"
         }
       },
       "version": ""
@@ -162,8 +148,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.IMergableConfigModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.IMergableConfigModel.html",
-          "hash": "sBaI1+PChIkx0c+6uP7RIhUD/2pgJ67wyO7Xb+SLMps="
+          "relative_path": "api/Mastersign.ConfigModel.IMergableConfigModel.html"
         }
       },
       "version": ""
@@ -173,8 +158,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ListMergeMode.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ListMergeMode.html",
-          "hash": "Wzzy7RCPe3fm3wMvlq3K7i04vgncy7xyoiFlKXO2Ps8="
+          "relative_path": "api/Mastersign.ConfigModel.ListMergeMode.html"
         }
       },
       "version": ""
@@ -184,8 +168,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.MergableConfigModelAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.MergableConfigModelAttribute.html",
-          "hash": "OTh6kIDx0PQgRCvvwgseuJRVHBwmVQ/ameIc7EXxvhE="
+          "relative_path": "api/Mastersign.ConfigModel.MergableConfigModelAttribute.html"
         }
       },
       "version": ""
@@ -195,8 +178,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.MergeDictionaryAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.MergeDictionaryAttribute.html",
-          "hash": "sJ1qYGVbzJlkdutBgs3yMYV+54YUm8Lh6zJ148K3dI8="
+          "relative_path": "api/Mastersign.ConfigModel.MergeDictionaryAttribute.html"
         }
       },
       "version": ""
@@ -206,8 +188,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.MergeListAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.MergeListAttribute.html",
-          "hash": "fUPfu031+SrMD4cL3N/FfyZlQq0H2+ZtL5CZfaKGSpk="
+          "relative_path": "api/Mastersign.ConfigModel.MergeListAttribute.html"
         }
       },
       "version": ""
@@ -217,8 +198,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ModelChangeHandler-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ModelChangeHandler-1.html",
-          "hash": "hHOVTaemylLYyhaBWYcTAqH5yXDUEbfPc5Mz+icswbE="
+          "relative_path": "api/Mastersign.ConfigModel.ModelChangeHandler-1.html"
         }
       },
       "version": ""
@@ -228,8 +208,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ModelChangedEventArgs-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ModelChangedEventArgs-1.html",
-          "hash": "ivmJVm1YzrKGDW/Mb9x8iKbvFujmj/GR7BaKDzjKI8M="
+          "relative_path": "api/Mastersign.ConfigModel.ModelChangedEventArgs-1.html"
         }
       },
       "version": ""
@@ -239,8 +218,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.html",
-          "hash": "hOzhy6UguYszhYjBpVRRj9b8V2++hXUxDCdTrNm+fxQ="
+          "relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorEventArgs.html"
         }
       },
       "version": ""
@@ -250,8 +228,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorHandler.html",
-          "hash": "Wdrhqe+RwfZWHDANvgok7M14TrmlITotx3FvNm6z4cM="
+          "relative_path": "api/Mastersign.ConfigModel.ModelReloadErrorHandler.html"
         }
       },
       "version": ""
@@ -261,8 +238,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.NoMergeAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.NoMergeAttribute.html",
-          "hash": "8TQ6qlCoKbZ5zrMzHJmxbHdDhu95zmUVBf1zS4sDo6M="
+          "relative_path": "api/Mastersign.ConfigModel.NoMergeAttribute.html"
         }
       },
       "version": ""
@@ -272,8 +248,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.PropertyNameHandling.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.PropertyNameHandling.html",
-          "hash": "HvoAn9W4+qeXrbhHHi0VO1v0F9wMk27Rkew6k31I+DI="
+          "relative_path": "api/Mastersign.ConfigModel.PropertyNameHandling.html"
         }
       },
       "version": ""
@@ -283,8 +258,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.html",
-          "hash": "GUNn6PzjRCOlSCd685jrhEAWvz5oXZFIIJn/j1iut0E="
+          "relative_path": "api/Mastersign.ConfigModel.TypeDiscriminationValueAttribute.html"
         }
       },
       "version": ""
@@ -294,8 +268,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.TypeDiscriminatorAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.TypeDiscriminatorAttribute.html",
-          "hash": "u/ALTdf3dPkKyq2UxlvChaTsrfxDxL1bNgkwVJKBz5Q="
+          "relative_path": "api/Mastersign.ConfigModel.TypeDiscriminatorAttribute.html"
         }
       },
       "version": ""
@@ -305,8 +278,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.TypeIndicatorAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.TypeIndicatorAttribute.html",
-          "hash": "XLBhnsBvQJtqYeYgW/8TjJc+oBDUUGtj8cX+K9eSNus="
+          "relative_path": "api/Mastersign.ConfigModel.TypeIndicatorAttribute.html"
         }
       },
       "version": ""
@@ -316,8 +288,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.YamlDeserializerBuildCustomizer.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.YamlDeserializerBuildCustomizer.html",
-          "hash": "Hw+1pBU0j9DEyxxmodvTZxjMBiR5XvUkdpX+XhBuEqs="
+          "relative_path": "api/Mastersign.ConfigModel.YamlDeserializerBuildCustomizer.html"
         }
       },
       "version": ""
@@ -327,8 +298,7 @@
       "source_relative_path": "api/Mastersign.ConfigModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mastersign.ConfigModel.html",
-          "hash": "YyY8ZBc1SFn8m3+ta4B8DNimMVzGTgu3W48smqmu2Os="
+          "relative_path": "api/Mastersign.ConfigModel.html"
         }
       },
       "version": ""
@@ -338,8 +308,7 @@
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
-          "relative_path": "api/index.html",
-          "hash": "vZgdh/0jRmGMacZG73wwLmx2VtIcbRh/sEFgOFAgVJU="
+          "relative_path": "api/index.html"
         }
       },
       "version": ""
@@ -349,8 +318,7 @@
       "source_relative_path": "api/toc.yml",
       "output": {
         ".html": {
-          "relative_path": "api/toc.html",
-          "hash": "k/QBg4A9k+lQK2uW1Qwk0lgUSIzSWJEkZw5+M/pi8ww="
+          "relative_path": "api/toc.html"
         }
       },
       "version": ""
@@ -360,8 +328,7 @@
       "source_relative_path": "articles/includes.md",
       "output": {
         ".html": {
-          "relative_path": "articles/includes.html",
-          "hash": "l6E49VlNpT4Bwawu43Joufq0Reughlfl28wj08ZwfLw="
+          "relative_path": "articles/includes.html"
         }
       },
       "version": ""
@@ -371,8 +338,7 @@
       "source_relative_path": "articles/intro.md",
       "output": {
         ".html": {
-          "relative_path": "articles/intro.html",
-          "hash": "nQxhwBVVhW6cS7rEkHPaVewvrI/LttlB9vksI2G0Z8M="
+          "relative_path": "articles/intro.html"
         }
       },
       "version": ""
@@ -382,8 +348,7 @@
       "source_relative_path": "articles/layers.md",
       "output": {
         ".html": {
-          "relative_path": "articles/layers.html",
-          "hash": "UWQxOqbQj9wUj/eqdJuRqyhe9ewpqIvWo96KKGxt7to="
+          "relative_path": "articles/layers.html"
         }
       },
       "version": ""
@@ -393,8 +358,7 @@
       "source_relative_path": "articles/merging.md",
       "output": {
         ".html": {
-          "relative_path": "articles/merging.html",
-          "hash": "J0aAy/UI0D+SYgrzr7oveNirHNW68JzI+Q0M/PLr+Jc="
+          "relative_path": "articles/merging.html"
         }
       },
       "version": ""
@@ -404,8 +368,7 @@
       "source_relative_path": "articles/naming.md",
       "output": {
         ".html": {
-          "relative_path": "articles/naming.html",
-          "hash": "G23MgpsNteQDZwsPJ9BKl67FaLpmuexpgkfWZO5Nr0g="
+          "relative_path": "articles/naming.html"
         }
       },
       "version": ""
@@ -415,8 +378,7 @@
       "source_relative_path": "articles/sources.md",
       "output": {
         ".html": {
-          "relative_path": "articles/sources.html",
-          "hash": "y5wW5dOYQfBk+CoHHYgS3emGQHA52y4tImxOtOmxmPI="
+          "relative_path": "articles/sources.html"
         }
       },
       "version": ""
@@ -426,8 +388,7 @@
       "source_relative_path": "articles/start.md",
       "output": {
         ".html": {
-          "relative_path": "articles/start.html",
-          "hash": "fzT6vLWOqrG8LZvpdcsxrdNZOCl1VmLcyzKTot/pEsQ="
+          "relative_path": "articles/start.html"
         }
       },
       "version": ""
@@ -437,8 +398,7 @@
       "source_relative_path": "articles/toc.yml",
       "output": {
         ".html": {
-          "relative_path": "articles/toc.html",
-          "hash": "yE3Dy9Jf3nO/fK7sNRyMcbB0gOL9x+QXeieg2T062xg="
+          "relative_path": "articles/toc.html"
         }
       },
       "version": ""
@@ -448,8 +408,7 @@
       "source_relative_path": "articles/types.md",
       "output": {
         ".html": {
-          "relative_path": "articles/types.html",
-          "hash": "odQlDazYXuYa0fQHM6dcS/GmGqXWFxVQ5XWgtyEbb68="
+          "relative_path": "articles/types.html"
         }
       },
       "version": ""
@@ -459,8 +418,7 @@
       "source_relative_path": "articles/watch.md",
       "output": {
         ".html": {
-          "relative_path": "articles/watch.html",
-          "hash": "v50F5m7NsCv32UARb8UEhpJ7GSIiHcRHFBas/+gR11U="
+          "relative_path": "articles/watch.html"
         }
       },
       "version": ""
@@ -490,8 +448,7 @@
       "source_relative_path": "index.md",
       "output": {
         ".html": {
-          "relative_path": "index.html",
-          "hash": "NFddTPbEk2NuYTeHIY/QJEvN749QzW58uaA3XCLe5qk="
+          "relative_path": "index.html"
         }
       },
       "version": ""
@@ -501,8 +458,7 @@
       "source_relative_path": "toc.yml",
       "output": {
         ".html": {
-          "relative_path": "toc.html",
-          "hash": "YTWhJn3oHS1U+dTfnW5wPJJuYFmN1QrG5XVuJIDl1YM="
+          "relative_path": "toc.html"
         }
       },
       "version": ""

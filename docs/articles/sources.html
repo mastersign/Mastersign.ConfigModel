@@ -10,7 +10,7 @@
       <meta name="title" content="String Sourcing | Mastersign.ConfigModel ">
     
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
       <link rel="stylesheet" href="../styles/main.css">
       <meta property="docfx:navrel" content="../toc.html">
@@ -78,20 +78,20 @@ and assigned to the property.</p>
 <p>This example uses the class model from the <a href="intro.html">Introduction</a>.</p>
 <p><code>config.yaml</code>:</p>
 <pre><code class="lang-yaml">$sources:
-  A: resources/a.txt
-  B: resources/b.txt
+  Project: resources/name.txt
+  Description: resources/description.txt
 
-B: Value B
+Project: My Project
 </code></pre>
-<p><code>resources/a.txt</code></p>
-<pre><code class="lang-txt">A from File
+<p><code>resources/name.txt</code></p>
+<pre><code class="lang-txt">Default Project Name
 </code></pre>
-<p><code>resources/b.txt</code></p>
-<pre><code class="lang-txt">B from File
+<p><code>resources/description.txt</code></p>
+<pre><code class="lang-txt">Description from file
 </code></pre>
 <p>Loading the <code>config.yaml</code> yields the following model:</p>
-<pre><code class="lang-yaml">A: A from File
-B: Value B
+<pre><code class="lang-yaml">Project: My Project
+Description: Description from file
 </code></pre>
 <p>String sourcing only works on model classes derived from <code>ConfigModelBase</code>.</p>
 <p>Explicit string values from the sourcing model supersede sourced strings.
@@ -125,7 +125,7 @@ string <code>B from File</code>.</p>
       </footer>
     </div>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

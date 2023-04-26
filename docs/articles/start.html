@@ -10,7 +10,7 @@
       <meta name="title" content="Getting Started | Mastersign.ConfigModel ">
     
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
       <link rel="stylesheet" href="../styles/main.css">
       <meta property="docfx:navrel" content="../toc.html">
@@ -71,11 +71,11 @@
 <p>This example uses the class model from the <a href="intro.html">Introduction</a>.</p>
 <p>At first we need a YAML file with our application configuration.</p>
 <p><code>config.yaml</code>:</p>
-<pre><code class="lang-yaml">A: Value A
-B: Value B
-Child:
-  X: 100
-  Ys:
+<pre><code class="lang-yaml">Project: My Project
+Description: An Example
+Data:
+  Version: 2
+  Values:
     a: 1
     b: 2
 </code></pre>
@@ -120,7 +120,7 @@ var config = manager.LoadModel();
       </footer>
     </div>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
   </body>

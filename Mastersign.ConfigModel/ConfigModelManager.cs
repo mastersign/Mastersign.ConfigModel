@@ -81,18 +81,58 @@ namespace Mastersign.ConfigModel
         private readonly TRootModel _defaultModel;
         private readonly YamlDeserializerBuildCustomizer _deserializationCustomizer;
 
-        private ConfigModelManager()
+        private ConfigModelManager(
+            IReadOnlyDictionary<Type, IReadOnlyDictionary<string, Type>> typeDiscriminationsByPropertyExistence,
+            IReadOnlyDictionary<Type, Tuple<string, IReadOnlyDictionary<string, Type>>> typeDiscriminationsByPropertyValue)
         {
             _discriminationsByPropertyExistence = ReflectionHelper.GetTypeDiscriminationsByPropertyExistence(typeof(TRootModel));
+            if (typeDiscriminationsByPropertyExistence != null)
+            {
+                foreach (var kvp in typeDiscriminationsByPropertyExistence)
+                {
+                    if (!_discriminationsByPropertyExistence.TryGetValue(kvp.Key, out var discrimination))
+                    {
+                        discrimination = new Dictionary<string, Type>();
+                        _discriminationsByPropertyExistence.Add(kvp.Key, discrimination);
+                    }
+                    foreach (var kvp2 in kvp.Value)
+                    {
+                        discrimination[kvp2.Key] = kvp2.Value;
+                    }
+                }
+            }
             _discriminationsByPropertyValue = ReflectionHelper.GetTypeDiscriminationsByPropertyValue(typeof(TRootModel));
+            if (typeDiscriminationsByPropertyValue != null)
+            {
+                foreach (var kvp in typeDiscriminationsByPropertyValue)
+                {
+                    if (!_discriminationsByPropertyValue.TryGetValue(kvp.Key, out var discrimination) ||
+                        discrimination.Item1 != kvp.Value.Item1)
+                    {
+                        discrimination = Tuple.Create(
+                            kvp.Value.Item1,
+                            kvp.Value.Item2.ToDictionary(p => p.Key, p => p.Value));
+                        _discriminationsByPropertyValue[kvp.Key] = discrimination;
+                    }
+                    else
+                    {
+                        foreach (var kvp2 in kvp.Value.Item2)
+                        {
+                            discrimination.Item2[kvp2.Key] = kvp2.Value;
+                        }
+                    }
+                }
+            }
         }
 
         public ConfigModelManager(
             StringComparison filenameComparison,
             INamingConvention propertyNamingConvention,
             TRootModel defaultModel,
-            YamlDeserializerBuildCustomizer deserializationCustomizer)
-            : this()
+            YamlDeserializerBuildCustomizer deserializationCustomizer,
+            IReadOnlyDictionary<Type, IReadOnlyDictionary<string, Type>> typeDiscriminationsByPropertyExistence,
+            IReadOnlyDictionary<Type, Tuple<string, IReadOnlyDictionary<string, Type>>> typeDiscriminationsByPropertyValue)
+            : this(typeDiscriminationsByPropertyExistence, typeDiscriminationsByPropertyValue)
         {
             _filenameComparison = filenameComparison;
             _propertyNamingConvention = propertyNamingConvention ?? PascalCaseNamingConvention.Instance;
@@ -104,12 +144,16 @@ namespace Mastersign.ConfigModel
             StringComparison filenameComparison = StringComparison.Ordinal,
             PropertyNameHandling propertyNameHandling = PropertyNameHandling.PascalCase,
             TRootModel defaultModel = null,
-            YamlDeserializerBuildCustomizer deserializationCustomizer = null)
+            YamlDeserializerBuildCustomizer deserializationCustomizer = null,
+            IReadOnlyDictionary<Type, IReadOnlyDictionary<string, Type>> typeDiscriminationsByPropertyExistence = null,
+            IReadOnlyDictionary<Type, Tuple<string, IReadOnlyDictionary<string, Type>>> typeDiscriminationsByPropertyValue = null)
             : this(
                   filenameComparison,
                   NamingConventionFor(propertyNameHandling),
                   defaultModel,
-                  deserializationCustomizer)
+                  deserializationCustomizer,
+                  typeDiscriminationsByPropertyExistence,
+                  typeDiscriminationsByPropertyValue)
         {
         }
 

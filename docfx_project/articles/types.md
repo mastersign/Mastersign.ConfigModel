@@ -47,6 +47,30 @@ Child:
   B: discriminated
 ```
 
+If you can not annotate the model classes, you can use the
+`typeDiscriminationByPropertyExistence` parameter
+of the constructor of @Mastersign.ConfigModel.ConfigModelManager.
+The dictionary maps from a base type to a nested dictionary wich maps from
+unique property names to derived types for instantiation.
+
+The equivalent of the example above would be:
+
+```cs
+var discrimination = new Dictionary<Type, Dictionary<string, Type>>()
+{
+ {
+    typeof(ChildBase),
+    new Dictionary<string, Type> {
+        { nameof(ChildA.A), typeof(ChildA) },
+        { nameof(ChildB.B), typeof(ChildB) },
+    },
+ },
+};
+
+var manager = new ConfigModelManager(
+    typeDiscriminationByPropertyExistence: discrimination);
+```
+
 ## Discrimination by Property Value
 
 The second way of determining, which derived class should be instantiated,
@@ -79,6 +103,34 @@ for the property `RootModel.Child`:
 ```yaml
 Child:
   ChildType: A
+```
+
+If you can not annotate the model classes, you can use the
+`typeDiscriminationByPropertyValue` parameter
+of the constructor of @Mastersign.ConfigModel.ConfigModelManager.
+The dictionary maps from a base type to a tuple with the indicator property name
+as first item and a nested dictionary as second item,
+wich maps from property values to derived types for instantiation.
+
+The equivalent of the example above would be:
+
+```cs
+var discrimination = new Dictionary<Type, Tuple<string, Dictionary<string, Type>>>()
+{
+ {
+    typeof(ChildBase),
+    Tuple.Create(
+        nameof(ChildBase.ChildType),
+        new Dictionary<string, Type> {
+            { "A", typeof(ChildA) },
+            { "B", typeof(ChildB) },
+        }
+    )
+ },
+};
+
+var manager = new ConfigModelManager(
+    typeDiscriminationByPropertyValue: discrimination);
 ```
 
 ## YAML Tag

@@ -105,6 +105,26 @@ for the property <code>RootModel.Child</code>:</p>
 <pre><code class="lang-yaml">Child:
   B: discriminated
 </code></pre>
+<p>If you can not annotate the model classes, you can use the
+<code>typeDiscriminationByPropertyExistence</code> parameter
+of the constructor of @Mastersign.ConfigModel.ConfigModelManager.
+The dictionary maps from a base type to a nested dictionary wich maps from
+unique property names to derived types for instantiation.</p>
+<p>The equivalent of the example above would be:</p>
+<pre><code class="lang-cs">var discrimination = new Dictionary&lt;Type, Dictionary&lt;string, Type&gt;&gt;()
+{
+ {
+    typeof(ChildBase),
+    new Dictionary&lt;string, Type&gt; {
+        { nameof(ChildA.A), typeof(ChildA) },
+        { nameof(ChildB.B), typeof(ChildB) },
+    },
+ },
+};
+
+var manager = new ConfigModelManager(
+    typeDiscriminationByPropertyExistence: discrimination);
+</code></pre>
 <h2 id="discrimination-by-property-value">Discrimination by Property Value</h2>
 <p>The second way of determining, which derived class should be instantiated,
 is by the value of a common property in the derived class.</p>
@@ -130,6 +150,30 @@ class ChildB { }
 for the property <code>RootModel.Child</code>:</p>
 <pre><code class="lang-yaml">Child:
   ChildType: A
+</code></pre>
+<p>If you can not annotate the model classes, you can use the
+<code>typeDiscriminationByPropertyValue</code> parameter
+of the constructor of @Mastersign.ConfigModel.ConfigModelManager.
+The dictionary maps from a base type to a tuple with the indicator property name
+as first item and a nested dictionary as second item,
+wich maps from property values to derived types for instantiation.</p>
+<p>The equivalent of the example above would be:</p>
+<pre><code class="lang-cs">var discrimination = new Dictionary&lt;Type, Tuple&lt;string, Dictionary&lt;string, Type&gt;&gt;&gt;()
+{
+ {
+    typeof(ChildBase),
+    Tuple.Create(
+        nameof(ChildBase.ChildType),
+        new Dictionary&lt;string, Type&gt; {
+            { &quot;A&quot;, typeof(ChildA) },
+            { &quot;B&quot;, typeof(ChildB) },
+        }
+    )
+ },
+};
+
+var manager = new ConfigModelManager(
+    typeDiscriminationByPropertyValue: discrimination);
 </code></pre>
 <h2 id="yaml-tag">YAML Tag</h2>
 <p>Because Mastersign.ConfigModel adds the <a class="xref" href="../api/Mastersign.ConfigModel.ClrTypeFromTagNodeTypeResolver.html">ClrTypeFromTagNodeTypeResolver</a>

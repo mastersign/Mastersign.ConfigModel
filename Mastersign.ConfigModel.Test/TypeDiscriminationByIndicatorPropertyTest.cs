@@ -24,6 +24,17 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
+        public void WithNamingConventionTest()
+        {
+            var mgrA = new ConfigModelManager<BaseModel>(
+                propertyNameHandling: PropertyNameHandling.CamelCase);
+            var modelFileA = GetTestDataFilePath(SCENARIO, "ByPropertyExistenceWithNamingConvention.yaml");
+            mgrA.AddLayer(modelFileA);
+            var resultA = mgrA.LoadModel();
+            Assert.AreEqual(typeof(ModelA), resultA.GetType());
+        }
+
+        [TestMethod]
         public void WithoutKeyTest()
         {
             var mgr = new ConfigModelManager<BaseModel>();

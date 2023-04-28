@@ -404,12 +404,16 @@ namespace Mastersign.ConfigModel
                     foreach (var discrimination in _discriminationsByPropertyExistence)
                     {
                         o.AddTypeDiscriminator(new UniqueKeyTypeDiscriminator(
-                            discrimination.Key, discrimination.Value));
+                            discrimination.Key, discrimination.Value.ToDictionary(
+                                kvp => _propertyNamingConvention.Apply(kvp.Key),
+                                kvp => kvp.Value)));
                     }
                     foreach (var discrimination in _discriminationsByPropertyValue)
                     {
                         o.AddTypeDiscriminator(new KeyValueTypeDiscriminator(
-                            discrimination.Key, discrimination.Value.Item1, discrimination.Value.Item2));
+                            discrimination.Key, 
+                            _propertyNamingConvention.Apply(discrimination.Value.Item1),
+                            discrimination.Value.Item2));
                     }
                 });
             }

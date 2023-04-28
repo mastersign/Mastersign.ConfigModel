@@ -71,7 +71,7 @@ namespace Mastersign.ConfigModel.Test
             var modelFile = GetTestDataFilePath(SCENARIO, "ByPropertyValueAbstractInvalid.yaml");
             mgr.AddLayer(modelFile);
             RootModelForAbstract result;
-            Assert.ThrowsException<YamlDotNet.Core.YamlException>(() => result = mgr.LoadModel());
+            Assert.ThrowsException<ConfigModelLayerLoadException>(() => result = mgr.LoadModel());
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Mastersign.ConfigModel.Test
             var modelFile = GetTestDataFilePath(SCENARIO, "ByPropertyValueAbstractNone.yaml");
             mgr.AddLayer(modelFile);
             RootModelForAbstract result;
-            Assert.ThrowsException<YamlDotNet.Core.YamlException>(() => result = mgr.LoadModel());
+            Assert.ThrowsException<ConfigModelLayerLoadException>(() => result = mgr.LoadModel());
         }
 
         class BaseModel

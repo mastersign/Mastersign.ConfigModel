@@ -293,7 +293,7 @@ namespace Mastersign.ConfigModel
             catch (SyntaxErrorException ex)
             {
                 throw new ConfigModelIncludeLoadException(
-                    $"Syntax error in included model file '{includePath}' at {ex.Start}: {ex.Message}",
+                    $"Syntax error in included file '{includePath}' at {ex.Start}: {ex.Message}",
                     modelFile, includePath, ex);
             }
             catch (SemanticErrorException ex)
@@ -318,6 +318,18 @@ namespace Mastersign.ConfigModel
             {
                 throw new ConfigModelIncludeLoadException(
                     $"Maximum recursion level reached in included file '{includePath}' at {ex.Start}: {ex.Message}",
+                    modelFile, includePath, ex);
+            }
+            catch (YamlException ex)
+            {
+                throw new ConfigModelIncludeLoadException(
+                    $"Failed to load YAML for include from '{includePath}' at {ex.Start}: {ex.Message}",
+                    modelFile, includePath, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ConfigModelIncludeLoadException(
+                    $"Failed to load YAML for include from '{includePath}': {ex.Message}",
                     modelFile, includePath, ex);
             }
 
@@ -505,6 +517,18 @@ namespace Mastersign.ConfigModel
                 {
                     throw new ConfigModelLayerLoadException(
                         $"Maximum recursion level reached in model file '{layerPath}' at {ex.Start}: {ex.Message}",
+                        layerPath, ex);
+                }
+                catch (YamlException ex)
+                {
+                    throw new ConfigModelLayerLoadException(
+                        $"Failed to load YAML from '{layerPath}' at {ex.Start}: {ex.Message}",
+                        layerPath, ex);
+                }
+                catch (Exception ex)
+                {
+                    throw new ConfigModelLayerLoadException(
+                        $"Failed to load YAML from '{layerPath}': {ex.Message}",
                         layerPath, ex);
                 }
 

@@ -71,7 +71,7 @@ namespace Mastersign.ConfigModel.Test
             var modelFile = GetTestDataFilePath(SCENARIO, "ByPropertyExistenceAbstractNone.yaml");
             mgr.AddLayer(modelFile);
             RootModelForAbstract result;
-            Assert.ThrowsException<YamlDotNet.Core.YamlException>(() => result = mgr.LoadModel());
+            Assert.ThrowsException<ConfigModelLayerLoadException>(() => result = mgr.LoadModel());
         }
 
         class BaseModel

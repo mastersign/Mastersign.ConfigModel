@@ -14,13 +14,13 @@ namespace Mastersign.ConfigModel.Test
             var modelFileA = GetTestDataFilePath(SCENARIO, "ByPropertyValueA.yaml");
             mgrA.AddLayer(modelFileA);
             var resultA = mgrA.LoadModel();
-            Assert.AreEqual(typeof(ModelA), resultA.GetType());
+            Assert.IsInstanceOfType(resultA, typeof(ModelA));
 
             var mgrB = new ConfigModelManager<BaseModel>();
             var modelFileB = GetTestDataFilePath(SCENARIO, "ByPropertyValueB.yaml");
             mgrB.AddLayer(modelFileB);
             var resultB = mgrB.LoadModel();
-            Assert.AreEqual(typeof(ModelB), resultB.GetType());
+            Assert.IsInstanceOfType(resultB, typeof(ModelB));
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace Mastersign.ConfigModel.Test
             var modelFileA = GetTestDataFilePath(SCENARIO, "ByPropertyValueWithNamingConvention.yaml");
             mgrA.AddLayer(modelFileA);
             var resultA = mgrA.LoadModel();
-            Assert.AreEqual(typeof(ModelA), resultA.GetType());
+            Assert.IsInstanceOfType(resultA, typeof(ModelA));
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace Mastersign.ConfigModel.Test
             var modelFile = GetTestDataFilePath(SCENARIO, "ByPropertyValueNone.yaml");
             mgr.AddLayer(modelFile);
             var result = mgr.LoadModel();
-            Assert.AreEqual(typeof(BaseModel), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(BaseModel));
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Mastersign.ConfigModel.Test
             var modelFile = GetTestDataFilePath(SCENARIO, "ByPropertyValueInvalid.yaml");
             mgr.AddLayer(modelFile);
             var result = mgr.LoadModel();
-            Assert.AreEqual(typeof(BaseModel), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(BaseModel));
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace Mastersign.ConfigModel.Test
             var modelFile = GetTestDataFilePath(SCENARIO, "ByPropertyValueAbstractC.yaml");
             mgr.AddLayer(modelFile);
             var result = mgr.LoadModel();
-            Assert.AreEqual(typeof(ModelC), result.Abstract?.GetType());
+            Assert.IsInstanceOfType(result.Abstract, typeof(ModelC));
         }
 
         [TestMethod]

@@ -1,0 +1,4 @@
+Base:
+  A: Class A
+  Child:
+    ChildA: Child Class A

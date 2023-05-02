@@ -67,18 +67,26 @@ namespace Mastersign.ConfigModel
             }
         }
 
-        public static IEnumerable<Type> TraverseModelTypes(Type t, HashSet<Type> visited = null)
+        public static IEnumerable<Type> TraverseModelTypes(Type t, bool returnAbstractClasses = false, HashSet<Type> visited = null)
         {
             visited = visited ?? new HashSet<Type>();
             if (visited.Contains(t)) yield break;
             visited.Add(t);
-            yield return t;
+            if (!t.IsAbstract || returnAbstractClasses) yield return t;
             foreach (var at in GetAssociatedModelTypes(t))
             {
                 if (visited.Contains(at)) continue;
-                foreach (var at2 in TraverseModelTypes(at, visited))
+                foreach (var at2 in TraverseModelTypes(at, returnAbstractClasses, visited))
                 {
-                    yield return at2;
+                    if (!at2.IsAbstract || returnAbstractClasses) yield return at2;
+                }
+            }
+            foreach (var dt in FindAllDerivedTypesInTheSameAssembly(t, returnAbstractClasses: true))
+            {
+                if (visited.Contains(dt)) continue;
+                foreach (var at in TraverseModelTypes(dt, returnAbstractClasses, visited))
+                {
+                    if (!at.IsAbstract || returnAbstractClasses) yield return at;
                 }
             }
         }
@@ -95,7 +103,7 @@ namespace Mastersign.ConfigModel
         public static Dictionary<Type, Dictionary<string, Type>> GetTypeDiscriminationsByPropertyExistence(Type modelType)
         {
             var result = new Dictionary<Type, Dictionary<string, Type>>();
-            foreach (var mt in TraverseModelTypes(modelType))
+            foreach (var mt in TraverseModelTypes(modelType, returnAbstractClasses: true))
             {
                 foreach (var st in FindAllDerivedTypesInTheSameAssembly(mt))
                 {
@@ -121,7 +129,7 @@ namespace Mastersign.ConfigModel
         public static Dictionary<Type, Tuple<string, Dictionary<string, Type>>> GetTypeDiscriminationsByPropertyValue(Type modelType)
         {
             var result = new Dictionary<Type, Tuple<string, Dictionary<string, Type>>>();
-            foreach (var mt in TraverseModelTypes(modelType))
+            foreach (var mt in TraverseModelTypes(modelType, returnAbstractClasses: true))
             {
                 foreach (var p in mt.GetModelProperties())
                 {
@@ -130,7 +138,6 @@ namespace Mastersign.ConfigModel
                         if (!result.TryGetValue(mt, out var valueIndicator))
                         {
                             valueIndicator = Tuple.Create(p.Name, new Dictionary<string, Type>());
-                            result.Add(mt, valueIndicator);
                         }
                         foreach (var st in FindAllDerivedTypesInTheSameAssembly(mt))
                         {
@@ -139,6 +146,10 @@ namespace Mastersign.ConfigModel
                             {
                                 valueIndicator.Item2.Add(discriminationValue, st);
                             }
+                        }
+                        if (valueIndicator.Item2.Count > 0 && !result.ContainsKey(mt))
+                        {
+                            result.Add(mt, valueIndicator);
                         }
                         break;
                     }

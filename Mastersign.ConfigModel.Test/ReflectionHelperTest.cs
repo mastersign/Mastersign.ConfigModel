@@ -121,7 +121,14 @@
                         { nameof(DiscriminationChildByExistenceA.A), typeof(DiscriminationChildByExistenceA) },
                         { nameof(DiscriminationChildByExistenceB.B), typeof(DiscriminationChildByExistenceB) },
                     }
-                }
+                },
+                {
+                    typeof(DiscriminationAbstractChildByExistence),
+                    new Dictionary<string, Type>
+                    {
+                        { nameof(DiscriminationChildByExistenceB.B), typeof(DiscriminationChildByExistenceB) },
+                    }
+                },
             };
             CollectionAssert.AreEquivalent(expected.Keys, discriminations.Keys);
             foreach (var baseType in expected.Keys)
@@ -152,6 +159,15 @@
                             { "Class B", typeof(DiscriminationChildByValueB) },
                         })
                 },
+                {
+                    typeof(DiscriminationAbstractChildByValueA),
+                    Tuple.Create(
+                        nameof(DiscriminationBaseClassByValue.Type),
+                        new Dictionary<string, Type>
+                        {
+                            { "Class B", typeof(DiscriminationChildByValueB) },
+                        })
+                }
             };
             CollectionAssert.AreEquivalent(expected.Keys, discriminations.Keys);
             foreach (var baseType in expected.Keys)

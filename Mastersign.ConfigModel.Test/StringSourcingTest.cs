@@ -74,7 +74,7 @@ namespace Mastersign.ConfigModel.Test
         {
             var mgr = new ConfigModelManager<Model>();
             mgr.AddLayer(GetTestDataFilePath(SCENARIO, "Child.yaml"));
-            Assert.AreEqual(0, mgr.GetStringSourcePaths().Length);
+            Assert.AreEqual(0, mgr.GetLoadedStringSourcePaths().Length);
             mgr.LoadModel();
             CollectionAssert.AreEquivalent(
                 new[]
@@ -82,7 +82,7 @@ namespace Mastersign.ConfigModel.Test
                     GetTestDataFilePath(SCENARIO, "Strings", "x.txt"),
                     GetTestDataFilePath(SCENARIO, "Strings", "y.txt"),
                 },
-                mgr.GetStringSourcePaths());
+                mgr.GetLoadedStringSourcePaths());
         }
 
         [TestMethod]

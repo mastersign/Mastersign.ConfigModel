@@ -37,12 +37,5 @@ var config = manager.LoadModel();
 ```
 
 Globbed layer files are sorted alphabetically.
-The globbing is performed only once when calling `AddLayers()`.
-Alle files, matched during the one globbing, must
-be present every time the model is (re)loaded.
-
-If you need the globbing to be performed every time the model is reloaded,
-consider using includes.
-
 The layers are merged in order they where added.
 The layer added last, has the highest precedence.

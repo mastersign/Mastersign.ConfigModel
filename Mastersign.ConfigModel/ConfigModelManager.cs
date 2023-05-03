@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Security;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.FileSystemGlobbing;
+using Microsoft.Extensions.Primitives;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators;
@@ -68,9 +72,11 @@ namespace Mastersign.ConfigModel
             }
         }
 
-        private readonly List<string> _layers = new List<string>();
-        private readonly HashSet<string> _stringSources = new HashSet<string>();
-        private readonly HashSet<string> _includeSources = new HashSet<string>();
+        private readonly List<string> _layerPatterns = new List<string>();
+        private readonly List<string> _loadedLayerPaths = new List<string>();
+        private readonly HashSet<string> _loadedStringSourcePaths = new HashSet<string>();
+        private readonly HashSet<string> _includePatterns = new HashSet<string>();
+        private readonly HashSet<string> _loadedIncludePaths = new HashSet<string>();
 
         private readonly StringComparison _filenameComparison;
         private readonly INamingConvention _propertyNamingConvention;
@@ -157,23 +163,29 @@ namespace Mastersign.ConfigModel
         {
         }
 
-        public string AddLayer(string fileName)
+        public void AddLayer(string fileName)
         {
-            if (!typeof(TRootModel).IsMergable() && _layers.Count > 0)
+            if (!typeof(TRootModel).IsMergable() && _layerPatterns.Count > 0)
             {
                 throw new NotSupportedException("The root model type is not mergable. Therefore, only one layer is supported.");
             }
-            var filepath = PathHelper.GetCanonicalPath(fileName);
-            _layers.Add(filepath);
-            return filepath;
+            if (fileName.Contains('*'))
+            {
+                throw new ArgumentException("The file name must not contain wildcards", nameof(fileName));
+            }
+            fileName = PathHelper.GetCanonicalPath(fileName, Environment.CurrentDirectory);
+            _layerPatterns.Add(fileName);
         }
 
-        public string[] AddLayers(string filePattern, string rootPath = null)
+        public void AddLayers(string filePattern, string rootPath = null)
         {
             if (!typeof(TRootModel).IsMergable())
             {
                 throw new NotSupportedException("The root model type is not mergable. Therefore, only one layer is supported.");
             }
+            filePattern = PathHelper.GetCanonicalPath(filePattern, rootPath ?? Environment.CurrentDirectory);
+            _layerPatterns.Add(filePattern);
+            /*
             var matcher = new Matcher(_filenameComparison);
             rootPath = rootPath ?? Environment.CurrentDirectory;
             var glob = PathHelper.PrepareGlobbingPattern(filePattern, rootPath);
@@ -182,15 +194,16 @@ namespace Mastersign.ConfigModel
                 .GetResultsInFullPath(glob.Item1)
                 .Select(p => PathHelper.GetCanonicalPath(p)));
             newLayers.Sort(StringComparerLookup.From(_filenameComparison));
-            _layers.AddRange(newLayers);
-            return newLayers.ToArray();
+            */
         }
 
-        public string[] GetLayerPaths() => _layers.ToArray();
+        public string[] GetLayerPatterns() => _layerPatterns.ToArray();
+        public string[] GetLoadedLayerPaths() => _loadedLayerPaths.ToArray();
 
-        public string[] GetIncludePaths() => _includeSources.ToArray();
+        public string[] GetIncludePatterns() => _includePatterns.ToArray();
+        public string[] GetLoadedIncludePaths() => _loadedIncludePaths.ToArray();
 
-        public string[] GetStringSourcePaths() => _stringSources.ToArray();
+        public string[] GetLoadedStringSourcePaths() => _loadedStringSourcePaths.ToArray();
 
         private void LoadStringSource(ConfigModelBase model, string modelFile, string referencePath, PropertyInfo p)
         {
@@ -201,9 +214,8 @@ namespace Mastersign.ConfigModel
             if (yamlMemberAttr?.ApplyNamingConventions != false) propName = _propertyNamingConvention.Apply(propName);
             if (model.StringSources.TryGetValue(propName, out var sourceFile))
             {
-                if (!Path.IsPathRooted(sourceFile)) sourceFile = Path.Combine(referencePath, sourceFile);
-                sourceFile = PathHelper.GetCanonicalPath(sourceFile);
-                _stringSources.Add(sourceFile);
+                sourceFile = PathHelper.GetCanonicalPath(sourceFile, referencePath);
+                _loadedStringSourcePaths.Add(sourceFile);
                 try
                 {
                     var s = File.ReadAllText(sourceFile, Encoding.UTF8);
@@ -251,7 +263,7 @@ namespace Mastersign.ConfigModel
             IDeserializer deserializer, List<string> includeStack, bool forceDeepMerge)
         {
             includePath = PathHelper.GetCanonicalPath(includePath, referencePath);
-            _includeSources.Add(includePath);
+            _loadedIncludePaths.Add(includePath);
 
             if (includeStack.Any(p => string.Equals(p, includePath, FILENAME_COMPARISON)))
             {
@@ -376,6 +388,8 @@ namespace Mastersign.ConfigModel
 
             foreach (var includePath in model.Includes)
             {
+                _includePatterns.Add(PathHelper.GetCanonicalPath(includePath, referencePath));
+
                 if (includePath.Contains('*'))
                 {
                     var matcher = new Matcher(_filenameComparison);
@@ -423,7 +437,7 @@ namespace Mastersign.ConfigModel
                     foreach (var discrimination in _discriminationsByPropertyValue)
                     {
                         o.AddTypeDiscriminator(new KeyValueTypeDiscriminator(
-                            discrimination.Key, 
+                            discrimination.Key,
                             _propertyNamingConvention.Apply(discrimination.Value.Item1),
                             discrimination.Value.Item2));
                     }
@@ -437,12 +451,38 @@ namespace Mastersign.ConfigModel
             return deserializer;
         }
 
+        private List<(string Path, bool Required)> GetLayerPaths()
+        {
+            var paths = new List<(string, bool)>();
+            foreach (var pattern in _layerPatterns)
+            {
+                if (pattern.Contains('*'))
+                {
+                    var matcher = new Matcher(_filenameComparison);
+                    var glob = PathHelper.PrepareGlobbingPattern(pattern);
+                    matcher.AddInclude(glob.Item2);
+                    var newLayers = new List<string>(matcher
+                        .GetResultsInFullPath(glob.Item1)
+                        .Select(p => PathHelper.GetCanonicalPath(p)));
+                    newLayers.Sort(StringComparerLookup.From(_filenameComparison));
+                    paths.AddRange(newLayers.Select(p => (p, false)));
+                }
+                else
+                {
+                    paths.Add((pattern, true));
+                }
+            }
+            return paths;
+        }
+
         public TRootModel LoadModel()
         {
             if (_disposed) throw new ObjectDisposedException(typeof(ConfigModelManager<TRootModel>).FullName);
 
-            _stringSources.Clear();
-            _includeSources.Clear();
+            _loadedLayerPaths.Clear();
+            _loadedStringSourcePaths.Clear();
+            _includePatterns.Clear();
+            _loadedIncludePaths.Clear();
 
             IDeserializer deserializer = BuildDeserializer();
 
@@ -460,7 +500,7 @@ namespace Mastersign.ConfigModel
             {
                 throw new NotSupportedException("The root model is not mergable. Therefore, a default model is not supported.");
             }
-            foreach (var layerPath in _layers)
+            foreach (var (layerPath, required) in GetLayerPaths())
             {
                 TRootModel layer;
                 try
@@ -473,15 +513,23 @@ namespace Mastersign.ConfigModel
                 }
                 catch (FileNotFoundException ex)
                 {
-                    throw new ConfigModelLayerNotFoundException(
-                        $"Could not find model file '{layerPath}'.",
-                        layerPath, ex);
+                    if (required)
+                    {
+                        throw new ConfigModelLayerNotFoundException(
+                            $"Could not find model file '{layerPath}'.",
+                            layerPath, ex);
+                    }
+                    else continue;
                 }
                 catch (DirectoryNotFoundException ex)
                 {
-                    throw new ConfigModelLayerNotFoundException(
-                        $"Could not find a part of the path to model file '{layerPath}'."
-                        , layerPath, ex);
+                    if (required)
+                    {
+                        throw new ConfigModelLayerNotFoundException(
+                        $"Could not find a part of the path to model file '{layerPath}'.",
+                        layerPath, ex);
+                    }
+                    else continue;
                 }
                 catch (IOException ex)
                 {
@@ -532,6 +580,8 @@ namespace Mastersign.ConfigModel
                         layerPath, ex);
                 }
 
+                _loadedLayerPaths.Add(layerPath);
+
                 var referencePath = Path.GetDirectoryName(layerPath);
                 var includeStack = new List<string> { layerPath };
 
@@ -546,6 +596,8 @@ namespace Mastersign.ConfigModel
                 else
                     root = layer;
             }
+
+            if (IsWatching) WatchAndReload();
 
             return root;
         }
@@ -562,7 +614,7 @@ namespace Mastersign.ConfigModel
 
         public TimeSpan ReloadDelay { get; set; } = TimeSpan.FromMilliseconds(250);
 
-        private readonly List<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
+        private readonly List<PhysicalFileProvider> _pfProviders = new List<PhysicalFileProvider>();
 
         private Timer _delayTimer = null;
 
@@ -583,6 +635,14 @@ namespace Mastersign.ConfigModel
 
         private void TriggerReloadTimer() => _delayTimer.Change(ReloadDelay, Timeout.InfiniteTimeSpan);
 
+        private void ChangeTokenHandler(object state)
+        {
+            TriggerReloadTimer();
+            var (pfProvider, subPath) = (Tuple<PhysicalFileProvider, string>)state;
+            var token = pfProvider.Watch(subPath);
+            token.RegisterChangeCallback(ChangeTokenHandler, state);
+        }
+
         private static readonly NotifyFilters WATCH_NOTIFY_FILTER =
             NotifyFilters.CreationTime
             | NotifyFilters.DirectoryName
@@ -590,17 +650,39 @@ namespace Mastersign.ConfigModel
             | NotifyFilters.LastWrite
             | NotifyFilters.Size;
 
+        public bool IsWatching => _pfProviders.Any();
+
+        /// <summary>
+        /// Starts watching for changes on any files, matching the glob patterns
+        /// added model layers, includes, and string sources.
+        /// Every time a change is detected the <see cref="ReloadDelay"/> is waited,
+        /// to filter out multiple change events in a short time,
+        /// then the model is reloaded.
+        /// When the reload was successful, the <see cref="ModelChanged"/> event is fired.
+        /// If the reload failed, the <see cref="ModelReloadFailed"/> event is fired.
+        /// </summary>
+        /// <remarks>
+        ///     The environment variable <c>DOTNET_USE_POLLING_FILE_WATCHER</c> can be set to <c>1</c> or <c>true</c>
+        ///     to use polling for the watcher.
+        ///     But keep in mind, that polling is slow: Probably around 4 seconds interval.
+        /// </remarks>
+        /// <exception cref="ObjectDisposedException">Is thrown if the mamager was disposed.</exception>
         public void WatchAndReload()
         {
             if (_disposed) throw new ObjectDisposedException(typeof(ConfigModelManager<TRootModel>).FullName);
             StopWatching();
 
-            var files = _layers.Concat(_includeSources).Concat(_stringSources).Distinct().ToList();
-            var directories = files
-                .GroupBy(Path.GetDirectoryName)
+            var patterns = _layerPatterns
+                .Concat(_includePatterns)
+                .Concat(_loadedStringSourcePaths)
+                .Distinct(StringComparerLookup.From(_filenameComparison))
+                .Select(p => PathHelper.PrepareGlobbingPattern(p))
+                .ToList();
+            var directories = patterns
+                .GroupBy(p => p.Item1)
                 .ToDictionary(
                     g => g.Key,
-                    g => new HashSet<string>(g.Select(Path.GetFileName)));
+                    g => new HashSet<string>(g.Select(p => p.Item2)));
 
             _delayTimer = new Timer(OnReloadTimer);
             _delayTimer.Change(Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
@@ -609,48 +691,24 @@ namespace Mastersign.ConfigModel
             {
                 var dir = group.Key;
                 var groupFiles = group.Value;
-                var watcher = new FileSystemWatcher(group.Key);
-                watcher.NotifyFilter = WATCH_NOTIFY_FILTER;
-                if (groupFiles.Count == 1)
-                {
-                    watcher.Filter = Path.GetFileName(groupFiles.First());
-                }
-                else
-                {
-                    var extensions = groupFiles.Select(Path.GetExtension).Distinct().ToList();
-                    if (extensions.Count == 1)
-                    {
-                        watcher.Filter = "*" + extensions[0];
-                    }
-                }
 
-                void Handler(object s, FileSystemEventArgs ea)
-                {
-                    if (groupFiles.Count > 1 && !groupFiles.Contains(ea.Name)) return;
-                    TriggerReloadTimer();
-                }
-                void RenamedHandler(object s, RenamedEventArgs ea)
-                {
-                    if (groupFiles.Count > 1 && !groupFiles.Contains(ea.Name) && !groupFiles.Contains(ea.OldName)) return;
-                    TriggerReloadTimer();
-                }
+                var pfProvider = new PhysicalFileProvider(dir);
+                _pfProviders.Add(pfProvider);
 
-                watcher.Changed += Handler;
-                watcher.Created += Handler;
-                watcher.Deleted += Handler;
-                watcher.Renamed += RenamedHandler;
-                _watchers.Add(watcher);
-                watcher.EnableRaisingEvents = true;
+                foreach (var subPattern in groupFiles)
+                {
+                    var changeToken = pfProvider.Watch(subPattern);
+                    changeToken.RegisterChangeCallback(
+                        ChangeTokenHandler,
+                        Tuple.Create(pfProvider, subPattern));
+                }
             }
         }
 
         public void StopWatching()
         {
-            foreach (var watcher in _watchers)
-            {
-                watcher.Dispose();
-            }
-            _watchers.Clear();
+            foreach (var pfProvider in _pfProviders) pfProvider.Dispose();
+            _pfProviders.Clear();
         }
 
         private bool _disposed = false;

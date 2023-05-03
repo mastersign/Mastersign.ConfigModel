@@ -69,12 +69,13 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void GetIncludePathsTest()
+        public void GetIncludePatternsAndLoadedPathsTest()
         {
             var mgr = new ConfigModelManager<Model>();
             mgr.AddLayer(GetTestDataFilePath(SCENARIO, "ComplexMain.yaml"));
 
-            Assert.AreEqual(0, mgr.GetIncludePaths().Length);
+            Assert.AreEqual(0, mgr.GetIncludePatterns().Length);
+            Assert.AreEqual(0, mgr.GetLoadedIncludePaths().Length);
 
             mgr.LoadModel();
 
@@ -85,7 +86,16 @@ namespace Mastersign.ConfigModel.Test
                     GetTestDataFilePath(SCENARIO, "ComplexFatBoyA.yaml"),
                     GetTestDataFilePath(SCENARIO, "ComplexMainFatChild.yaml"),
                 },
-                mgr.GetIncludePaths());
+                mgr.GetIncludePatterns());
+
+            CollectionAssert.AreEquivalent(
+                new[]
+                {
+                    GetTestDataFilePath(SCENARIO, "ComplexBase.yaml"),
+                    GetTestDataFilePath(SCENARIO, "ComplexFatBoyA.yaml"),
+                    GetTestDataFilePath(SCENARIO, "ComplexMainFatChild.yaml"),
+                },
+                mgr.GetLoadedIncludePaths());
         }
 
         [TestMethod]

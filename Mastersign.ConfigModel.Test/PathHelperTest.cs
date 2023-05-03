@@ -22,6 +22,14 @@
         }
 
         [TestMethod]
+        public void PrepareGlobbingPatternNoWildcardTest()
+        {
+            var result = PathHelper.PrepareGlobbingPattern("a/b/c", @"C:\Users\Me\Documents");
+            Assert.AreEqual(@"C:\Users\Me\Documents\a\b", result.Item1);
+            Assert.AreEqual(@"c", result.Item2);
+        }
+
+        [TestMethod]
         public void PrepareGlobbingPatternNoRootTest()
         {
             var result = PathHelper.PrepareGlobbingPattern("a/b/*.txt", @"C:\Users\Me\Documents");

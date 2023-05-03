@@ -8,23 +8,34 @@ namespace Mastersign.ConfigModel.Test
         private static readonly string SCENARIO = "LayerCombination";
 
         [TestMethod]
-        public void GetLayerPathsTest()
+        public void GetLayerPatternsAndLoadedPathsTest()
         {
             var mgr = new ConfigModelManager<Model>();
             var canonicalBasePath = GetTestDataFilePath(SCENARIO);
             var basePath = Path.Combine(canonicalBasePath, "..", SCENARIO, ".");
 
+            Assert.AreEqual(0, mgr.GetLayerPatterns().Length);
+            Assert.AreEqual(0, mgr.GetLoadedLayerPaths().Length);
+
+            mgr.AddLayer(Path.Combine(basePath, "MergeByInterface1.yaml"));
+            Assert.AreEqual(1, mgr.GetLayerPatterns().Length);
             Assert.AreEqual(
                 Path.Combine(canonicalBasePath, "MergeByInterface1.yaml"),
-                mgr.AddLayer(Path.Combine(basePath, "MergeByInterface1.yaml")));
+                mgr.GetLayerPatterns()[0]);
 
+
+            mgr.AddLayers("MergeByAttribute*.yaml", basePath);
             CollectionAssert.AreEqual(
                 new[]
                 {
-                    Path.Combine(canonicalBasePath, "MergeByAttribute1.yaml"),
-                    Path.Combine(canonicalBasePath, "MergeByAttribute2.yaml"),
+                    Path.Combine(canonicalBasePath, "MergeByInterface1.yaml"),
+                    Path.Combine(canonicalBasePath, "MergeByAttribute*.yaml"),
                 },
-                mgr.AddLayers("MergeByAttribute*.yaml", basePath));
+                mgr.GetLayerPatterns());
+
+            Assert.AreEqual(0, mgr.GetLoadedLayerPaths().Length);
+
+            mgr.LoadModel();
 
             CollectionAssert.AreEqual(
                 new[]
@@ -33,15 +44,39 @@ namespace Mastersign.ConfigModel.Test
                     Path.Combine(canonicalBasePath, "MergeByAttribute1.yaml"),
                     Path.Combine(canonicalBasePath, "MergeByAttribute2.yaml"),
                 },
-                mgr.GetLayerPaths());
+                mgr.GetLoadedLayerPaths());
+        }
+
+
+        [TestMethod]
+        public void AddGetLoadedLayerPathsTest()
+        {
+            var testDataBasePath = GetTestDataFilePath(SCENARIO);
+            var mgr = new ConfigModelManager<Model>();
+
+            mgr.AddLayers("MergeByInterface*.yaml", testDataBasePath);
+            mgr.AddLayers("MergeBy*.yaml", testDataBasePath);
+
+            mgr.LoadModel();
+
+            CollectionAssert.AreEqual(
+                new string[]
+                {
+                    Path.Combine(testDataBasePath, "MergeByInterface1.yaml"),
+                    Path.Combine(testDataBasePath, "MergeByInterface2.yaml"),
+                    Path.Combine(testDataBasePath, "MergeByAttribute1.yaml"),
+                    Path.Combine(testDataBasePath, "MergeByAttribute2.yaml"),
+                    Path.Combine(testDataBasePath, "MergeByInterface1.yaml"),
+                    Path.Combine(testDataBasePath, "MergeByInterface2.yaml"),
+                },
+                mgr.GetLoadedLayerPaths());
         }
 
         [TestMethod]
         public void LayerMergeByAttributeTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeByAttribute*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeByAttribute*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
             Assert.AreEqual("A1", result.A);
@@ -55,8 +90,7 @@ namespace Mastersign.ConfigModel.Test
         public void LayerMergeByAttributeWithSkipTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeWithSkip*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeWithSkip*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
             Assert.AreEqual("A2", result.A);
@@ -67,8 +101,7 @@ namespace Mastersign.ConfigModel.Test
         public void LayerMergeByInterfaceTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeByInterface*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeByInterface*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.MergableByInterface);
@@ -80,8 +113,7 @@ namespace Mastersign.ConfigModel.Test
         public void LayerMergeByReplacementTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("NonMergable*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("NonMergable*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Child);
@@ -91,51 +123,20 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void AddLayerResultTest()
+        public void AddNonExistantLayerTest()
         {
             var testDataBasePath = GetTestDataFilePath(SCENARIO);
             var mgr = new ConfigModelManager<Model>();
 
-            Assert.AreEqual(
-                Path.Combine(testDataBasePath, "MergeByAttribute1.yaml"),
-                mgr.AddLayer(Path.Combine(testDataBasePath, "MergeByAttribute1.yaml")));
-
-            Assert.AreEqual(
-                Path.Combine(testDataBasePath, "DoesNotExist.yaml"),
-                mgr.AddLayer(Path.Combine(testDataBasePath, "DoesNotExist.yaml")));
-        }
-
-        [TestMethod]
-        public void AddLayersResultTest()
-        {
-            var testDataBasePath = GetTestDataFilePath(SCENARIO);
-            var mgr = new ConfigModelManager<Model>();
-
-            CollectionAssert.AreEqual(
-                new string[]
-                {
-                    Path.Combine(testDataBasePath, "MergeByInterface1.yaml"),
-                    Path.Combine(testDataBasePath, "MergeByInterface2.yaml"),
-                },
-                mgr.AddLayers("MergeByInterface*.yaml", testDataBasePath));
-
-            CollectionAssert.AreEqual(
-                new string[]
-                {
-                    Path.Combine(testDataBasePath, "MergeByAttribute1.yaml"),
-                    Path.Combine(testDataBasePath, "MergeByAttribute2.yaml"),
-                    Path.Combine(testDataBasePath, "MergeByInterface1.yaml"),
-                    Path.Combine(testDataBasePath, "MergeByInterface2.yaml"),
-                },
-                mgr.AddLayers("MergeBy*.yaml", testDataBasePath));
+            mgr.AddLayer(Path.Combine(testDataBasePath, "DoesNotExist.yaml"));
+            Assert.AreEqual(1, mgr.GetLayerPatterns().Length);
         }
 
         [TestMethod]
         public void MergeListDefaultTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeListDefault*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeListDefault*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -159,8 +160,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeListClearTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeListClear*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeListClear*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -178,8 +178,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeListAppendTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeListAppendIndistinct*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeListAppendIndistinct*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -197,8 +196,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeListPrependTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeListPrependIndistinct*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeListPrependIndistinct*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -216,8 +214,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeListAppendDistinctTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeListAppendDistinct*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeListAppendDistinct*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -234,8 +231,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeListPrependDistinctTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeListPrependDistinct*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeListPrependDistinct*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -252,8 +248,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeListReplaceTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeListReplace*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeListReplace*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -274,8 +269,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeListMergeTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeListMerge*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeListMerge*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -305,8 +299,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeDictDefaultTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeDictDefault*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeDictDefault*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -336,8 +329,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeDictClearTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeDictClear*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeDictClear*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -363,8 +355,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeDictReplaceTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeDictReplace*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeDictReplace*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);
@@ -395,8 +386,7 @@ namespace Mastersign.ConfigModel.Test
         public void MergeDictMergeTest()
         {
             var mgr = new ConfigModelManager<Model>();
-            var layers = mgr.AddLayers("MergeDictMerge*.yaml", GetTestDataFilePath(SCENARIO));
-            Assert.AreEqual(2, layers.Length);
+            mgr.AddLayers("MergeDictMerge*.yaml", GetTestDataFilePath(SCENARIO));
             var result = mgr.LoadModel();
 
             Assert.IsNotNull(result);

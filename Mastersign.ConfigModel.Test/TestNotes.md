@@ -38,7 +38,7 @@
     + [X] If includes build a cycle
     + [X] If string source does not exist
     + [X] If string source can not be read
-- [ ] Change Trigger
+- [X] Change Trigger
     + [X] On root
     + [X] On string source
     + [X] On include

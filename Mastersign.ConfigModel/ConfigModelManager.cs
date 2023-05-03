@@ -643,13 +643,6 @@ namespace Mastersign.ConfigModel
             token.RegisterChangeCallback(ChangeTokenHandler, state);
         }
 
-        private static readonly NotifyFilters WATCH_NOTIFY_FILTER =
-            NotifyFilters.CreationTime
-            | NotifyFilters.DirectoryName
-            | NotifyFilters.FileName
-            | NotifyFilters.LastWrite
-            | NotifyFilters.Size;
-
         public bool IsWatching => _pfProviders.Any();
 
         /// <summary>

@@ -1,7 +1,8 @@
 bin/
 obj/
-publish/
-TestResults/
 .vs/
+/docker-test/tmp/
+/TestResults/
+/publish/
 *.suo
 *.cache

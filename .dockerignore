@@ -1,0 +1,8 @@
+docfx_project/
+docs/
+publish/
+TestResults/
+docker-test/
+*.md
+*.cmd
+*.ps1

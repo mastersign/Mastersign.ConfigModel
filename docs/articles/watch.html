@@ -95,11 +95,11 @@ manager.ModelReloadFailed += (s, e) =&gt; {
 
 model = manager.LoadModel();
 </code></pre>
-<p>Globbing of includes is currently not considered in the watch.
-Which means, that if a file included by a glob pattern is changed or deleted,
-the model is reloaded.
-But if a new file is created, that matches a glob pattern,
-the model is not reloaded.</p>
+<p>In some scenarios, watching for changes by listening to file system events does not work properly.
+One example is changing a file in a Docker volume mount from the host.
+For such cases, the environment variable <code>DOTNET_USE_POLLING_FILE_WATCHER</code>
+can be set to <code>1</code> or <code>true</code> to switch from file system events to polling.
+Currently the polling interval can not be specified and is propably set to 4 seconds.</p>
 </article>
           </div>
 

@@ -101,12 +101,7 @@ manager.AddLayers(&quot;user/*.config.yaml&quot;);
 var config = manager.LoadModel();
 </code></pre>
 <p>Globbed layer files are sorted alphabetically.
-The globbing is performed only once when calling <code>AddLayers()</code>.
-Alle files, matched during the one globbing, must
-be present every time the model is (re)loaded.</p>
-<p>If you need the globbing to be performed every time the model is reloaded,
-consider using includes.</p>
-<p>The layers are merged in order they where added.
+The layers are merged in order they where added.
 The layer added last, has the highest precedence.</p>
 </article>
           </div>

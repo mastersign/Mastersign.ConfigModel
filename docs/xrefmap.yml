@@ -463,57 +463,108 @@ references:
   isSpec: "True"
   fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.~ConfigModelManager
   nameWithType: ConfigModelManager<TRootModel>.~ConfigModelManager
-- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths
-  name: GetIncludePaths()
-  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePaths
-  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths
-  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetIncludePaths()
-  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetIncludePaths()
-  nameWithType: ConfigModelManager<TRootModel>.GetIncludePaths()
-  nameWithType.vb: ConfigModelManager(Of TRootModel).GetIncludePaths()
-- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths*
-  name: GetIncludePaths
-  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePaths_
-  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePatterns
+  name: GetIncludePatterns()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePatterns
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePatterns
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetIncludePatterns()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetIncludePatterns()
+  nameWithType: ConfigModelManager<TRootModel>.GetIncludePatterns()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetIncludePatterns()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePatterns*
+  name: GetIncludePatterns
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePatterns_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePatterns
   isSpec: "True"
-  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetIncludePaths
-  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetIncludePaths
-  nameWithType: ConfigModelManager<TRootModel>.GetIncludePaths
-  nameWithType.vb: ConfigModelManager(Of TRootModel).GetIncludePaths
-- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths
-  name: GetLayerPaths()
-  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPaths
-  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths
-  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLayerPaths()
-  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLayerPaths()
-  nameWithType: ConfigModelManager<TRootModel>.GetLayerPaths()
-  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLayerPaths()
-- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths*
-  name: GetLayerPaths
-  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPaths_
-  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetIncludePatterns
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetIncludePatterns
+  nameWithType: ConfigModelManager<TRootModel>.GetIncludePatterns
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetIncludePatterns
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPatterns
+  name: GetLayerPatterns()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPatterns
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPatterns
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLayerPatterns()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLayerPatterns()
+  nameWithType: ConfigModelManager<TRootModel>.GetLayerPatterns()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLayerPatterns()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPatterns*
+  name: GetLayerPatterns
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPatterns_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPatterns
   isSpec: "True"
-  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLayerPaths
-  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLayerPaths
-  nameWithType: ConfigModelManager<TRootModel>.GetLayerPaths
-  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLayerPaths
-- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths
-  name: GetStringSourcePaths()
-  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetStringSourcePaths
-  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths
-  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetStringSourcePaths()
-  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetStringSourcePaths()
-  nameWithType: ConfigModelManager<TRootModel>.GetStringSourcePaths()
-  nameWithType.vb: ConfigModelManager(Of TRootModel).GetStringSourcePaths()
-- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths*
-  name: GetStringSourcePaths
-  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetStringSourcePaths_
-  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLayerPatterns
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLayerPatterns
+  nameWithType: ConfigModelManager<TRootModel>.GetLayerPatterns
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLayerPatterns
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedIncludePaths
+  name: GetLoadedIncludePaths()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedIncludePaths
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedIncludePaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLoadedIncludePaths()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLoadedIncludePaths()
+  nameWithType: ConfigModelManager<TRootModel>.GetLoadedIncludePaths()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLoadedIncludePaths()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedIncludePaths*
+  name: GetLoadedIncludePaths
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedIncludePaths_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedIncludePaths
   isSpec: "True"
-  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetStringSourcePaths
-  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetStringSourcePaths
-  nameWithType: ConfigModelManager<TRootModel>.GetStringSourcePaths
-  nameWithType.vb: ConfigModelManager(Of TRootModel).GetStringSourcePaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLoadedIncludePaths
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLoadedIncludePaths
+  nameWithType: ConfigModelManager<TRootModel>.GetLoadedIncludePaths
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLoadedIncludePaths
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedLayerPaths
+  name: GetLoadedLayerPaths()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedLayerPaths
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedLayerPaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLoadedLayerPaths()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLoadedLayerPaths()
+  nameWithType: ConfigModelManager<TRootModel>.GetLoadedLayerPaths()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLoadedLayerPaths()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedLayerPaths*
+  name: GetLoadedLayerPaths
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedLayerPaths_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedLayerPaths
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLoadedLayerPaths
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLoadedLayerPaths
+  nameWithType: ConfigModelManager<TRootModel>.GetLoadedLayerPaths
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLoadedLayerPaths
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedStringSourcePaths
+  name: GetLoadedStringSourcePaths()
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedStringSourcePaths
+  commentId: M:Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedStringSourcePaths
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLoadedStringSourcePaths()
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLoadedStringSourcePaths()
+  nameWithType: ConfigModelManager<TRootModel>.GetLoadedStringSourcePaths()
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLoadedStringSourcePaths()
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedStringSourcePaths*
+  name: GetLoadedStringSourcePaths
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedStringSourcePaths_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedStringSourcePaths
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.GetLoadedStringSourcePaths
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).GetLoadedStringSourcePaths
+  nameWithType: ConfigModelManager<TRootModel>.GetLoadedStringSourcePaths
+  nameWithType.vb: ConfigModelManager(Of TRootModel).GetLoadedStringSourcePaths
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.IsWatching
+  name: IsWatching
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_IsWatching
+  commentId: P:Mastersign.ConfigModel.ConfigModelManager`1.IsWatching
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.IsWatching
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).IsWatching
+  nameWithType: ConfigModelManager<TRootModel>.IsWatching
+  nameWithType.vb: ConfigModelManager(Of TRootModel).IsWatching
+- uid: Mastersign.ConfigModel.ConfigModelManager`1.IsWatching*
+  name: IsWatching
+  href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_IsWatching_
+  commentId: Overload:Mastersign.ConfigModel.ConfigModelManager`1.IsWatching
+  isSpec: "True"
+  fullName: Mastersign.ConfigModel.ConfigModelManager<TRootModel>.IsWatching
+  fullName.vb: Mastersign.ConfigModel.ConfigModelManager(Of TRootModel).IsWatching
+  nameWithType: ConfigModelManager<TRootModel>.IsWatching
+  nameWithType.vb: ConfigModelManager(Of TRootModel).IsWatching
 - uid: Mastersign.ConfigModel.ConfigModelManager`1.LoadModel
   name: LoadModel()
   href: api/Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_LoadModel

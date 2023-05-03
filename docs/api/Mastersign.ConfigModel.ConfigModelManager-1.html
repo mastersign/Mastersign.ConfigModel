@@ -235,6 +235,29 @@
   </table>
   <h3 id="properties">Properties
 </h3>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_IsWatching_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.IsWatching*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_IsWatching" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.IsWatching">IsWatching</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsWatching { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Mastersign_ConfigModel_ConfigModelManager_1_ReloadDelay_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.ReloadDelay*"></a>
   <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_ReloadDelay" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.ReloadDelay">ReloadDelay</h4>
   <div class="markdown level1 summary"></div>
@@ -266,7 +289,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string AddLayer(string fileName)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddLayer(string fileName)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -285,28 +308,13 @@
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <a id="Mastersign_ConfigModel_ConfigModelManager_1_AddLayers_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.AddLayers*"></a>
   <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_AddLayers_System_String_System_String_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.AddLayers(System.String,System.String)">AddLayers(string, string)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string[] AddLayers(string filePattern, string rootPath = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddLayers(string filePattern, string rootPath = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -330,21 +338,6 @@
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <a id="Mastersign_ConfigModel_ConfigModelManager_1_Dispose_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.Dispose*"></a>
   <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_Dispose" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.Dispose">Dispose()</h4>
   <div class="markdown level1 summary"></div>
@@ -361,13 +354,13 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">protected ~ConfigModelManager()</code></pre>
   </div>
-  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths*"></a>
-  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePaths">GetIncludePaths()</h4>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePatterns_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePatterns*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetIncludePatterns" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetIncludePatterns">GetIncludePatterns()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string[] GetIncludePaths()</code></pre>
+    <pre><code class="lang-csharp hljs">public string[] GetIncludePatterns()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
@@ -384,13 +377,13 @@
       </tr>
     </tbody>
   </table>
-  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths*"></a>
-  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPaths">GetLayerPaths()</h4>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPatterns_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPatterns*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetLayerPatterns" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLayerPatterns">GetLayerPatterns()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string[] GetLayerPaths()</code></pre>
+    <pre><code class="lang-csharp hljs">public string[] GetLayerPatterns()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
@@ -407,13 +400,59 @@
       </tr>
     </tbody>
   </table>
-  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetStringSourcePaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths*"></a>
-  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetStringSourcePaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetStringSourcePaths">GetStringSourcePaths()</h4>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedIncludePaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedIncludePaths*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedIncludePaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedIncludePaths">GetLoadedIncludePaths()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string[] GetStringSourcePaths()</code></pre>
+    <pre><code class="lang-csharp hljs">public string[] GetLoadedIncludePaths()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedLayerPaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedLayerPaths*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedLayerPaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedLayerPaths">GetLoadedLayerPaths()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] GetLoadedLayerPaths()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedStringSourcePaths_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedStringSourcePaths*"></a>
+  <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_GetLoadedStringSourcePaths" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.GetLoadedStringSourcePaths">GetLoadedStringSourcePaths()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[] GetLoadedStringSourcePaths()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-condensed">
@@ -463,12 +502,40 @@
   </div>
   <a id="Mastersign_ConfigModel_ConfigModelManager_1_WatchAndReload_" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.WatchAndReload*"></a>
   <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_WatchAndReload" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.WatchAndReload">WatchAndReload()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Starts watching for changes on any files, matching the glob patterns
+added model layers, includes, and string sources.
+Every time a change is detected the <a class="xref" href="Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_ReloadDelay">ReloadDelay</a> is waited,
+to filter out multiple change events in a short time,
+then the model is reloaded.
+When the reload was successful, the <a class="xref" href="Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_ModelChanged">ModelChanged</a> event is fired.
+If the reload failed, the <a class="xref" href="Mastersign.ConfigModel.ConfigModelManager-1.html#Mastersign_ConfigModel_ConfigModelManager_1_ModelReloadFailed">ModelReloadFailed</a> event is fired.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void WatchAndReload()</code></pre>
   </div>
+  <h5 id="Mastersign_ConfigModel_ConfigModelManager_1_WatchAndReload_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The environment variable <code>DOTNET_USE_POLLING_FILE_WATCHER</code> can be set to <code>1</code> or <code>true</code>
+to use polling for the watcher.
+But keep in mind, that polling is slow: Probably around 4 seconds interval.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Is thrown if the mamager was disposed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="events">Events
 </h3>
   <h4 id="Mastersign_ConfigModel_ConfigModelManager_1_ModelChanged" data-uid="Mastersign.ConfigModel.ConfigModelManager`1.ModelChanged">ModelChanged</h4>

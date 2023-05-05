@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Security;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.FileSystemGlobbing;
-using Microsoft.Extensions.Primitives;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators;
@@ -185,16 +182,6 @@ namespace Mastersign.ConfigModel
             }
             filePattern = PathHelper.GetCanonicalPath(filePattern, rootPath ?? Environment.CurrentDirectory);
             _layerPatterns.Add(filePattern);
-            /*
-            var matcher = new Matcher(_filenameComparison);
-            rootPath = rootPath ?? Environment.CurrentDirectory;
-            var glob = PathHelper.PrepareGlobbingPattern(filePattern, rootPath);
-            matcher.AddInclude(glob.Item2);
-            var newLayers = new List<string>(matcher
-                .GetResultsInFullPath(glob.Item1)
-                .Select(p => PathHelper.GetCanonicalPath(p)));
-            newLayers.Sort(StringComparerLookup.From(_filenameComparison));
-            */
         }
 
         public string[] GetLayerPatterns() => _layerPatterns.ToArray();
@@ -212,7 +199,7 @@ namespace Mastersign.ConfigModel
             var yamlMemberAttr = p.GetCustomAttribute<YamlMemberAttribute>();
             if (yamlMemberAttr?.Alias != null) propName = yamlMemberAttr.Alias;
             if (yamlMemberAttr?.ApplyNamingConventions != false) propName = _propertyNamingConvention.Apply(propName);
-            if (model.StringSources.TryGetValue(propName, out var sourceFile))
+            if (model.ConfigModelStringSources.TryGetValue(propName, out var sourceFile))
             {
                 sourceFile = PathHelper.GetCanonicalPath(sourceFile, referencePath);
                 _loadedStringSourcePaths.Add(sourceFile);
@@ -244,13 +231,13 @@ namespace Mastersign.ConfigModel
 
         private ConfigModelBase LoadStringSources(ConfigModelBase model, string modelFile, string referencePath)
         {
-            if (model?.StringSources == null) return model;
+            if (model?.ConfigModelStringSources == null) return model;
             foreach (var p in model.GetType().GetModelProperties()
                 .Where(p => p.PropertyType == typeof(string)))
             {
                 LoadStringSource(model, modelFile, referencePath, p);
             }
-            model.StringSources = null;
+            model.ConfigModelStringSources = null;
             return model;
         }
 
@@ -361,7 +348,7 @@ namespace Mastersign.ConfigModel
         private ConfigModelBase LoadIncludes(ConfigModelBase model, string modelFile, string referencePath,
             IDeserializer deserializer, List<string> includeStack, bool forceDeepMerge = false)
         {
-            if (model?.Includes == null) return model;
+            if (model?.ConfigModelIncludes == null) return model;
             var t = model.GetType();
             var result = (ConfigModelBase)Activator.CreateInstance(t);
 
@@ -386,7 +373,7 @@ namespace Mastersign.ConfigModel
                 Merging.MergeObject(result, include, forceRootMerge: true, forceDeepMerge);
             }
 
-            foreach (var includePath in model.Includes)
+            foreach (var includePath in model.ConfigModelIncludes)
             {
                 _includePatterns.Add(PathHelper.GetCanonicalPath(includePath, referencePath));
 

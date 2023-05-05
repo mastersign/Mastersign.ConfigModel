@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using YamlDotNet.Serialization;
 
 namespace Mastersign.ConfigModel
@@ -10,13 +9,13 @@ namespace Mastersign.ConfigModel
         [YamlMember(Alias = "$includes",
             DefaultValuesHandling = DefaultValuesHandling.OmitNull,
             ApplyNamingConventions = false)]
-        public List<string> Includes { get; set; }
+        public List<string> ConfigModelIncludes { get; set; }
 
         [NoMerge]
         [YamlMember(Alias = "$sources",
             DefaultValuesHandling = DefaultValuesHandling.OmitNull,
             ApplyNamingConventions = false)]
-        public Dictionary<string, string> StringSources { get; set; }
+        public Dictionary<string, string> ConfigModelStringSources { get; set; }
 
         private readonly List<string> _layers = new List<string>();
 

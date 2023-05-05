@@ -47,14 +47,14 @@ namespace Mastersign.ConfigModel.Test
             Assert.AreEqual("Include X", result.FatChild.X);
             Assert.AreEqual("Main Y", result.FatChild.Y);
             CollectionAssert.AreEqual(new[] { "a", "b", "c", "d" }, result.FatChild.Array);
-            Assert.IsNull(result.FatChild.Includes);
+            Assert.IsNull(result.FatChild.ConfigModelIncludes);
 
             Assert.IsNotNull(result.FatBoys);
             Assert.IsTrue(result.FatBoys.ContainsKey("a"));
             Assert.AreEqual("Main a.X", result.FatBoys["a"].X);
             Assert.AreEqual("Y from File", result.FatBoys["a"].Y);
             CollectionAssert.AreEqual(new[] { "A", "B", "C", "D" }, result.FatBoys["a"].Array);
-            Assert.IsNull(result.FatBoys["a"].Includes);
+            Assert.IsNull(result.FatBoys["a"].ConfigModelIncludes);
         }
 
         [TestMethod]

@@ -1,0 +1,5 @@
+Children:
+  A: &child-a
+    X: Template A
+
+Child: *child-a

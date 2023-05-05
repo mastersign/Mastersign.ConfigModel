@@ -10,6 +10,8 @@
   href: layers.md
 - name: Merging
   href: merging.md
+- name: Merge Keys
+  href: merge-keys.md
 - name: Naming Conventions
   href: naming.md
 - name: Type Discrimination

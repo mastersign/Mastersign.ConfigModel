@@ -1,0 +1,8 @@
+Children:
+  A: &child-a
+    X: Template XA
+  B: &child-b
+    Y: Template YB
+
+Child:
+  <<: [*child-a, *child-b]

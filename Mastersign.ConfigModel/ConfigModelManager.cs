@@ -77,6 +77,7 @@ namespace Mastersign.ConfigModel
 
         private readonly StringComparison _filenameComparison;
         private readonly INamingConvention _propertyNamingConvention;
+        private readonly bool _useMergingParser;
 
         private readonly Dictionary<Type, Dictionary<string, Type>> _discriminationsByPropertyExistence;
         private readonly Dictionary<Type, Tuple<string, Dictionary<string, Type>>> _discriminationsByPropertyValue;
@@ -134,13 +135,15 @@ namespace Mastersign.ConfigModel
             TRootModel defaultModel,
             YamlDeserializerBuildCustomizer deserializationCustomizer,
             IReadOnlyDictionary<Type, IReadOnlyDictionary<string, Type>> typeDiscriminationsByPropertyExistence,
-            IReadOnlyDictionary<Type, Tuple<string, IReadOnlyDictionary<string, Type>>> typeDiscriminationsByPropertyValue)
+            IReadOnlyDictionary<Type, Tuple<string, IReadOnlyDictionary<string, Type>>> typeDiscriminationsByPropertyValue,
+            bool withMergeKeys)
             : this(typeDiscriminationsByPropertyExistence, typeDiscriminationsByPropertyValue)
         {
             _filenameComparison = filenameComparison;
             _propertyNamingConvention = propertyNamingConvention ?? PascalCaseNamingConvention.Instance;
             _defaultModel = defaultModel;
             _deserializationCustomizer = deserializationCustomizer;
+            _useMergingParser = withMergeKeys;
         }
 
         public ConfigModelManager(
@@ -149,15 +152,64 @@ namespace Mastersign.ConfigModel
             TRootModel defaultModel = null,
             YamlDeserializerBuildCustomizer deserializationCustomizer = null,
             IReadOnlyDictionary<Type, IReadOnlyDictionary<string, Type>> typeDiscriminationsByPropertyExistence = null,
-            IReadOnlyDictionary<Type, Tuple<string, IReadOnlyDictionary<string, Type>>> typeDiscriminationsByPropertyValue = null)
+            IReadOnlyDictionary<Type, Tuple<string, IReadOnlyDictionary<string, Type>>> typeDiscriminationsByPropertyValue = null,
+            bool withMergeKeys = false)
             : this(
                   filenameComparison,
                   NamingConventionFor(propertyNameHandling),
                   defaultModel,
                   deserializationCustomizer,
                   typeDiscriminationsByPropertyExistence,
-                  typeDiscriminationsByPropertyValue)
+                  typeDiscriminationsByPropertyValue,
+                  withMergeKeys)
         {
+        }
+
+        private IDeserializer BuildDeserializer()
+        {
+            var builder = new DeserializerBuilder();
+            builder = builder.IgnoreUnmatchedProperties();
+            builder = builder.WithNamingConvention(_propertyNamingConvention);
+            builder = builder.WithNodeTypeResolver(new ClrTypeFromTagNodeTypeResolver());
+
+            if (_discriminationsByPropertyExistence.Count > 0 ||
+                _discriminationsByPropertyValue.Count > 0)
+            {
+                builder = builder.WithTypeDiscriminatingNodeDeserializer(o =>
+                {
+                    foreach (var discrimination in _discriminationsByPropertyExistence)
+                    {
+                        o.AddTypeDiscriminator(new UniqueKeyTypeDiscriminator(
+                            discrimination.Key, discrimination.Value.ToDictionary(
+                                kvp => _propertyNamingConvention.Apply(kvp.Key),
+                                kvp => kvp.Value)));
+                    }
+                    foreach (var discrimination in _discriminationsByPropertyValue)
+                    {
+                        o.AddTypeDiscriminator(new KeyValueTypeDiscriminator(
+                            discrimination.Key,
+                            _propertyNamingConvention.Apply(discrimination.Value.Item1),
+                            discrimination.Value.Item2));
+                    }
+                });
+            }
+            if (_deserializationCustomizer != null)
+            {
+                builder = _deserializationCustomizer(builder);
+            }
+            var deserializer = builder.Build();
+            return deserializer;
+        }
+
+        private T Deserialize<T>(IDeserializer deserializer, string fileName)
+        {
+            using (var s = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var r = new StreamReader(s))
+            {
+                IParser p = new Parser(r);
+                if (_useMergingParser) p = new MergingParser(p);
+                return deserializer.Deserialize<T>(p);
+            }
         }
 
         public void AddLayer(string fileName)
@@ -265,11 +317,7 @@ namespace Mastersign.ConfigModel
             T model;
             try
             {
-                using (var s = File.Open(includePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                using (var r = new StreamReader(s))
-                {
-                    model = deserializer.Deserialize<T>(r);
-                }
+                model = Deserialize<T>(deserializer, includePath);
             }
             catch (FileNotFoundException ex)
             {
@@ -402,42 +450,6 @@ namespace Mastersign.ConfigModel
             return result;
         }
 
-        private IDeserializer BuildDeserializer()
-        {
-            var builder = new DeserializerBuilder();
-            builder = builder.IgnoreUnmatchedProperties();
-            builder = builder.WithNamingConvention(_propertyNamingConvention);
-            builder = builder.WithNodeTypeResolver(new ClrTypeFromTagNodeTypeResolver());
-
-            if (_discriminationsByPropertyExistence.Count > 0 ||
-                _discriminationsByPropertyValue.Count > 0)
-            {
-                builder = builder.WithTypeDiscriminatingNodeDeserializer(o =>
-                {
-                    foreach (var discrimination in _discriminationsByPropertyExistence)
-                    {
-                        o.AddTypeDiscriminator(new UniqueKeyTypeDiscriminator(
-                            discrimination.Key, discrimination.Value.ToDictionary(
-                                kvp => _propertyNamingConvention.Apply(kvp.Key),
-                                kvp => kvp.Value)));
-                    }
-                    foreach (var discrimination in _discriminationsByPropertyValue)
-                    {
-                        o.AddTypeDiscriminator(new KeyValueTypeDiscriminator(
-                            discrimination.Key,
-                            _propertyNamingConvention.Apply(discrimination.Value.Item1),
-                            discrimination.Value.Item2));
-                    }
-                });
-            }
-            if (_deserializationCustomizer != null)
-            {
-                builder = _deserializationCustomizer(builder);
-            }
-            var deserializer = builder.Build();
-            return deserializer;
-        }
-
         private List<(string Path, bool Required)> GetLayerPaths()
         {
             var paths = new List<(string, bool)>();
@@ -492,11 +504,7 @@ namespace Mastersign.ConfigModel
                 TRootModel layer;
                 try
                 {
-                    using (var s = File.Open(layerPath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                    using (var r = new StreamReader(s))
-                    {
-                        layer = deserializer.Deserialize<TRootModel>(r);
-                    }
+                    layer = Deserialize<TRootModel>(deserializer, layerPath);
                 }
                 catch (FileNotFoundException ex)
                 {

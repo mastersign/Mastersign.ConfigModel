@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Merge Keys | Mastersign.ConfigModel </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Merge Keys | Mastersign.ConfigModel ">
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="Mastersign.ConfigModel">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="merge-keys">Merge Keys</h1>
+
+<p><a href="https://ktomk.github.io/writing/yaml-anchor-alias-and-merge-key.html">Merge keys</a> —
+even thou they are currently not specified well —
+are supported in many YAML parser implementations.
+And <em>YamlDotNet</em> is no exception. That is why <em>Mastersign.ConfigModel</em> can support them too.
+And they have proven to be very helpful in removing repetition from config files,
+and in turn making them more <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>.</p>
+<h2 id="example">Example</h2>
+<p>Consider the following model:</p>
+<pre><code class="lang-cs">using Mastersign.ConfigModel;
+
+class ProjectModel
+{
+    public string? Caption { get; set; }
+
+    public Dictionary&lt;string, DataModel&gt;? Data { get; set; }
+}
+
+class DataModel
+{
+    public int? X { get; set; }
+    public int? Y { get; set; }
+    public int? Z { get; set; }
+}
+</code></pre>
+<p>Without merge keys a config file could look like this:</p>
+<pre><code class="lang-yaml">Caption: No Merge Keys Yet
+Data:
+  a:
+    X: 1
+    Y: 1
+    Z: 1
+  b:
+    X: 1
+    Y: 1
+    Z: 2
+  c:
+    X: 1
+    Y: 1
+    Z: 3
+</code></pre>
+<p>To reduce the repetition in the file merge keys can be used.
+At first, one or more maps need to be marked with an anchor:</p>
+<pre><code class="lang-yaml">...
+Data:
+  a: &amp;default-data
+    X: 1
+    Y: 1
+    Z: 1
+...
+</code></pre>
+<p>Then an alias can be used in an merge key <code>&lt;&lt;:</code> to paste an anchored map into the current map:</p>
+<pre><code class="lang-yaml">...
+Data:
+  ...
+  b:
+    &lt;&lt;: *default-data
+    Z: 2
+</code></pre>
+<p>Leading to this &quot;dried&quot; config file:</p>
+<pre><code class="lang-yaml">Caption: Merge Key Demo
+Data:
+  a: &amp;default-data
+    X: 1
+    Y: 1
+    Z: 1
+  b:
+    &lt;&lt;: *default-data
+    Z: 2
+  c:
+    &lt;&lt;: *default-data
+    Z: 3
+</code></pre>
+<p>If you want to have multiple maps as reusable templates/presets in your file,
+you need to prepare a place for them in the model;
+otherwise the maps are not deserialized and can therefore not be found,
+when referring to them with an alias.</p>
+<pre><code class="lang-cs">class ProjectModel
+{
+    public string? Caption { get; set; }
+
+    [NoMerge]
+    public Dictionary&lt;string, DataModel&gt;? Presets { get; set; }
+
+    public Dictionary&lt;string, DataModel&gt;? Data { get; set; }
+}
+</code></pre>
+<p>Now you can refer to them throughout your config file.
+You can even merge multiple aliases into one target map.</p>
+<pre><code class="lang-yaml">Caption: Merge Key Demo
+Presets:
+  ones: &amp;default-data
+    X: 1
+    Y: 1
+    Z: 1
+  layer2: &amp;layer-2
+    Y: 2
+Data:
+  a:
+    &lt;&lt;: *default-data
+  b:
+    &lt;&lt;: [*default-data, *layer-2]
+    Z: 2
+  c:
+    &lt;&lt;:
+      - *default-data
+      - *layer-2
+    Z: 3
+</code></pre>
+<p>The order of normal keys and merge keys is important here.
+If you first specify normal keys and place a merge key behind them,
+the maps referenced in the merge key will overwrite the values of the normal keys.
+Consider the following config file:</p>
+<pre><code class="lang-yaml">Caption: Importance Of Order
+Presets:
+  preset: &amp;preset
+    X: 99
+Data:
+  a:
+    X: 100
+    &lt;&lt;: *preset
+</code></pre>
+<p>The value of <code>Data[&quot;a&quot;].X</code> will be <code>99</code> here.</p>
+<h2 id="limitations">Limitations</h2>
+<p>Aliases can not refer to anchors in another file.
+Therefore, if <a href="includes.html">includes</a> are used, aliases can not refer to anchors in included files.
+Consequently, merge keys can only be used in the context of one file.</p>
+<p>Values with an anchor need to be represented in the model to be available
+for alias look-up during deserialization.
+Meaning, you can not use a non-existent property to store an anchored value,
+with the intention to refer to it with an alias later in the file.
+The property, holding the anchored value must be present in the model.</p>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      <center><a href="https://mastersign.de">mastersign</a></center>
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

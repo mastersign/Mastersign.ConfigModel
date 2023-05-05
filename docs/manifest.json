@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "F:/repo/projects/Mastersign.ConfigModel/docfx_project",
+  "source_base_path": "D:/repo/projects/OS/Mastersign.ConfigModel/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -349,6 +349,16 @@
       "output": {
         ".html": {
           "relative_path": "articles/layers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/merge-keys.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/merge-keys.html"
         }
       },
       "version": ""

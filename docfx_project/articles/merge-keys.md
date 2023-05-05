@@ -7,6 +7,9 @@ And _YamlDotNet_ is no exception. That is why _Mastersign.ConfigModel_ can suppo
 And they have proven to be very helpful in removing repetition from config files,
 and in turn making them more [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
 
+Support for merge keys is currently optional and needs to be activated
+with a parameter in the @Mastersign.ConfigModel.ConfigModelManager`1 constructor.
+
 ## Example
 
 Consider the following model:
@@ -88,6 +91,9 @@ Data:
     <<: *default-data
     Z: 3
 ```
+
+**Important:** To load a model with merge keys, you need to pass `true` for the `withMergeKeys`
+parameter in the constructor of @Mastersign.ConfigModel.ConfigModelManager`1.
 
 If you want to have multiple maps as reusable templates/presets in your file,
 you need to prepare a place for them in the model;

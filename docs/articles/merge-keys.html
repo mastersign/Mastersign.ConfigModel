@@ -74,6 +74,8 @@ are supported in many YAML parser implementations.
 And <em>YamlDotNet</em> is no exception. That is why <em>Mastersign.ConfigModel</em> can support them too.
 And they have proven to be very helpful in removing repetition from config files,
 and in turn making them more <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>.</p>
+<p>Support for merge keys is currently optional and needs to be activated
+with a parameter in the <a class="xref" href="../api/Mastersign.ConfigModel.ConfigModelManager-1.html">ConfigModelManager&lt;TRootModel&gt;</a> constructor.</p>
 <h2 id="example">Example</h2>
 <p>Consider the following model:</p>
 <pre><code class="lang-cs">using Mastersign.ConfigModel;
@@ -140,6 +142,8 @@ Data:
     &lt;&lt;: *default-data
     Z: 3
 </code></pre>
+<p><strong>Important:</strong> To load a model with merge keys, you need to pass <code>true</code> for the <code>withMergeKeys</code>
+parameter in the constructor of <a class="xref" href="../api/Mastersign.ConfigModel.ConfigModelManager-1.html">ConfigModelManager&lt;TRootModel&gt;</a>.</p>
 <p>If you want to have multiple maps as reusable templates/presets in your file,
 you need to prepare a place for them in the model;
 otherwise the maps are not deserialized and can therefore not be found,

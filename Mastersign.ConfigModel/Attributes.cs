@@ -28,6 +28,7 @@ namespace Mastersign.ConfigModel
         Clear,
         ReplaceValue,
         MergeValue,
+        Complement,
     }
 
     [AttributeUsage(AttributeTargets.Property)]

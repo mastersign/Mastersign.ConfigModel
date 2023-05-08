@@ -109,6 +109,16 @@ namespace Mastersign.ConfigModel
                             target[kvp.Key] = kvp.Value;
                     }
                     break;
+                case DictionaryMergeMode.Complement:
+                    if (source == null) break;
+                    foreach (var kvp in source)
+                    {
+                        if (!target.ContainsKey(kvp.Key))
+                        {
+                            target.Add(kvp.Key, kvp.Value);
+                        }
+                    }
+                    break;
                 default:
                     throw new NotSupportedException();
             }

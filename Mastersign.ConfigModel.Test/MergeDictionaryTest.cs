@@ -94,6 +94,29 @@
         }
 
         [TestMethod]
+        public void ComplementsTest()
+        {
+            var target = new Dictionary<string, MergableTestModel> {
+                { "X", new() { A = "XA", B = "XB", C = "XC" } },
+                { "Y", new() { A = "YA", B = "YB", C = "YC" } },
+            };
+            var source = new Dictionary<string, MergableTestModel> {
+                { "X", new() { A = "Xa", B = "Xb", C = "Xc" } },
+                { "Y", new() { A = "Ya" } },
+                { "Z", new() { B = "Zb", C = "Zc" } },
+            };
+            var sourceCopy = CloneDict(source);
+            var expected = new Dictionary<string, MergableTestModel> {
+                { "X", new() { A = "XA", B = "XB", C = "XC" } },
+                { "Y", new() { A = "YA", B = "YB", C = "YC" } },
+                { "Z", new() { B = "Zb", C = "Zc" } },
+            };
+            Merging.MergeDictionary(target, source, typeof(MergableTestModel), DictionaryMergeMode.Complement);
+            CollectionAssert.AreEqual(sourceCopy, source);
+            CollectionAssert.AreEqual(expected, target);
+        }
+
+        [TestMethod]
         public void MergeValuesTest()
         {
             var target = new Dictionary<string, TestModel> {

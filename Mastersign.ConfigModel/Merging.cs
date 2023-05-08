@@ -14,22 +14,27 @@ namespace Mastersign.ConfigModel
             {
                 case ListMergeMode.Clear:
                     target.Clear();
+                    if (source == null) break;
                     foreach (var x in source) target.Add(x);
                     break;
                 case ListMergeMode.Append:
+                    if (source == null) break;
                     foreach (var x in source) target.Add(x);
                     break;
                 case ListMergeMode.Prepend:
+                    if (source == null) break;
                     // inefficient, performance can definitely be improved
                     foreach (var x in source.Reverse()) target.Insert(0, x);
                     break;
                 case ListMergeMode.AppendDistinct:
+                    if (source == null) break;
                     foreach (var x in source)
                     {
                         if (!target.Contains(x)) target.Add(x);
                     }
                     break;
                 case ListMergeMode.PrependDistinct:
+                    if (source == null) break;
                     // inefficient, performance can definitely be improved
                     foreach (var x in source.Reverse())
                     {
@@ -37,6 +42,7 @@ namespace Mastersign.ConfigModel
                     }
                     break;
                 case ListMergeMode.ReplaceItem:
+                    if (source == null) break;
                     for (var i = 0; i < Math.Min(source.Count, target.Count); i++)
                     {
                         target[i] = source[i];
@@ -50,6 +56,7 @@ namespace Mastersign.ConfigModel
                     }
                     break;
                 case ListMergeMode.MergeItem:
+                    if (source == null) break;
                     for (var i = 0; i < Math.Min(source.Count, target.Count); i++)
                     {
                         var tv = target[i];
@@ -82,19 +89,22 @@ namespace Mastersign.ConfigModel
             {
                 case DictionaryMergeMode.Clear:
                     target.Clear();
+                    if (source == null) break;
                     foreach (var kvp in source) target.Add(kvp.Key, kvp.Value);
                     break;
                 case DictionaryMergeMode.ReplaceValue:
+                    if (source == null) break;
                     foreach (var kvp in source) target[kvp.Key] = kvp.Value;
                     break;
                 case DictionaryMergeMode.MergeValue:
+                    if (source == null) break;
                     foreach (var kvp in source)
                     {
                         if (target.TryGetValue(kvp.Key, out var v))
                         {
                             MergeObject(v, kvp.Value, forceRootMerge: true, forceDeepMerge);
                             if (typeof(T).IsValueType) target[kvp.Key] = v;
-                        } 
+                        }
                         else
                             target[kvp.Key] = kvp.Value;
                     }
@@ -114,7 +124,7 @@ namespace Mastersign.ConfigModel
         private static void MergeObjectProperties(object target, object source, bool forceRootMerge = false, bool forceDeepMerge = false)
         {
             if (target == null) throw new ArgumentNullException(nameof(target));
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source == null) return;
             var t = target.GetType();
             if (source.GetType() != t) throw new ArgumentException("Different types in source and target");
 
@@ -160,14 +170,17 @@ namespace Mastersign.ConfigModel
         public static void MergeObject(object target, object source, bool forceRootMerge = false, bool forceDeepMerge = false)
         {
             if (target == null) throw new ArgumentNullException(nameof(target));
-            if (source == null) throw new ArgumentNullException(nameof(source));
             var t = target.GetType();
-            if (source.GetType() != t) throw new ArgumentException("Different types in source and target");
 
             if (t.IsMergableByInterface())
             {
                 ((IMergableConfigModel)target).UpdateWith(source, forceDeepMerge);
                 return;
+            }
+
+            if (source != null && source.GetType() != t)
+            {
+                throw new ArgumentException("Different types in source and target");
             }
 
             var mapValueType = GetDictionaryValueType(t);

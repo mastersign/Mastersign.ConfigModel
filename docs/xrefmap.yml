@@ -737,6 +737,12 @@ references:
   commentId: F:Mastersign.ConfigModel.DictionaryMergeMode.Clear
   fullName: Mastersign.ConfigModel.DictionaryMergeMode.Clear
   nameWithType: DictionaryMergeMode.Clear
+- uid: Mastersign.ConfigModel.DictionaryMergeMode.Complement
+  name: Complement
+  href: api/Mastersign.ConfigModel.DictionaryMergeMode.html#Mastersign_ConfigModel_DictionaryMergeMode_Complement
+  commentId: F:Mastersign.ConfigModel.DictionaryMergeMode.Complement
+  fullName: Mastersign.ConfigModel.DictionaryMergeMode.Complement
+  nameWithType: DictionaryMergeMode.Complement
 - uid: Mastersign.ConfigModel.DictionaryMergeMode.MergeValue
   name: MergeValue
   href: api/Mastersign.ConfigModel.DictionaryMergeMode.html#Mastersign_ConfigModel_DictionaryMergeMode_MergeValue

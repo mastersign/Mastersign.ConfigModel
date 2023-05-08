@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Mastersign.ConfigModel.Test
+﻿namespace Mastersign.ConfigModel.Test
 {
     [TestClass]
     public class MergeDictionaryTest
@@ -18,7 +12,7 @@ namespace Mastersign.ConfigModel.Test
             => new(d);
 
         [TestMethod]
-        public void Clear()
+        public void ClearTest()
         {
             var target = new Dictionary<string, int> { { "X", 1 }, { "Y", 2 }, { "Z", 3 } };
             var source = new Dictionary<string, int> { { "X", 4 }, { "Y", 5 } };
@@ -30,7 +24,7 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void ReplaceValues()
+        public void ReplaceValuesTest()
         {
             var target = new Dictionary<string, MergableTestModel> {
                 { "X", new() { A = "XA", B = "XB", C = "XC" } },
@@ -54,7 +48,7 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void ReplaceValuesWithLess()
+        public void ReplaceValuesWithLessTest()
         {
             var target = new Dictionary<string, MergableTestModel> {
                 { "X", new() { A = "XA", B = "XB", C = "XC" } },
@@ -77,7 +71,7 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void ReplaceValuesWithMore()
+        public void ReplaceValuesWithMoreTest()
         {
             var target = new Dictionary<string, MergableTestModel> {
                 { "X", new() { A = "XA", B = "XB", C = "XC" } },
@@ -100,7 +94,7 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void MergeValues()
+        public void MergeValuesTest()
         {
             var target = new Dictionary<string, TestModel> {
                 { "X", new() { A = "XA", B = "XB", C = "XC" } },
@@ -124,7 +118,7 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void MergeValuesWithLess()
+        public void MergeValuesWithLessTest()
         {
             var target = new Dictionary<string, TestModel> {
                 { "X", new() { A = "XA", B = "XB", C = "XC" } },
@@ -147,7 +141,7 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void MergeValuesWithMore()
+        public void MergeValuesWithMoreTest()
         {
             var target = new Dictionary<string, TestModel> {
                 { "X", new() { A = "XA", B = "XB", C = "XC" } },
@@ -170,7 +164,7 @@ namespace Mastersign.ConfigModel.Test
         }
 
         [TestMethod]
-        public void MergeMergableValues()
+        public void MergeMergableValuesTest()
         {
             var target = new Dictionary<string, MergableTestModel> {
                 { "X", new() { A = "XA", B = "XB", C = "XC" } },

@@ -244,6 +244,36 @@ namespace Mastersign.ConfigModel
 
         public string[] GetLoadedStringSourcePaths() => _loadedStringSourcePaths.ToArray();
 
+        private string LoadString(string modelFile, string referencePath, string sourceFile)
+        {
+            string s;
+            sourceFile = PathHelper.GetCanonicalPath(sourceFile, referencePath);
+            try
+            {
+                s = File.ReadAllText(sourceFile, Encoding.UTF8);
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new ConfigModelStringSourceNotFoundException(
+                    $"Could not find string source file '{sourceFile}' for model '{modelFile}'.",
+                    modelFile, sourceFile, ex);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                throw new ConfigModelStringSourceNotFoundException(
+                    $"Could not find a part of the path to string source file '{sourceFile}' for model '{modelFile}'.",
+                    modelFile, sourceFile, ex);
+            }
+            catch (IOException ex)
+            {
+                throw new ConfigModelStringSourceLoadException(
+                    $"Can not read string source file in model '{modelFile}': {ex.Message}",
+                    modelFile, sourceFile, ex);
+            }
+            _loadedStringSourcePaths.Add(sourceFile);
+            return s;
+        }
+
         private void LoadStringSource(ConfigModelBase model, string modelFile, string referencePath, PropertyInfo p)
         {
             if (p.GetValue(model) != null) return;
@@ -253,31 +283,9 @@ namespace Mastersign.ConfigModel
             if (yamlMemberAttr?.ApplyNamingConventions != false) propName = _propertyNamingConvention.Apply(propName);
             if (model.ConfigModelStringSources.TryGetValue(propName, out var sourceFile))
             {
-                sourceFile = PathHelper.GetCanonicalPath(sourceFile, referencePath);
-                _loadedStringSourcePaths.Add(sourceFile);
-                try
-                {
-                    var s = File.ReadAllText(sourceFile, Encoding.UTF8);
-                    p.SetValue(model, s);
-                }
-                catch (FileNotFoundException ex)
-                {
-                    throw new ConfigModelStringSourceNotFoundException(
-                        $"Could not find string source file '{sourceFile}' for model '{modelFile}'.",
-                        modelFile, sourceFile, ex);
-                }
-                catch (DirectoryNotFoundException ex)
-                {
-                    throw new ConfigModelStringSourceNotFoundException(
-                        $"Could not find a part of the path to string source file '{sourceFile}' for model '{modelFile}'.",
-                        modelFile, sourceFile, ex);
-                }
-                catch (IOException ex)
-                {
-                    throw new ConfigModelStringSourceLoadException(
-                        $"Can not read string source file in model '{modelFile}': {ex.Message}",
-                        modelFile, sourceFile, ex);
-                }
+                string s;
+                s = LoadString(modelFile, referencePath, sourceFile);
+                p.SetValue(model, s);
             }
         }
 
@@ -290,6 +298,28 @@ namespace Mastersign.ConfigModel
                 LoadStringSource(model, modelFile, referencePath, p);
             }
             model.ConfigModelStringSources = null;
+            return model;
+        }
+
+        private IDictionary<string, object> LoadStringSources(IDictionary<string, object> model, string modelFile, string referencePath)
+        {
+            if (!model.TryGetValue("$sources", out var sourcesObject) ||
+                !(sourcesObject is IDictionary<object, object> sources))
+            {
+                return model;
+            }
+            foreach (var kvp in sources)
+            {
+                var key = kvp.Key as string;
+                var sourcePath = kvp.Value as string;
+                if (key is null || sourcePath is null) continue;
+                if (!model.ContainsKey(key))
+                {
+                    var s = LoadString(modelFile, referencePath, sourcePath);
+                    model.Add(key, s);
+                }
+            }
+            model.Remove("$sources");
             return model;
         }
 
@@ -383,6 +413,9 @@ namespace Mastersign.ConfigModel
             var includeReferencePath = Path.GetDirectoryName(includePath);
 
             model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
+                m => LoadStringSources(m, includePath, includeReferencePath));
+
+            model = (T)ModelWalking.WalkConfigModel<IDictionary<string, object>>(model,
                 m => LoadStringSources(m, includePath, includeReferencePath));
 
             model = (T)ModelWalking.WalkConfigModel<ConfigModelBase>(model,
@@ -581,6 +614,9 @@ namespace Mastersign.ConfigModel
                 var includeStack = new List<string> { layerPath };
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,
+                    m => LoadStringSources(m, layerPath, referencePath));
+
+                layer = (TRootModel)ModelWalking.WalkConfigModel<IDictionary<string, object>>(layer,
                     m => LoadStringSources(m, layerPath, referencePath));
 
                 layer = (TRootModel)ModelWalking.WalkConfigModel<ConfigModelBase>(layer,

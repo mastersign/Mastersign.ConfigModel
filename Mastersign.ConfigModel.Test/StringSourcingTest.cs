@@ -105,6 +105,20 @@ namespace Mastersign.ConfigModel.Test
             }
         }
 
+        [TestMethod]
+        public void GenericDictionaryTest()
+        {
+            var mgr = new ConfigModelManager<Dictionary<string, object>>();
+            var modelFile = GetTestDataFilePath(SCENARIO, "Dictionary.yaml");
+            mgr.AddLayer(modelFile);
+            var result = mgr.LoadModel();
+
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.ContainsKey("$sources"));
+            Assert.AreEqual("X from File", result["X"]);
+            Assert.AreEqual("Dictionary Y", result["Y"]);
+        }
+
         class Model
         {
             public ChildWithSources? Child { get; set; }

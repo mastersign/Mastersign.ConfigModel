@@ -93,7 +93,8 @@ Project: My Project
 <pre><code class="lang-yaml">Project: My Project
 Description: Description from file
 </code></pre>
-<p>String sourcing only works on model classes derived from <code>ConfigModelBase</code>.</p>
+<p>String sourcing only works on model classes derived from <code>ConfigModelBase</code>
+or on classes implementing <code>IDictionary&lt;string, object&gt;</code>.</p>
 <p>Explicit string values from the sourcing model supersede sourced strings.
 In the example above, the value <code>Value B</code> for <code>B</code> supersede the sourced
 string <code>B from File</code>.</p>

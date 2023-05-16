@@ -54,6 +54,12 @@ namespace Mastersign.ConfigModel
                 {
                     throw ex.InnerException;
                 }
+
+                if (typeof(TTarget).IsAssignableFrom(t))
+                {
+                    model = visitor((TTarget)model);
+                }
+
                 return model;
             }
 
@@ -71,6 +77,12 @@ namespace Mastersign.ConfigModel
                 {
                     throw ex.InnerException;
                 }
+
+                if (typeof(TTarget).IsAssignableFrom(t))
+                {
+                    model = visitor((TTarget)model);
+                }
+
                 return model;
             }
 

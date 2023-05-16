@@ -40,7 +40,8 @@ Project: My Project
 Description: Description from file
 ```
 
-String sourcing only works on model classes derived from `ConfigModelBase`.
+String sourcing only works on model classes derived from `ConfigModelBase`
+or on classes implementing `IDictionary<string, object>`.
 
 Explicit string values from the sourcing model supersede sourced strings.
 In the example above, the value `Value B` for `B` supersede the sourced
